@@ -1,6 +1,6 @@
 # DOMAIN-003D — Membership Domain Events
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -34,9 +34,9 @@ Aggregate **Membership**.
 Un Domain Event representa un hecho de negocio que ya ocurrió y
 que modifica el estado del dominio.
 
-Los eventos son inmutables, históricos y constituyen la fuente
-de verdad para la reconstrucción del Aggregate y la
-sincronización con otros Bounded Contexts.
+Los eventos son inmutables, históricos e internos a Membership
+Management. Sólo una decisión futura de Event Sourcing puede convertirlos
+en fuente de reconstrucción; no sincronizan directamente otros contextos.
 
 ---
 
@@ -356,21 +356,12 @@ Los Domain Events:
 
 ---
 
-# Consumo por Otros Contextos
+# Cruce de Bounded Context
 
-Los Domain Events pueden ser utilizados internamente por otros
-Bounded Contexts para construir procesos de negocio.
-
-Ejemplos:
-
-- Role Management;
-- Permission Management;
-- Notification;
-- Audit;
-- Analytics.
-
-Cuando un evento deba salir del Bounded Context, se transformará
-en un **Integration Event**.
+Los Domain Events sólo alimentan handlers y proyecciones internas de
+Membership Management. Cuando un hecho deba cruzar el contexto,
+Application construye un Integration Event explícito conforme a
+DOMAIN-003K; no existe transformación automática ni un contexto Permission.
 
 ---
 
@@ -440,6 +431,6 @@ Este modelo sigue:
 Los **Domain Events** del Aggregate **Membership** representan
 de forma precisa e inmutable todos los hechos relevantes de la
 relación entre un **Citizen** y una **Organization**. Constituyen
-la base para la trazabilidad, la reconstrucción del estado, la
-integración con otros Bounded Contexts y la evolución del
+la base para la trazabilidad interna y, cuando exista un contrato K
+explícito, para efectos cross-boundary del
 ecosistema AURA mediante una arquitectura orientada a eventos.

@@ -1,6 +1,6 @@
 # CORE-016 — Dependency Rules
 
-Versión: 1.0
+Versión: 2.0
 
 Estado: Oficial
 
@@ -39,39 +39,32 @@ Ningún componente interno puede depender de uno externo.
 
 # Dirección de Dependencias
 
-La dirección oficial es:
+La dirección oficial de las dependencias de código es:
 
 ```text
-Interfaces
-      │
-      ▼
-Application
-      │
-      ▼
-Domain
+Inbound Adapter ──► Application ──► Domain
+
+Outbound Adapter ──► Application/Domain Port
 ```
 
-Infrastructure implementa contratos definidos por Domain o
-Application.
+Domain no depende de Application. Application sólo depende de Domain y
+Shared Kernel. Los adapters dependen de los puertos que invocan o
+implementan.
 
 Nunca ocurre la dirección inversa.
 
 ---
 
-# Modelo de Capas
+# Modelo Hexagonal
 
 ```text
-┌───────────────────────────────┐
-│ Interfaces                    │
-├───────────────────────────────┤
-│ Application                   │
-├───────────────────────────────┤
-│ Domain                        │
-└───────────────────────────────┘
-
-Infrastructure
-implementa contratos definidos
-por las capas superiores.
+Inbound Adapters ──► Input Ports ──► Application ──► Domain
+                                              │
+                                              ▼
+                                        Output Ports
+                                              ▲
+                                              │
+                                      Outbound Adapters
 ```
 
 ---
@@ -161,10 +154,12 @@ demás.
 
 La comunicación entre contextos ocurre mediante:
 
-- Domain Events;
-- Interfaces públicas;
+- Integration Events;
+- API Contracts;
 - Anti-Corruption Layer;
 - Published Language.
+
+Los Domain Events permanecen dentro del contexto productor.
 
 Nunca mediante acceso directo a clases internas.
 
@@ -178,9 +173,9 @@ abstracciones.
 Ejemplos:
 
 - Repository Contracts;
-- Domain Services;
-- Ports;
-- Interfaces.
+- Application input ports;
+- Application o Domain output ports;
+- Published Languages.
 
 Nunca mediante implementaciones concretas.
 
@@ -243,8 +238,8 @@ Aggregate.
 La comunicación se realiza mediante:
 
 - identificadores;
-- Domain Events;
-- Domain Services.
+- Application Services para orquestación;
+- Integration Events cuando cruzan Bounded Contexts.
 
 ---
 

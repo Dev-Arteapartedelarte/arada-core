@@ -1,6 +1,6 @@
 # DOMAIN-004K — Role Integration Events
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -20,8 +20,8 @@ Documentos relacionados:
 - DOMAIN-004D-Domain-Events.md
 - DOMAIN-004J-Consistency-Boundary.md
 - DOMAIN-005-Aggregate.md
-- CORE-009-Domain-Events.md
-- CORE-013-Integration-Events.md
+- CORE-005-Domain-Events.md
+- CORE-007-Strategic-Design.md
 
 ---
 

@@ -1,6 +1,6 @@
 # DOMAIN-008D — Participation Domain Events
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -45,7 +45,7 @@ Documentos relacionados:
 
 # Objetivo
 
-Definir los Domain Events oficiales emitidos por el Aggregate
+Definir los Domain Events oficiales generados y registrados por el Aggregate
 **Participation** cuando ocurre un hecho relevante dentro de su
 límite de consistencia.
 
@@ -2226,7 +2226,7 @@ La coordinación se realiza fuera del Aggregate.
 
 # Domain Events y Notification
 
-Un Domain Event puede ser consumido para originar procesos de
+Un Domain Event puede originar handlers internos de
 Notification.
 
 Ejemplo conceptual:
@@ -2557,7 +2557,8 @@ evento.
 
 # Consumidores
 
-Los Domain Events pueden ser consumidos conceptualmente por:
+Dentro de Participation Management, los Domain Events pueden ser
+consumidos por:
 
 - Application Services;
 - Projection Handlers;

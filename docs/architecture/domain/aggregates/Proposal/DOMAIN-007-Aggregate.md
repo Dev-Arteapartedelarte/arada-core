@@ -1,6 +1,6 @@
 # DOMAIN-007 — Proposal Aggregate
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -1578,7 +1578,7 @@ DOMAIN-007I-Versioning.md
 
 # Domain Events
 
-Proposal publica Domain Events cuando ocurren hechos relevantes
+Proposal genera y registra Domain Events cuando ocurren hechos relevantes
 dentro de su ciclo de vida.
 
 Eventos conceptuales:

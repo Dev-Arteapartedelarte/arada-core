@@ -1,6 +1,6 @@
 # DOMAIN-004A — Role Lifecycle
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -79,7 +79,7 @@ Representa un Role recién creado.
 
 Características:
 
-- aún no puede asignarse a Memberships;
+- aún no está disponible como referencia activa del catálogo;
 - puede modificarse libremente;
 - aún no participa en procesos organizacionales.
 
@@ -98,8 +98,8 @@ El Role se encuentra operativo.
 
 Características:
 
-- puede asignarse a Memberships;
-- puede utilizarse en procesos de autorización;
+- está disponible como referencia activa del catálogo;
+- no concede autorización implícita;
 - forma parte de la estructura organizacional.
 
 Operaciones permitidas:
@@ -113,14 +113,13 @@ Operaciones permitidas:
 
 # Estado: Inactive
 
-El Role deja de estar disponible para nuevas asignaciones.
+El Role deja de estar disponible como referencia activa del catálogo.
 
 Características:
 
 - conserva su historial;
-- las asignaciones existentes permanecen válidas hasta que el
-  dominio determine lo contrario;
-- no puede asignarse a nuevas Memberships.
+- las referencias históricas conservan su significado;
+- no define comportamiento de asignación.
 
 Operaciones permitidas:
 

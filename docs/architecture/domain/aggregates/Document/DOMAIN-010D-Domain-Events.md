@@ -1,6 +1,6 @@
 # DOMAIN-010D — Document Domain Events
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -1439,8 +1439,9 @@ Una operación rechazada:
 
 # Relación con Consistency Boundary
 
-Los Domain Events permiten comunicar hechos fuera de Document sin
-expandir su Consistency Boundary.
+Los Domain Events comunican hechos únicamente dentro de Document
+Management. Todo efecto externo requiere un Integration Event explícito
+definido en DOMAIN-010K.
 
 La definición pertenece a:
 
@@ -1482,8 +1483,8 @@ Cada Aggregate conserva su propia autoridad de escritura.
 
 # Relación con Integration Events
 
-Los Domain Events que necesiten comunicar hechos fuera del Bounded
-Context pueden participar en la generación de Integration Events
+Los hechos que deban cruzar el Bounded Context requieren Integration Events
+explícitos
 conforme a:
 
 ```text
@@ -1518,7 +1519,8 @@ Las proyecciones definidas en:
 DOMAIN-010L-Read-Model.md
 ```
 
-pueden consumir Domain Events para representar el estado derivado
+pueden consumir Domain Events únicamente dentro de Document Management
+para representar el estado derivado
 de Document.
 
 Conceptualmente:

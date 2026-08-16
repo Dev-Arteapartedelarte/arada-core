@@ -1,6 +1,6 @@
 # DOMAIN-004N — Role Performance Rules
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -22,7 +22,7 @@ Documentos relacionados:
 - DOMAIN-004J-Consistency-Boundary.md
 - DOMAIN-004K-Integration-Events.md
 - DOMAIN-004L-Read-Model.md
-- CORE-016-Performance-Guidelines.md
+- CORE-011-Repository-Contracts.md
 
 ---
 

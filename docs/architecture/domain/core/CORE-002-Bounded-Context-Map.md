@@ -1,557 +1,110 @@
-# ============================================================
-# ARADA
-# ============================================================
+# CORE-002 — Bounded Context Map
+
+Versión: 2.0
+
+Estado: Official
+
+Proyecto: AURA Core
+
+ADR relacionados:
+
+- ADR-001 — Domain-Driven Design
+- ADR-002 — Hexagonal Architecture
+- ADR-003 — Event Boundaries
+
+## Objetivo
+
+Definir los trece Bounded Contexts oficiales, su ownership y la dirección
+semántica de sus relaciones. Este mapa no define infraestructura.
+
+## Contextos oficiales
+
+| Bounded Context | Aggregate | Ownership principal |
+|---|---|---|
+| Organization Management | Organization | identidad, configuración, políticas y lifecycle organizacional |
+| Citizen Management | Citizen | identidad cívica |
+| Membership Management | Membership | relación Citizen–Organization |
+| Authorization Management | Role | catálogo de funciones organizacionales |
+| Territorial Management | Territory | identidad, jerarquía y lifecycle territorial |
+| Assembly Management | Assembly | sesión formal de asamblea |
+| Proposal Management | Proposal | propuesta y su lifecycle |
+| Participation Management | Participation | instancia formal de participación |
+| Voting Management | Voting | proceso de votación |
+| Document Management | Document | documento y metadatos de dominio |
+| Notification Management | Notification | intención y resultado de notificación |
+| Audit Management | Audit | registro de auditoría bajo su propio modelo |
+| Integration Management | Integration | vínculo y estado de integración externa |
+
+## Reglas del mapa
+
+- Una referencia por ID no transfiere ownership.
+- Una dependencia de lectura no amplía la transacción del consumidor.
+- Un contexto no importa Aggregates, Entities o Value Objects internos de
+  otro contexto.
+- Todo efecto cross-context es eventual y utiliza Integration Event o API
+  Contract explícito.
+- Domain Events no constituyen Published Language entre contextos.
+
+## Relaciones explícitas
+
+La flecha apunta desde el consumidor semántico hacia el contexto dueño de
+la identidad referenciada.
+
+```text
+Membership ─────► Citizen
+Membership ─────► Organization
+Role ───────────► Organization
+Organization ───► Territory
+Assembly ───────► Organization / Territory
+Proposal ───────► Organization / Territory / Assembly
+Participation ─► Organization / Citizen / Membership
+Participation ─► Assembly / Proposal / Voting
+Voting ─────────► Organization / Assembly / Proposal
+Document ───────► contexto dueño del hecho documentado
+Notification ──► identidad del hecho o destinatario referenciado
+Audit ──────────► identidad del hecho auditado
+Integration ───► sistema externo identificado por su propio contrato
+```
+
+Las relaciones opcionales sólo existen cuando el Aggregate consumidor
+mantiene explícitamente el identificador correspondiente.
+
+## Contextos reactivos
+
+Notification y Audit no consumen directamente Domain Events ajenos.
+Reciben un Integration Event por un inbound adapter; Application valida
+el contrato y ejecuta un Command propio. El nuevo Aggregate produce sus
+propios Domain Events internos.
+
+Integration Management protege el dominio mediante Anti-Corruption
+Layers. Ningún modelo de FIWARE, NGSI-LD, municipio o proveedor ingresa
+directamente en un Aggregate.
+
+## Role y Permission
+
+Role es un Aggregate organizacional. Permission no es un Bounded Context
+ni un Aggregate del baseline; es una capacidad explícita vinculada a un
+Command. La asignación Membership–Role se difiere hasta contar con un
+Source of Truth aprobado.
+
+## Consistencia
+
+```text
+Inside Aggregate  = Immediate Consistency
+Across Aggregates = Eventual Consistency
+```
+
+Un caso de uso puede leer referencias o coordinar pasos, pero cada commit
+de escritura confirma un solo Aggregate.
+
+## Contextos retirados del baseline
+
+Identity, Community, Requests, Workflow y Smart City no son Bounded
+Contexts oficiales de AURA Core 1.0. Capacidades técnicas de identidad o
+integraciones Smart City pertenecen a adapters o sistemas externos hasta
+que una decisión futura defina un modelo de dominio explícito.
 
-# Proyecto
+## Definición de éxito
 
-AURA Core
-
----
-
-# Unidad
-
-CORE-002
-
----
-
-# Documento
-
-Bounded Context Map
-
----
-
-# ADR relacionado
-
-ADR-001
-ADR-002 (pendiente)
-
----
-
-# Objetivo
-
-Definir oficialmente los Bounded Contexts que conforman
-el dominio de la plataforma AURA.
-
-Este documento constituye el mapa conceptual del sistema
-y establece los límites de cada subdominio.
-
-No define implementación.
-
-Define lenguaje.
-
-Define responsabilidades.
-
-Define fronteras.
-
----
-
-# Principios
-
-Cada contexto posee:
-
-• su propio modelo
-
-• su propio lenguaje
-
-• sus propias reglas
-
-• sus propios eventos
-
-• su propia evolución
-
-Nunca se comparte el modelo interno entre contextos.
-
-La comunicación siempre ocurre mediante contratos.
-
----
-
-# Visión General
-
-                    +--------------------+
-                    |   Identity         |
-                    +---------+----------+
-                              |
-                              |
-                              v
-                    +--------------------+
-                    | Community          |
-                    +---------+----------+
-                              |
-              +---------------+----------------+
-              |                                |
-              v                                v
-      +---------------+               +----------------+
-      | Participation |               | Organization   |
-      +-------+-------+               +--------+-------+
-              |                                |
-              +---------------+----------------+
-                              |
-                              v
-                    +--------------------+
-                    | Requests           |
-                    +---------+----------+
-                              |
-                              v
-                    +--------------------+
-                    | Workflow           |
-                    +---------+----------+
-                              |
-                              v
-                    +--------------------+
-                    | Notification       |
-                    +---------+----------+
-                              |
-                              v
-                    +--------------------+
-                    | Integration        |
-                    +---------+----------+
-                              |
-                              v
-                    +--------------------+
-                    | Smart City         |
-                    +--------------------+
-
----
-
-# Contextos Oficiales
-
-La plataforma se divide inicialmente en
-nueve Bounded Contexts.
-
----
-
-## 1.
-
-Identity
-
-Responsabilidad
-
-Gestionar identidades.
-
-Incluye:
-
-- autenticación
-
-- autorización
-
-- roles
-
-- permisos
-
-No conoce organizaciones.
-
-No conoce juntas de vecinos.
-
-No conoce solicitudes.
-
----
-
-## 2.
-
-Community
-
-Representa la comunidad.
-
-Conceptos:
-
-- vecinos
-
-- dirigentes
-
-- comunidades
-
-- relaciones
-
-Es el corazón social del sistema.
-
----
-
-## 3.
-
-Organization
-
-Representa organizaciones.
-
-Ejemplos:
-
-- junta de vecinos
-
-- comité
-
-- asociación
-
-- corporación
-
-No administra usuarios.
-
-Administra organizaciones.
-
----
-
-## 4.
-
-Participation
-
-Representa toda interacción ciudadana.
-
-Incluye:
-
-- votaciones
-
-- consultas
-
-- encuestas
-
-- cabildos
-
-- participación digital
-
----
-
-## 5.
-
-Requests
-
-Gestiona necesidades.
-
-Ejemplos:
-
-- reclamos
-
-- solicitudes
-
-- incidentes
-
-- requerimientos
-
-- propuestas
-
-No ejecuta procesos.
-
-Sólo administra solicitudes.
-
----
-
-## 6.
-
-Workflow
-
-Motor de procesos.
-
-Responsabilidad
-
-Mover estados.
-
-Ejemplo
-
-Creado
-
-↓
-
-Validado
-
-↓
-
-Asignado
-
-↓
-
-En ejecución
-
-↓
-
-Finalizado
-
-No conoce el significado del proceso.
-
-Sólo administra estados.
-
----
-
-## 7.
-
-Notification
-
-Eventos.
-
-Correo.
-
-Push.
-
-WhatsApp.
-
-SMS.
-
-WebSocket.
-
-Nunca contiene lógica de negocio.
-
----
-
-## 8.
-
-Integration
-
-Adaptadores externos.
-
-Ejemplos
-
-Municipalidad
-
-Keycloak
-
-Correo
-
-Open311
-
-FIWARE
-
-Blockchain
-
-LoRaWAN
-
-APIs externas
-
-Nunca contiene reglas del dominio.
-
----
-
-## 9.
-
-Smart City
-
-Modelo urbano.
-
-Entidades:
-
-sensores
-
-IoT
-
-NGSI-LD
-
-FIWARE
-
-Digital Twin
-
-Open Data
-
-No conoce usuarios.
-
-No conoce autenticación.
-
-Sólo ciudad.
-
----
-
-# Relaciones
-
-Identity
-↓
-
-Community
-
-Community
-↓
-
-Organization
-
-Organization
-↓
-
-Participation
-
-Organization
-↓
-
-Requests
-
-Requests
-↓
-
-Workflow
-
-Workflow
-↓
-
-Notification
-
-Integration conecta todos los contextos
-mediante Anti-Corruption Layers.
-
-Smart City consume eventos publicados
-por los demás contextos.
-
----
-
-# Dependencias Permitidas
-
-Identity
-
-↓
-
-Community
-
-↓
-
-Organization
-
-↓
-
-Participation
-
-↓
-
-Requests
-
-↓
-
-Workflow
-
-↓
-
-Notification
-
-↓
-
-Integration
-
-↓
-
-Smart City
-
-Las dependencias son únicamente hacia abajo.
-
-Nunca hacia arriba.
-
-Nunca circulares.
-
----
-
-# Lenguaje Ubicuo
-
-Cada contexto mantiene su propio
-lenguaje.
-
-Ejemplo
-
-Community
-
-Vecino
-
-Dirigente
-
-Comunidad
-
---------------------------------
-
-Requests
-
-Solicitud
-
-Incidente
-
-Caso
-
-Estado
-
---------------------------------
-
-Workflow
-
-Proceso
-
-Transición
-
-Paso
-
-Estado
-
---------------------------------
-
-Smart City
-
-Entidad NGSI-LD
-
-Sensor
-
-Gemelo Digital
-
-Evento
-
----
-
-# Reglas
-
-Un contexto nunca modifica directamente
-el estado interno de otro.
-
-La comunicación ocurre mediante:
-
-• Eventos
-
-o
-
-• APIs públicas
-
-Nunca mediante acceso directo.
-
----
-
-# Eventos del Dominio
-
-Ejemplos
-
-CitizenRegistered
-
-OrganizationCreated
-
-RequestCreated
-
-RequestAssigned
-
-WorkflowStarted
-
-WorkflowFinished
-
-NotificationSent
-
-SensorUpdated
-
-MunicipalitySynchronized
-
----
-
-# Objetivo Arquitectónico
-
-Mantener un dominio:
-
-cohesionado
-
-desacoplado
-
-extensible
-
-orientado al negocio
-
-independiente de frameworks.
-
----
-
-# Estado
-
-Versión
-
-1.0
-
-Estado
-
-Aprobado
-
-Proyecto
-
-Project Chrysalis
-
-Autor
-
-ARADA
+Cada relación posee dueño, dirección y mecanismo explícitos sin fusionar
+Aggregates ni introducir consistencia distribuida.

@@ -1,6 +1,6 @@
 # DOMAIN-005D — Territory Domain Events
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -28,7 +28,7 @@ Documentos relacionados:
 
 # Objetivo
 
-Definir los Domain Events emitidos por el Aggregate
+Definir los Domain Events generados y registrados por el Aggregate
 **Territory** cuando ocurre un cambio significativo y
 válidamente confirmado dentro del dominio.
 
@@ -677,8 +677,9 @@ New Domain Event
 
 # Eventos y otros Aggregates
 
-Los Domain Events de Territory pueden ser consumidos por otros
-Aggregates o servicios sin crear referencias directas.
+Los Domain Events de Territory permanecen dentro de Territorial
+Management. Otros contextos sólo reciben Integration Events explícitos
+definidos en DOMAIN-005K.
 
 Ejemplo:
 

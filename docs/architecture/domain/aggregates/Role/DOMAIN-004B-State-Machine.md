@@ -1,6 +1,6 @@
 # DOMAIN-004B — Role State Machine
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -111,7 +111,7 @@ Representa un Role recién creado.
 
 Características:
 
-- aún no puede asignarse a Memberships;
+- aún no está disponible como referencia activa del catálogo;
 - puede modificarse;
 - puede activarse;
 - puede archivarse.

@@ -1,6 +1,6 @@
 # DOMAIN-002D — Citizen Domain Events
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -43,7 +43,7 @@ Los Domain Events cumplen los siguientes principios:
 - describen hechos pasados;
 - son inmutables;
 - representan lenguaje del dominio;
-- pueden consumirse por múltiples Bounded Contexts;
+- permanecen dentro de Citizen Management;
 - son independientes de la infraestructura;
 - forman parte de la auditoría del sistema.
 
@@ -511,11 +511,10 @@ Ejemplos:
 
 # Integración
 
-Los Domain Events pueden transformarse posteriormente en
-Integration Events para comunicarse con otros Bounded Contexts
-o sistemas externos.
-
-La transformación ocurre fuera del Aggregate.
+Cuando un hecho deba cruzar Citizen Management, Application construye
+un Integration Event explícito definido en DOMAIN-002K. La selección y
+el payload del contrato público no se infieren automáticamente desde el
+Domain Event.
 
 ---
 

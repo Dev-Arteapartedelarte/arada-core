@@ -1,6 +1,6 @@
 # DOMAIN-004M — Role Test Scenarios
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -24,7 +24,7 @@ Documentos relacionados:
 - DOMAIN-004I-Versioning.md
 - DOMAIN-004J-Consistency-Boundary.md
 - DOMAIN-004L-Read-Model.md
-- CORE-015-Test-Strategy.md
+- CORE-008-Aggregate-Design-Rules.md
 
 ---
 

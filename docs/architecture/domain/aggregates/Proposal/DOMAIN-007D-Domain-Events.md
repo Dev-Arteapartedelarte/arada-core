@@ -1,6 +1,6 @@
 # DOMAIN-007D — Proposal Domain Events
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -38,7 +38,7 @@ Documentos relacionados:
 
 # Objetivo
 
-Definir los Domain Events oficiales emitidos por el Aggregate
+Definir los Domain Events oficiales generados y registrados por el Aggregate
 **Proposal** cuando ocurre un hecho relevante dentro de su ciclo
 de vida.
 
@@ -2136,7 +2136,8 @@ Notification conserva su propio límite de consistencia.
 Los Domain Events constituyen una fuente relevante de
 trazabilidad.
 
-Audit puede consumir hechos como:
+Audit Management no consume estos Domain Events. Si existe contrato en
+DOMAIN-007K, puede recibir Integration Events equivalentes a:
 
 ```text
 ProposalCreated
@@ -2372,7 +2373,7 @@ No representa nueva actividad del dominio.
 
 # Idempotencia de Consumo
 
-Los consumidores de Domain Events deben poder distinguir eventos
+Los handlers internos de Domain Events deben poder distinguir eventos
 mediante:
 
 ```text

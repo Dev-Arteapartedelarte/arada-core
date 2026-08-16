@@ -1,6 +1,6 @@
 # DOMAIN-004E — Role Invariants
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -242,13 +242,8 @@ No puede:
 
 # Invariante 10 — Roles Activos
 
-Solo un Role en estado:
-
-```text
-Active
-```
-
-puede ser asignado a nuevas Memberships.
+Sólo un Role en estado `Active` está disponible como referencia activa
+del catálogo. Esta regla no define asignaciones a Membership.
 
 Los Roles en estado:
 

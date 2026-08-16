@@ -1,6 +1,6 @@
 # DOMAIN-007J — Proposal Consistency Boundary
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -1653,7 +1653,7 @@ estado.
 
 # Domain Events
 
-Proposal publica Domain Events después de hechos relevantes del
+Proposal genera y registra Domain Events después de hechos relevantes del
 dominio.
 
 Ejemplos:

@@ -1,6 +1,6 @@
 # DOMAIN-004P — Role Extension Points
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -21,7 +21,7 @@ Documentos relacionados:
 - DOMAIN-004F-Permissions.md
 - DOMAIN-004K-Integration-Events.md
 - DOMAIN-005-Aggregate.md
-- CORE-018-Extension-Points.md
+- CORE-007-Strategic-Design.md
 
 ---
 
@@ -272,43 +272,20 @@ referenciados mediante identificadores.
 
 ---
 
-# Extensión mediante Permission
+# Extensión de autorización
 
-El Aggregate **Permission** amplía funcionalmente al Aggregate
+Ninguna extensión puede convertir Role en contenedor de Permissions ni
+crear un Aggregate Permission por inferencia. Nuevas capacidades de
+autorización se vinculan explícitamente a Commands fuera del estado de
 Role.
-
-Relación conceptual:
-
-```text
-Role
-
-↓
-
-Permission
-
-↓
-
-Authorization
-```
-
-El Role nunca almacena directamente las Permissions.
 
 ---
 
-# Extensión mediante Membership
+# Extensión futura de asignación
 
-Un mismo Role puede asignarse a múltiples Memberships.
-
-```text
-Role
-
-↓
-
-Membership
-```
-
-La asignación pertenece al Aggregate **Membership**, preservando
-la independencia entre Aggregates.
+Una futura asignación Membership–Role requiere una decisión explícita de
+ownership, Commands, Events, Repository y consistency boundary. No se
+asume que pertenezca a Membership ni a Role.
 
 ---
 

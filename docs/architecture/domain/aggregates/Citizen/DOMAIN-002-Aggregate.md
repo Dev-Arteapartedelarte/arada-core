@@ -1,6 +1,6 @@
 # DOMAIN-002 — Citizen Aggregate
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -243,7 +243,7 @@ No existen actualizaciones parciales.
 
 # Eventos
 
-Citizen publica Domain Events cuando cambia su estado.
+Citizen genera y registra Domain Events cuando cambia su estado.
 
 Ejemplos:
 
@@ -334,7 +334,8 @@ Citizen nunca almacena:
 - claves privadas;
 - secretos criptográficos.
 
-La autenticación pertenece al Bounded Context Identity.
+La autenticación pertenece a un Identity Provider externo accedido por
+un puerto de Application.
 
 ---
 

@@ -1,6 +1,6 @@
 # DOMAIN-004 — Role Aggregate
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -18,8 +18,8 @@ Documentos relacionados:
 
 - DOMAIN-003-Aggregate.md
 - DOMAIN-003F-Permissions.md
-- CORE-001-Ubiquitous-Language.md
-- CORE-002-Bounded-Contexts.md
+- CORE-004-Ubiquitous-Language.md
+- CORE-002-Bounded-Context-Map.md
 - CORE-008-Aggregate-Design-Rules.md
 
 ---
@@ -29,10 +29,9 @@ Documentos relacionados:
 El Aggregate **Role** representa una función organizacional
 dentro de una **Organization**.
 
-Un Role define las responsabilidades funcionales que podrán ser
-asignadas a una o más Memberships. No representa personas ni
-permisos técnicos; constituye una abstracción del dominio sobre
-la estructura organizacional.
+Un Role define una función organizacional disponible en el catálogo de
+una Organization. No representa personas ni permisos técnicos. La
+asignación Membership–Role no forma parte del baseline 1.0.
 
 Ejemplos:
 
@@ -55,7 +54,6 @@ El Aggregate Role es responsable de:
 - definir Roles organizacionales;
 - administrar su ciclo de vida;
 - garantizar unicidad dentro de una Organization;
-- permitir su asignación a Memberships;
 - emitir Domain Events;
 - preservar las invariantes del dominio.
 
@@ -72,24 +70,11 @@ No es responsable de:
 # Modelo Conceptual
 
 ```text
-Organization
-      │
-      │ 1
-      │
-      ▼
-Role
-      │
-      │ N
-      ▼
-Membership
+OrganizationId -> Role
 ```
 
-Una Organization posee múltiples Roles.
-
-Un Role puede estar asociado a múltiples Memberships.
-
-Cada Membership puede desempeñar uno o más Roles según las
-reglas definidas por el dominio.
+Una Organization posee un catálogo de Roles. El Aggregate Role no conoce
+Memberships y no administra asignaciones.
 
 ---
 
@@ -328,22 +313,15 @@ OrganizationId
 
 ## Membership
 
-Las Memberships hacen referencia al Role mediante:
-
-```text
-RoleId
-```
-
-No existe dependencia directa entre Aggregates.
+Role no mantiene MembershipIds. La eventual asignación entre ambos
+conceptos requiere un Source of Truth y contratos aún no definidos.
 
 ---
 
 ## Permission
 
-Los permisos podrán asociarse posteriormente a un Role.
-
-Esta relación será desarrollada en el Aggregate
-**Permission**.
+Permission es una capacidad explícita requerida por un Command. Role no
+almacena, agrupa ni concede Permissions.
 
 ---
 
@@ -400,7 +378,6 @@ Cambiar la descripción de un cargo.
 
 Archivar un cargo obsoleto.
 
-Asignar un cargo a una Membership.
 ```
 
 ---
@@ -414,7 +391,7 @@ No está permitido:
 - modificar OrganizationId;
 - modificar RoleId;
 - eliminar un System Role;
-- asignar Memberships a Roles archivados.
+- tratar un Role archivado como referencia activa del catálogo.
 
 ---
 
@@ -423,7 +400,7 @@ No está permitido:
 El Aggregate es compatible con:
 
 - Domain-Driven Design (DDD);
-- Clean Architecture;
+- Hexagonal Architecture;
 - CQRS;
 - Event Sourcing;
 - Event-Driven Architecture.

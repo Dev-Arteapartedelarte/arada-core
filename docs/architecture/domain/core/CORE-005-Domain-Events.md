@@ -1,362 +1,119 @@
 # CORE-005 — Domain Events
 
-Version: 1.0
+Versión: 2.0
 
-Estado: Oficial
+Estado: Official
 
 Proyecto: AURA Core
 
-Autor: ARADA
-
 ADR relacionados:
 
-- ADR-001 Domain Driven Design
-- ADR-002 Hexagonal Architecture
-- ADR-003 Event Driven Core
+- ADR-001 — Domain-Driven Design
+- ADR-002 — Hexagonal Architecture
+- ADR-003 — Event Boundaries
 
----
+## Objetivo
 
-# Objetivo
+Definir el contrato normativo de Domain Events y su límite respecto de
+Integration Events y transporte.
 
-Definir el modelo oficial de Domain Events de AURA Core.
+## Definición
 
-Los Domain Events representan hechos que ya ocurrieron
-dentro del dominio.
+Un Domain Event es un hecho significativo, inmutable y confirmado,
+generado por una única instancia de Aggregate dentro de su Bounded
+Context.
 
-No representan intenciones.
+No representa intención, fallo técnico, request, mensaje de broker ni
+contrato público.
 
-No representan solicitudes.
+## Responsabilidades
 
-Representan cambios consumados del negocio.
+El Aggregate:
 
----
+1. valida el Command y sus invariantes;
+2. modifica exclusivamente su propio estado;
+3. incrementa AggregateVersion cuando corresponde;
+4. crea y registra los Domain Events resultantes.
 
-# Definición
+El Aggregate nunca transporta ni publica técnicamente eventos.
 
-Un Domain Event es un objeto inmutable que describe un
-hecho significativo ocurrido dentro de un Aggregate.
+Application:
 
-Ejemplos:
+1. carga el Aggregate mediante Repository Contract;
+2. ejecuta el comportamiento;
+3. persiste el nuevo estado;
+4. obtiene los eventos pendientes;
+5. coordina su publicación interna después del commit.
 
-- PersonaRegistrada
-- OrganizaciónCreada
-- ProyectoPublicado
-- SolicitudAceptada
-- PermisoRevocado
+Un fallo de persistencia impide tratar el evento como confirmado.
 
----
-
-# Propiedades
-
-Todo Domain Event debe ser:
-
-- Inmutable
-- Identificable
-- Serializable
-- Versionable
-- Independiente de infraestructura
-
----
-
-# Responsabilidades
-
-Un Domain Event permite:
-
-- comunicar cambios entre Bounded Contexts
-- desacoplar componentes
-- iniciar procesos posteriores
-- registrar auditoría
-- reconstruir historial
-- publicar integración externa
-
-Nunca modifica el estado del dominio.
-
----
-
-# Estructura Conceptual
+## Envelope conceptual
 
 Todo Domain Event contiene como mínimo:
 
-- EventId
-- EventName
-- AggregateId
-- AggregateType
-- OccurredAt
-- Version
-- Payload
-
----
-
-# Ciclo de Vida
-
-1.
-
-El Aggregate ejecuta una operación válida.
-
-↓
-
-2.
-
-El Aggregate cambia su estado.
-
-↓
-
-3.
-
-El Aggregate crea uno o más Domain Events.
-
-↓
-
-4.
-
-Los eventos quedan registrados.
-
-↓
-
-5.
-
-La capa de Aplicación los publica.
-
-↓
-
-6.
-
-Los consumidores reaccionan.
-
----
-
-# Publicación
-
-Los Aggregates nunca publican eventos.
-
-Únicamente los crean.
-
-La publicación corresponde a la capa de Aplicación.
-
-Esto mantiene al Dominio completamente desacoplado.
-
----
-
-# Ejemplo Conceptual
-
-Comando
-
-RegistrarPersona
-
-↓
-
-Aggregate
-
-Persona
-
-↓
-
-Cambio de estado
-
-↓
-
-Evento
-
-PersonaRegistrada
-
-↓
-
-Application Layer
-
-↓
-
-Event Bus
-
-↓
-
-Consumidores
-
----
-
-# Clasificación
-
-## Eventos de Creación
-
-- PersonaRegistrada
-- OrganizaciónCreada
-- ProyectoCreado
-
----
-
-## Eventos de Actualización
-
-- PerfilActualizado
-- PermisoModificado
-- ProyectoActualizado
-
----
-
-## Eventos de Eliminación
-
-- OrganizaciónEliminada
-- ProyectoArchivado
-- UsuarioDeshabilitado
-
----
-
-## Eventos de Relación
-
-- MiembroAgregado
-- PermisoAsignado
-- OrganizaciónAsociada
-
----
-
-# Reglas
-
-## Regla 1
-
-Todo evento representa un hecho pasado.
-
-Nunca una intención futura.
-
-Correcto
-
-ProyectoCreado
-
-Incorrecto
-
-CrearProyecto
-
----
-
-## Regla 2
-
-Todo evento es inmutable.
-
-Nunca cambia después de ser emitido.
-
----
-
-## Regla 3
-
-Todo evento pertenece a un Aggregate Root.
-
-Nunca nace fuera del dominio.
-
----
-
-## Regla 4
-
-Los eventos nunca contienen comportamiento.
-
-Sólo información.
-
----
-
-## Regla 5
-
-Los eventos nunca conocen infraestructura.
-
-No conocen:
-
-- HTTP
-- REST
-- PostgreSQL
-- MongoDB
-- Kafka
-- RabbitMQ
-- Redis
-
----
-
-## Regla 6
-
-Los eventos pueden almacenarse para auditoría.
-
-Nunca deben modificarse.
-
----
-
-# Event Naming
-
-Formato oficial
-
-<Sustantivo><VerboEnParticipio>
-
-Ejemplos
-
-PersonaRegistrada
-
-ProyectoPublicado
-
-SolicitudAceptada
-
-PermisoRevocado
-
-OrganizaciónCreada
-
----
-
-# Event Versioning
-
-Todo evento posee versión.
-
-Ejemplo
-
-Version = 1
-
-Si cambia su estructura:
-
-Version = 2
-
-Esto permite mantener compatibilidad hacia atrás.
-
----
-
-# Event Payload
-
-El Payload contiene únicamente la información necesaria
-para describir el hecho ocurrido.
-
-Debe ser lo más pequeño posible.
-
-No debe contener objetos completos.
-
-Debe contener identificadores y datos relevantes.
-
----
-
-# Consumo
-
-Los Domain Events pueden ser consumidos por:
-
-- Application Services
-- Event Handlers
-- Integraciones
-- Bounded Contexts
-- Sistemas externos
-
-Nunca por el propio Aggregate que los generó.
-
----
-
-# Beneficios
-
-El uso de Domain Events permite:
-
-- Bajo acoplamiento
-- Alta cohesión
-- Escalabilidad
-- Auditoría completa
-- Integración entre dominios
-- Eventual Consistency
-- Evolución independiente de módulos
-
----
-
-# Definición de Éxito
-
-Todo cambio importante del dominio genera un Domain Event.
-
-El dominio únicamente produce eventos.
-
-La infraestructura decide cómo transportarlos.
-
-De este modo, AURA Core permanece independiente de cualquier
-tecnología de mensajería o mecanismo de integración.
+- EventId;
+- EventName;
+- AggregateId;
+- AggregateType;
+- AggregateVersion;
+- OccurredAt;
+- CorrelationId cuando exista una cadena causal;
+- CausationId cuando exista una causa identificable;
+- payload mínimo del hecho.
+
+`AggregateVersion` no es `EventContractVersion`.
+
+## Scope y consumidores
+
+Un Domain Event permanece dentro del Bounded Context productor. Puede
+alimentar handlers internos y proyecciones propias sin otorgarles
+capacidad de modificar el Aggregate directamente.
+
+Otro Bounded Context no consume este contrato interno. Para cruzar la
+frontera se define uno de estos contratos:
+
+```text
+Integration Event
+API Contract
+```
+
+La existencia de un Domain Event no obliga a exponerlo, copiar su payload
+ni crear un Integration Event.
+
+## Domain Event versus Integration Event
+
+| Aspecto | Domain Event | Integration Event |
+|---|---|---|
+| Owner | Aggregate/Bounded Context | contrato de integración |
+| Scope | interno | cross-boundary |
+| Payload | lenguaje interno mínimo | Published Language estable |
+| Momento | junto al cambio confirmado | después del commit |
+| Transporte | ninguno | responsabilidad de adapters |
+| Versionado | AggregateVersion y contrato interno | versión pública propia |
+
+## Entrega e infraestructura
+
+Outbox, broker, retries, deduplicación y orden de entrega son decisiones
+de arquitectura. Pueden implementar confiabilidad, pero no forman parte
+del Domain Event ni convierten Event Sourcing en obligatorio.
+
+## Replay
+
+Si una arquitectura futura adopta Event Sourcing, reproducir eventos no
+genera nuevos hechos ni efectos externos. Sin esa decisión, los Domain
+Events no son automáticamente la Source of Truth del Aggregate.
+
+## Reglas obligatorias
+
+- hechos en pasado;
+- inmutables;
+- un productor Aggregate explícito;
+- sin comportamiento ni dependencias técnicas;
+- sin consumidores cross-context directos;
+- sin publicación antes del commit;
+- sin conversión automática a contrato público.
+
+## Definición de éxito
+
+Los Domain Events expresan hechos internos verificables sin acoplar el
+dominio a transporte, persistencia o modelos de otros contextos.

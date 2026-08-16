@@ -1,6 +1,6 @@
 # DOMAIN-004H — Role Examples
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -346,40 +346,11 @@ No existe transición válida.
 
 ---
 
-# Ejemplo 11 — Asignación a Membership
+# Ejemplo 11 — Límite de asignación
 
-Existe el Role:
-
-```text
-Secretario
-```
-
-Existe la Membership:
-
-```text
-Juan Pérez
-
-Miembro Activo
-```
-
-Resultado conceptual
-
-```text
-Membership
-
-↓
-
-RoleId
-
-↓
-
-Secretary
-```
-
-La asignación pertenece al Aggregate
-**Membership**.
-
-El Aggregate **Role** permanece inalterado.
+Una solicitud de asignar una Membership a un Role no se ejecuta sobre
+Role ni Membership en el baseline 1.0. Debe rechazarse como capacidad no
+definida hasta contar con un Source of Truth explícito.
 
 ---
 
@@ -557,7 +528,7 @@ Cada Role:
 - posee un `RoleId` único;
 - pertenece a la misma `Organization`;
 - mantiene su propio ciclo de vida;
-- puede ser asignado a múltiples Memberships según las reglas del dominio.
+- no almacena ni administra asignaciones a Memberships.
 
 ---
 
@@ -566,7 +537,7 @@ Cada Role:
 Los ejemplos son compatibles con:
 
 - Domain-Driven Design (DDD);
-- Clean Architecture;
+- Hexagonal Architecture;
 - CQRS;
 - Event Sourcing;
 - Event-Driven Architecture.

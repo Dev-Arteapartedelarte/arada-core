@@ -1,6 +1,6 @@
 # DOMAIN-013D — Integration Domain Events
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -61,7 +61,7 @@ Los Domain Events permiten:
 - relacionar comportamiento con Version;
 - alimentar Read Models;
 - permitir colaboración desacoplada;
-- proporcionar hechos que puedan ser consumidos por Audit;
+- proporcionar hechos para handlers internos de Integration Management;
 - permitir una posterior transformación hacia Integration Events
   cuando exista un contrato explícito;
 - mantener compatibilidad con CQRS;
@@ -1923,7 +1923,8 @@ External System changed
 
 # External Consistency
 
-Otros contextos pueden observar los hechos posteriormente.
+Otros contextos sólo pueden observar Integration Events explícitos
+posteriormente.
 
 La consistencia externa permanece eventual.
 
@@ -2577,8 +2578,9 @@ Los Domain Events de Integration deben cumplir:
 77. Projection Failure no invalida eventos confirmados.
 78. Projection Retry no crea eventos nuevos.
 79. Projection Rebuild no crea hechos nuevos.
-80. Audit puede consumir hechos sin adquirir ownership.
-81. Notification puede reaccionar sin formar parte del Aggregate.
+80. Audit sólo puede recibir Integration Events explícitos sin adquirir ownership.
+81. Notification sólo puede reaccionar a Integration Events explícitos mediante
+un Command propio.
 82. Un evento confirma únicamente el cambio dentro de Integration.
 83. Un evento no confirma simultáneamente cambios en otros
     Aggregates.

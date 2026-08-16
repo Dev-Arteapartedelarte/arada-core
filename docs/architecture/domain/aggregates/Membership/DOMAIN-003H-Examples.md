@@ -1,6 +1,6 @@
 # DOMAIN-003H — Membership Examples
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -493,36 +493,11 @@ Acceso denegado
 
 ---
 
-# Ejemplo 14 — Integración con Role
+# Ejemplo 14 — Asignación no definida
 
-Después de activar una Membership:
-
-```text
-MembershipActivated
-```
-
-Un proceso de aplicación ejecuta:
-
-```text
-AssignDefaultRole
-```
-
-Resultado:
-
-```text
-Citizen
-
-↓
-
-Membership
-
-↓
-
-Role = Member
-```
-
-La asignación del rol ocurre fuera del Aggregate
-Membership.
+Después de activar una Membership no se asigna automáticamente un Role.
+La solicitud se rechaza o se difiere hasta que exista un Source of Truth
+explícito para la relación Membership–Role.
 
 ---
 

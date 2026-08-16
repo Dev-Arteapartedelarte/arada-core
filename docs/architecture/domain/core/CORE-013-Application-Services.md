@@ -1,6 +1,6 @@
 # CORE-013 — Application Services
 
-Versión: 1.0
+Versión: 2.0
 
 Estado: Oficial
 
@@ -208,10 +208,13 @@ Nunca exponen directamente Aggregates hacia el exterior.
 
 # Transacciones
 
-El Application Service constituye el límite transaccional.
+El Application Service coordina el límite transaccional de una única
+escritura de Aggregate.
 
-Cuando un caso de uso modifica múltiples Aggregates, la
-transacción se controla aquí.
+Un caso de uso puede coordinar varios Aggregates, pero no los modifica en
+una misma transacción. Cada commit confirma un solo Aggregate; los pasos
+cross-boundary continúan mediante Integration Events y consistencia
+eventual.
 
 ---
 
@@ -226,9 +229,10 @@ El Dominio permanece completamente ajeno.
 
 # Domain Events
 
-Una vez completada la transacción, el Application Service
-coordina la publicación de los Domain Events generados por
-los Aggregates.
+Después de persistir exitosamente, el Application Service obtiene los
+Domain Events pendientes y coordina su publicación interna. Para cruzar
+un Bounded Context construye un Integration Event explícito mediante un
+output port; nunca expone automáticamente el evento interno.
 
 ---
 

@@ -1,6 +1,6 @@
 # CORE-015 — Package Architecture
 
-Versión: 1.0
+Versión: 2.0
 
 Estado: Oficial
 
@@ -40,8 +40,9 @@ principios:
 
 # Organización General
 
-La organización del proyecto sigue una arquitectura por
-capas.
+La organización del proyecto sigue Hexagonal Architecture. Los nombres
+de paquete expresan el núcleo y sus adapters, no una dependencia vertical
+hacia Infrastructure.
 
 ```text
 src/
@@ -52,13 +53,17 @@ src/
 
     infrastructure/
 
-    interfaces/
+        adapters/
+
+            inbound/
+
+            outbound/
 
     shared/
 ```
 
-Cada capa representa una responsabilidad distinta dentro
-del sistema.
+Cada zona representa una responsabilidad dentro de la arquitectura
+hexagonal; no constituye una cadena de dependencias descendente.
 
 ---
 
@@ -123,8 +128,8 @@ application/
 
 # Infrastructure
 
-Infrastructure implementa las dependencias técnicas del
-sistema.
+Infrastructure contiene outbound adapters que implementan puertos del
+núcleo y composición técnica.
 
 Ejemplos:
 
@@ -152,8 +157,8 @@ El dominio nunca depende de Infrastructure.
 
 # Interfaces
 
-La capa Interfaces representa los mecanismos de entrada y
-salida del sistema.
+Interfaces contiene inbound adapters que traducen mecanismos externos a
+input ports de Application.
 
 Ejemplos:
 
@@ -173,7 +178,7 @@ interfaces/
     jobs/
 ```
 
-Las Interfaces nunca contienen reglas del negocio.
+Los inbound adapters nunca contienen reglas del negocio.
 
 ---
 

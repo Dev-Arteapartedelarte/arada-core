@@ -1,6 +1,6 @@
 # DOMAIN-004I — Role Versioning
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -22,7 +22,7 @@ Documentos relacionados:
 - DOMAIN-004E-Invariants.md
 - DOMAIN-004G-Repository-Contract.md
 - DOMAIN-004J-Consistency-Boundary.md
-- CORE-011-Versioning.md
+- CORE-008-Aggregate-Design-Rules.md
 
 ---
 

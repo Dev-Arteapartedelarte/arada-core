@@ -1,6 +1,6 @@
 # DOMAIN-004L — Role Read Model
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -21,7 +21,7 @@ Documentos relacionados:
 - DOMAIN-004D-Domain-Events.md
 - DOMAIN-004G-Repository-Contract.md
 - DOMAIN-004K-Integration-Events.md
-- CORE-014-Read-Model.md
+- CORE-013-Application-Services.md
 
 ---
 
@@ -57,7 +57,7 @@ El Read Model permite responder consultas como:
 - ¿Qué Roles existen en una Organization?
 - ¿Cuáles están activos?
 - ¿Qué Roles pertenecen al sistema?
-- ¿Qué Roles pueden asignarse actualmente?
+- ¿Qué Roles están disponibles como referencias activas del catálogo?
 - ¿Cuál es la información descriptiva de un Role?
 - ¿Cuál es el historial de cambios de un Role?
 

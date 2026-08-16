@@ -1,6 +1,6 @@
 # DOMAIN-002K — Citizen Integration Events
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -293,10 +293,10 @@ Los principales consumidores son:
 
 ---
 
-## Identity Context
+## External Identity Systems
 
-- sincronización de identidad;
-- actualización de atributos.
+- sincronización mediante Integration Events explícitos;
+- actualización de atributos públicos minimizados.
 
 ---
 

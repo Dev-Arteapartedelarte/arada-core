@@ -1,6 +1,6 @@
 # DOMAIN-002O — Citizen Security Model
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -141,7 +141,8 @@ No pueden existir estados parcialmente válidos.
 
 # Autenticación
 
-La autenticación pertenece al Bounded Context de Identity.
+La autenticación pertenece a un Identity Provider adapter externo al
+dominio.
 
 Puede implementarse mediante tecnologías como:
 

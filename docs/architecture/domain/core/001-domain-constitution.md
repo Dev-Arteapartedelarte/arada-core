@@ -1,510 +1,152 @@
-# ============================================================
-# ARADA
-# ============================================================
-#
-# Proyecto:
-# AURA Core
-#
-# Unidad:
-# CORE-001
-#
-# Documento:
-# Domain Constitution
-#
-# Ruta:
-# docs/architecture/CORE-001-domain-constitution.md
-#
-# Estado:
-# Ratificado
-#
-# Versión:
-# 1.0
-#
-# ADR:
-# ADR-000
-#
-# ============================================================
-
 # CORE-001 — Domain Constitution
 
-## 1. Propósito
+Versión: 2.0
 
-AURA Core es el núcleo de dominio de la plataforma ARADA.
+Estado: Ratificado
 
-Su responsabilidad consiste en modelar el comportamiento de las organizaciones,
-sus procesos, actores, eventos y relaciones, de forma completamente desacoplada
-de cualquier tecnología específica.
+Proyecto: AURA Core
 
-El dominio constituye el activo principal del proyecto.
+ADR relacionados:
 
-Toda decisión arquitectónica deberá preservar su independencia.
+- ADR-001 — Domain-Driven Design
+- ADR-002 — Hexagonal Architecture
+- ADR-003 — Event Boundaries
 
----
+## Propósito
 
-# 2. Principios Fundamentales
+AURA Core modela el dominio de organizaciones y participación
+ciudadana. El dominio es el centro de la arquitectura y permanece
+independiente de transporte, persistencia, frameworks y proveedores.
 
-## 2.1 El dominio es el centro
+## Principios obligatorios
 
-Toda dependencia apunta hacia el dominio.
+1. Cada Bounded Context posee su modelo, lenguaje y contratos.
+2. Cada Aggregate protege una única frontera de consistencia inmediata.
+3. Una transacción de escritura confirma un solo Aggregate.
+4. Las referencias entre Aggregates utilizan identidades, nunca objetos.
+5. La colaboración entre Bounded Contexts es explícita y eventualmente
+   consistente.
+6. Los Read Models son proyecciones y nunca Sources of Truth de escritura.
+7. Event Sourcing y CQRS físico son compatibles, pero no obligatorios.
 
-Nunca al revés.
+## Arquitectura hexagonal
 
-El dominio jamás conoce:
-
-- React
-- Next.js
-- FastAPI
-- Django
-- PostgreSQL
-- MongoDB
-- REST
-- GraphQL
-- Docker
-- Kubernetes
-- Redis
-
-El dominio únicamente conoce conceptos del negocio.
-
----
-
-## 2.2 Lenguaje Ubicuo
-
-Todos los nombres utilizados deberán pertenecer al lenguaje del dominio.
-
-Ejemplos:
-
-✔ Organization
-
-✔ Member
-
-✔ Assembly
-
-✔ Vote
-
-✔ Proposal
-
-✔ Neighborhood
-
-✔ Process
-
-Nunca utilizar nombres tecnológicos como:
-
-Controller
-
-DTO
-
-Model
-
-Schema
-
-DatabaseEntity
-
-APIResponse
-
----
-
-## 2.3 El dominio no posee Frameworks
-
-Frameworks son detalles.
-
-El dominio no depende de detalles.
-
-Los detalles dependen del dominio.
-
----
-
-## 2.4 El dominio es puro
-
-No existen efectos secundarios.
-
-No existen accesos a red.
-
-No existen accesos a disco.
-
-No existen consultas SQL.
-
-No existen llamadas HTTP.
-
----
-
-## 2.5 Inmutabilidad
-
-Siempre que sea posible:
-
-Los objetos del dominio serán inmutables.
-
-El estado cambiará únicamente mediante nuevas instancias.
-
----
-
-## 2.6 Reglas explícitas
-
-Toda regla de negocio deberá existir como código.
-
-Nunca como comentario.
-
-Nunca como documentación.
-
-Nunca como validación de interfaz.
-
----
-
-# 3. Arquitectura
-
-El dominio utilizará Clean Architecture.
-
-```
-Presentation
-
-↓
-
-Application
-
-↓
-
+```text
+Inbound Adapter
+      │
+      ▼
+Application Input Port / Use Case
+      │
+      ▼
 Domain
-
-↓
-
-Infrastructure
+      │
+      ▼
+Application or Domain Output Port
+      │
+      ▼
+Outbound Adapter
 ```
 
-Las dependencias únicamente apuntan hacia abajo.
+Las dependencias de código apuntan hacia Domain y Application. Los
+adaptadores implementan o invocan puertos; el núcleo nunca depende de
+adaptadores.
 
-Infrastructure jamás gobierna al dominio.
+### Domain
 
----
+Contiene:
 
-# 4. Bounded Contexts
+- Aggregates, Entities y Value Objects;
+- Domain Services e invariantes;
+- Commands como intención del dominio;
+- Domain Events como hechos internos confirmados;
+- Repository Contracts requeridos por el modelo de escritura.
 
-AURA Core se dividirá en múltiples contextos delimitados.
+No contiene HTTP, SQL, ORM, brokers, DTO de transporte ni SDK externos.
 
-Inicialmente:
+### Application
 
+Contiene casos de uso y puertos de entrada, coordina autorización,
+carga un Aggregate, ejecuta un Command, persiste por un puerto de salida
+y publica los Domain Events pendientes después del commit.
+
+Puede coordinar procesos que involucren varios Aggregates, pero no crea
+una transacción distribuida entre ellos.
+
+### Adapters
+
+Los inbound adapters traducen REST, GraphQL, CLI, mensajes u otros
+mecanismos hacia casos de uso. Los outbound adapters implementan
+persistencia, publicación, identidad técnica e integraciones externas.
+
+## Bounded Contexts oficiales
+
+El baseline 1.0 reconoce exclusivamente:
+
+1. Organization Management
+2. Citizen Management
+3. Membership Management
+4. Authorization Management
+5. Territorial Management
+6. Assembly Management
+7. Proposal Management
+8. Participation Management
+9. Voting Management
+10. Document Management
+11. Notification Management
+12. Audit Management
+13. Integration Management
+
+Cada contexto contiene un Aggregate oficial del mismo catálogo. Esta
+correspondencia no convierte el conjunto en un único Aggregate.
+
+## Ownership
+
+- Organization posee su identidad, configuración, políticas, territorio
+  asociado y lifecycle.
+- Citizen posee la identidad cívica.
+- Membership posee la relación Citizen–Organization.
+- Role posee el catálogo de funciones organizacionales.
+- Los demás Aggregates poseen exclusivamente su estado y lifecycle.
+- Ningún Aggregate Permission forma parte del baseline.
+
+Permission es una capacidad explícita requerida para ejecutar un Command.
+Role, Membership y Citizen pueden aportar contexto a una decisión de
+autorización, pero nunca conceden permisos implícitamente.
+
+La asignación Membership–Role no posee Source of Truth en la versión 1.0
+y no debe inferirse desde ninguno de los dos Aggregates.
+
+## Eventos y contratos
+
+```text
+Domain Event != Integration Event != API Contract
 ```
-Organization
 
-Citizen
+El Aggregate genera y registra Domain Events. Application los obtiene y
+coordina su publicación interna después de persistir exitosamente.
 
-Assembly
+Un Domain Event permanece dentro de su Bounded Context. Cuando un hecho
+debe cruzar una frontera se define, versiona y publica un Integration
+Event independiente o se expone un API Contract explícito. La conversión
+nunca es automática.
 
-Proposal
+## Consistencia y persistencia
 
-Voting
+El Repository Contract pertenece al núcleo y opera sobre el Aggregate
+completo. Su implementación es un outbound adapter.
 
-Process
+La consistencia inmediata termina en el Aggregate. Las referencias
+externas, proyecciones, notificaciones, auditoría e integración se
+coordinan con consistencia eventual.
 
-Workflow
+## Regla de evolución
 
-Notification
+Toda evolución debe actualizar conjuntamente los contratos A–P afectados,
+el Context Map, el lenguaje ubicuo y el manifiesto del Domain Model. Una
+capacidad ausente no puede agregarse por analogía o decisión técnica.
 
-Identity
+## Definición de éxito
 
-Permissions
-
-Geo
-
-Assets
-
-Documents
-
-Audit
-
-Integration
-```
-
-Cada contexto será independiente.
-
----
-
-# 5. Entidades
-
-Una Entidad posee identidad.
-
-Ejemplo:
-
-Organization
-
-Member
-
-Assembly
-
-Proposal
-
-Document
-
-Neighborhood
-
----
-
-# 6. Value Objects
-
-Un Value Object no posee identidad.
-
-Ejemplo:
-
-Email
-
-Phone
-
-Address
-
-Coordinates
-
-Period
-
-Money
-
-Role
-
-VoteWeight
-
----
-
-# 7. Domain Events
-
-Toda modificación importante del dominio genera un evento.
-
-Ejemplos:
-
-OrganizationCreated
-
-MemberAdded
-
-AssemblyScheduled
-
-ProposalApproved
-
-VoteCast
-
-DocumentSigned
-
-Estos eventos representan hechos.
-
-No comandos.
-
----
-
-# 8. Casos de Uso
-
-Los casos de uso viven fuera del dominio.
-
-Responsabilidades:
-
-Coordinar entidades.
-
-Invocar repositorios.
-
-Emitir eventos.
-
-Nunca contienen reglas de negocio propias.
-
----
-
-# 9. Repositorios
-
-Los repositorios son interfaces.
-
-Nunca implementaciones.
-
-Ejemplo:
-
-OrganizationRepository
-
-MemberRepository
-
-ProposalRepository
-
-Infrastructure implementará estas interfaces.
-
----
-
-# 10. Adaptadores
-
-Todo acceso externo se realiza mediante adaptadores.
-
-Ejemplos:
-
-REST Adapter
-
-GraphQL Adapter
-
-NGSI-LD Adapter
-
-Municipality Adapter
-
-FIWARE Adapter
-
-Keycloak Adapter
-
-Email Adapter
-
-SMS Adapter
-
----
-
-# 11. Integraciones
-
-Las integraciones nunca forman parte del dominio.
-
-Las integraciones traducen.
-
-Nunca gobiernan.
-
----
-
-# 12. Testing
-
-El dominio debe ser completamente testeable.
-
-Sin mocks de frameworks.
-
-Sin bases de datos.
-
-Sin servidores.
-
-Cada regla deberá poseer pruebas unitarias.
-
----
-
-# 13. Convenciones
-
-Idioma:
-
-Código:
-
-Inglés.
-
-Documentación:
-
-Español.
-
-Comentarios:
-
-Español.
-
-Commit:
-
-Conventional Commits.
-
-PEP8 para Python.
-
-ESLint + Prettier para TypeScript.
-
----
-
-# 14. Principios SOLID
-
-Toda implementación deberá respetar:
-
-Single Responsibility
-
-Open/Closed
-
-Liskov
-
-Interface Segregation
-
-Dependency Inversion
-
----
-
-# 15. Principios DDD
-
-El dominio seguirá Domain Driven Design.
-
-Componentes oficiales:
-
-Entities
-
-Value Objects
-
-Aggregates
-
-Repositories
-
-Factories
-
-Domain Services
-
-Specifications
-
-Policies
-
-Domain Events
-
----
-
-# 16. Reglas de Dependencia
-
-Permitido:
-
-Presentation
-
-↓
-
-Application
-
-↓
-
-Domain
-
-↓
-
-Infrastructure
-
-Prohibido:
-
-Domain → Infrastructure
-
-Domain → React
-
-Domain → SQL
-
-Domain → HTTP
-
-Domain → Frameworks
-
----
-
-# 17. Objetivo Final
-
-Construir una plataforma capaz de modelar organizaciones,
-procesos comunitarios e interoperabilidad institucional
-sin depender de ninguna tecnología específica.
-
-El dominio deberá poder sobrevivir al reemplazo total de:
-
-React
-
-Next.js
-
-FastAPI
-
-Django
-
-MongoDB
-
-PostgreSQL
-
-Docker
-
-Kubernetes
-
-FIWARE
-
-sin modificar una sola regla de negocio.
-
----
-
-# 18. Constitución
-
-Esta constitución prevalece sobre cualquier decisión de implementación.
-
-Toda nueva funcionalidad deberá respetar este documento.
-
-Si una decisión contradice esta constitución:
-
-la implementación deberá cambiar,
-
-no la constitución.
+AURA Core mantiene un dominio autónomo, consistente y verificable,
+rodeado por puertos y adaptadores reemplazables, con ownership explícito
+y colaboración cross-boundary mediante contratos deliberados.

@@ -1,6 +1,6 @@
 # DOMAIN-003 — Membership Aggregate
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -315,9 +315,6 @@ Citizen
 
 Organization
 
-Role
-
-Permission
 
 Assembly
 
@@ -370,7 +367,6 @@ Los cambios relevantes pueden propagarse mediante
 Integration Events hacia:
 
 - Organization Context;
-- Identity Context;
 - Notification Context;
 - Analytics Context;
 - FIWARE;
@@ -401,6 +397,5 @@ El Aggregate **Membership** constituye el núcleo de la relación
 entre ciudadanos y organizaciones dentro del ecosistema AURA.
 Su responsabilidad es garantizar que toda pertenencia sea
 consistente, trazable y evolucione conforme a las reglas del
-dominio, proporcionando la base sobre la cual se construyen los
-roles, permisos, procesos de participación y mecanismos de
-gobernanza de la plataforma.
+dominio, proporcionando contexto explícito para procesos de participación y
+mecanismos de gobernanza de la plataforma.

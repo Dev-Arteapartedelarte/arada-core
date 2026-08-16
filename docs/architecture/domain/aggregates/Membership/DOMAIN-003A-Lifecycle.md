@@ -1,6 +1,6 @@
 # DOMAIN-003A — Membership Lifecycle
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -169,7 +169,6 @@ Representa una membresía plenamente vigente.
 Características:
 
 - habilita participación;
-- permite asignación de roles;
 - permite acceso a procesos internos;
 - constituye el estado operativo normal.
 

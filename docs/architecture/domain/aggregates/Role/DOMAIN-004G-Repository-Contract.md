@@ -1,6 +1,6 @@
 # DOMAIN-004G — Role Repository Contract
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -22,7 +22,7 @@ Documentos relacionados:
 - DOMAIN-004E-Invariants.md
 - DOMAIN-004I-Versioning.md
 - DOMAIN-004J-Consistency-Boundary.md
-- CORE-010-Repository-Pattern.md
+- CORE-011-Repository-Contracts.md
 
 ---
 

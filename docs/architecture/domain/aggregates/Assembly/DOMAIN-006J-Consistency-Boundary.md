@@ -1,6 +1,6 @@
 # DOMAIN-006J — Assembly Consistency Boundary
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -3326,7 +3326,7 @@ El Consistency Boundary debe garantizar:
 * autonomía de otros Aggregates;
 * ausencia de transacciones distribuidas como mecanismo normal de
   consistencia;
-* comunicación mediante Domain Events;
+* Domain Events internos e Integration Events para comunicación cross-context;
 * Integration Events fuera de la Aggregate Root;
 * Read Models fuera del Write Model;
 * infraestructura fuera del dominio;

@@ -1,6 +1,6 @@
 # DOMAIN-004J — Role Consistency Boundary
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -23,7 +23,7 @@ Documentos relacionados:
 - DOMAIN-004G-Repository-Contract.md
 - DOMAIN-004I-Versioning.md
 - DOMAIN-004K-Integration-Events.md
-- CORE-012-Consistency-Boundary.md
+- CORE-008-Aggregate-Design-Rules.md
 
 ---
 
@@ -184,27 +184,9 @@ Services.
 
 # Relación con Membership
 
-Un Role puede estar asociado a múltiples Memberships.
-
-La relación conceptual es:
-
-```text
-Role
-
-1
-
-↓
-
-N
-
-Membership
-```
-
-Sin embargo:
-
-- el Aggregate Role no modifica Membership;
-- el Aggregate Membership no modifica Role;
-- ambos se relacionan mediante `RoleId`.
+Role no contiene MembershipIds y Membership no contiene RoleIds en el
+baseline 1.0. La asignación se difiere hasta definir un Source of Truth
+independiente y contratos explícitos.
 
 ---
 
@@ -228,20 +210,8 @@ es inmutable.
 
 # Relación con Permission
 
-El Aggregate Role no almacena permisos funcionales.
-
-La relación conceptual es:
-
-```text
-Role
-
-↓
-
-Permission
-```
-
-La administración de permisos pertenece al Aggregate
-**Permission**.
+Permission es una capacidad exigida para ejecutar Commands; no pertenece
+al estado de Role ni constituye un Aggregate del baseline.
 
 ---
 
@@ -258,7 +228,7 @@ Commit
 
 ↓
 
-Publish Domain Events
+Publish Internal Domain Events
 ```
 
 Nunca deben publicarse eventos antes del commit.

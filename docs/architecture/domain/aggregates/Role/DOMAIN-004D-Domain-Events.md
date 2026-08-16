@@ -1,6 +1,6 @@
 # DOMAIN-004D — Role Domain Events
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -22,7 +22,7 @@ Documentos relacionados:
 - DOMAIN-004C-Commands.md
 - DOMAIN-004E-Invariants.md
 - DOMAIN-004K-Integration-Events.md
-- CORE-009-Domain-Events.md
+- CORE-005-Domain-Events.md
 
 ---
 
@@ -183,7 +183,7 @@ Version
 
 ## Descripción
 
-El Role dejó de estar disponible para nuevas asignaciones.
+El Role dejó de estar disponible como referencia activa del catálogo.
 
 ## Originado por
 
@@ -318,8 +318,8 @@ estado exacto del Aggregate.
 
 Los Domain Events permanecen dentro del Bounded Context.
 
-Cuando un evento debe ser compartido con otros Contextos se
-transforma en un **Integration Event**, definido en:
+Cuando un hecho debe compartirse con otros contextos, Application construye
+un **Integration Event** explícito, definido en:
 
 ```text
 DOMAIN-004K-Integration-Events.md
@@ -378,7 +378,7 @@ El modelo es compatible con:
 Los Domain Events del Aggregate **Role** representan de manera
 precisa y auditable la evolución de las funciones
 organizacionales dentro de AURA. Su diseño desacoplado permite
-la integración con otros Bounded Contexts, facilita la
+facilita la creación explícita de contratos de integración, la
 reconstrucción del estado mediante Event Sourcing y constituye
 la base para mecanismos de auditoría, analítica e integración
 sin comprometer la pureza del dominio.

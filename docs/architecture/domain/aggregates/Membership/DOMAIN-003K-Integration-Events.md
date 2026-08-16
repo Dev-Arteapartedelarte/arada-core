@@ -1,6 +1,6 @@
 # DOMAIN-003K — Membership Integration Events
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -207,16 +207,15 @@ Nunca se publican eventos antes del commit.
 
 Los Integration Events pueden ser consumidos por:
 
-- Identity Context;
-- Role Management;
-- Permission Management;
+- Citizen Management;
+- Organization Management;
 - Notification;
 - Audit;
 - Analytics;
 - Reporting;
 - Search;
-- Workflow;
-- Smart City Integration;
+- external workflow systems;
+- external Smart City systems;
 - API Gateway;
 - Sistemas Municipales.
 
@@ -242,14 +241,6 @@ Puede ser utilizado para:
 Puede desencadenar:
 
 ```text
-Asignación de Roles
-
-↓
-
-Creación de Permisos
-
-↓
-
 Actualización de estadísticas
 
 ↓
@@ -267,8 +258,7 @@ Sincronización externa
 
 Puede provocar:
 
-- revocación de permisos;
-- desasignación de Roles;
+- reevaluación explícita de autorizaciones en Application;
 - cierre de procesos pendientes;
 - actualización de reportes.
 

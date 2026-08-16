@@ -1,6 +1,6 @@
 # DOMAIN-008 — Participation Aggregate
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -2073,7 +2073,7 @@ DOMAIN-008C-Commands.md
 
 # Domain Events
 
-Participation publica Domain Events cuando ocurren hechos
+Participation genera y registra Domain Events cuando ocurren hechos
 relevantes.
 
 Eventos conceptuales:

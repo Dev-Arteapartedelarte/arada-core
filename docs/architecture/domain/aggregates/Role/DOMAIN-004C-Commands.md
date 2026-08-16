@@ -1,6 +1,6 @@
 # DOMAIN-004C — Role Commands
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -178,7 +178,7 @@ RoleDescriptionChanged
 
 ## Objetivo
 
-Habilitar el Role para ser utilizado por Memberships.
+Habilitar el Role dentro del catálogo organizacional.
 
 ## Estados permitidos
 

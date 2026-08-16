@@ -1,6 +1,6 @@
 # DOMAIN-003F — Membership Permissions
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -304,8 +304,8 @@ membership.terminate
 membership.archive
 ```
 
-La asignación de estos permisos a Roles pertenece al Aggregate
-**Permission**.
+Estas Permissions se vinculan a Commands y se evalúan en Application; no
+se asignan implícitamente a Roles ni pertenecen a un Aggregate Permission.
 
 ---
 

@@ -1,6 +1,6 @@
 # DOMAIN-011H — Notification Examples
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -1206,7 +1206,7 @@ Los Read Models no modifican Notification.
 # Relación con Event Sourcing
 
 Cada escenario puede reconstruirse reproduciendo en orden lógico
-los Domain Events emitidos por el Aggregate.
+los Domain Events generados y registrados por el Aggregate.
 
 Para un mismo:
 

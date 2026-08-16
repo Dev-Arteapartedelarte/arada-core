@@ -1,6 +1,6 @@
 # DOMAIN-003J — Membership Consistency Boundary
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -110,9 +110,6 @@ CitizenId
 
 OrganizationId
 
-RoleId
-
-PermissionId
 ```
 
 Membership nunca mantiene referencias directas a objetos
@@ -185,8 +182,9 @@ El Aggregate nunca puede quedar parcialmente actualizado.
 
 # Consistencia Eventual
 
-La sincronización con otros Bounded Contexts ocurre de forma
-eventual.
+La colaboración con otros Bounded Contexts ocurre mediante Integration
+Events explícitos y consistencia eventual. Membership no participa en asignaciones de Role ni concede autorización
+implícita.
 
 Ejemplos:
 
@@ -196,22 +194,6 @@ Membership
 ↓
 
 Notification
-```
-
-```text
-Membership
-
-↓
-
-Role Management
-```
-
-```text
-Membership
-
-↓
-
-Permission Management
 ```
 
 ```text

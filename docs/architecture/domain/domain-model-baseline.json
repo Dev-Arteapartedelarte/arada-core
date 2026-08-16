@@ -1,0 +1,1010 @@
+{
+  "schema_version": 2,
+  "project": "AURA Core",
+  "baseline_status": "approved",
+  "release_tag": "domain-model-v1.0.0",
+  "required_sequence": "ABCDEFGHIJKLMNOP",
+  "aggregates": [
+    {
+      "number": "001",
+      "name": "Organization",
+      "bounded_context": "Organization Management",
+      "last_consolidated_commit": "193484d",
+      "not_applicable": [],
+      "documents": {
+        "DOMAIN-001-Aggregate.md": {
+          "version": "2.0",
+          "sha256": "33b4d2613554ef70165dc89ba1ca8e1b80a984656db836f63861811a28d417a2"
+        },
+        "DOMAIN-001A-Lifecycle.md": {
+          "version": "2.0",
+          "sha256": "f6691473682e7e57dc63a6cd6b2f88d16c98aae337e59b6d0315ae8bbb7d2b04"
+        },
+        "DOMAIN-001B-State-Machine.md": {
+          "version": "2.0",
+          "sha256": "e4b411fd229828865dfe003eb1fddfd0f7eba39327ffb02f7e9d3b92bc82c450"
+        },
+        "DOMAIN-001C-Commands.md": {
+          "version": "2.0",
+          "sha256": "08bafd2f4d5c4265150f5d71a0ed91ec2c0adc68b39008d06bba42a6e6bcb345"
+        },
+        "DOMAIN-001D-Domain-Events.md": {
+          "version": "2.0",
+          "sha256": "6f2be7083faec57ca4f1241e811fb6d6be4e431d9dbc7263bc691c92460ceb12"
+        },
+        "DOMAIN-001E-Invariants.md": {
+          "version": "2.0",
+          "sha256": "58a86530b7a843ba4a8588039fb356a2a39354c310859756a523e7190856e41f"
+        },
+        "DOMAIN-001F-Permissions.md": {
+          "version": "2.0",
+          "sha256": "90f49917e8f8e906dabf07284156bde9b3591b6f0e8d32733115c4b59dc4bfbd"
+        },
+        "DOMAIN-001G-Repository-Contract.md": {
+          "version": "2.0",
+          "sha256": "59702baad150b9c3dabd05436a35f4ff39130ac2cc4ae1ca9b82c9e86356c847"
+        },
+        "DOMAIN-001H-Examples.md": {
+          "version": "2.0",
+          "sha256": "660efddf539ea2be0061f0f7737696efb7ad8440d2be92f03eaf37a783b20a92"
+        },
+        "DOMAIN-001I-Versioning.md": {
+          "version": "2.0",
+          "sha256": "0382be3e2969c35dd94ce41451cac3a9c9b569d895c4a725353af2a253e6b893"
+        },
+        "DOMAIN-001J-Consistency-Boundary.md": {
+          "version": "2.0",
+          "sha256": "6409a03ad40de2af9180e42b4354cd86dc546422984e81f9c5ff15542d191813"
+        },
+        "DOMAIN-001K-Integration-Events.md": {
+          "version": "2.0",
+          "sha256": "e66b8fe6d84dd5ffe0df93e6c880777ea976228d6c26fee5469b891ad8d35733"
+        },
+        "DOMAIN-001L-Read-Model.md": {
+          "version": "2.0",
+          "sha256": "f3ddf55c6eb6c8ecbf9d22e24f422d5514be484737296f686b18a735cb79a463"
+        },
+        "DOMAIN-001M-Test-Scenarios.md": {
+          "version": "2.0",
+          "sha256": "9e507fbd7adc3882b0f56541cfb4bcd2d81c80fcbc0615fd23b36a4d11e7f8d1"
+        },
+        "DOMAIN-001N-Performance-Rules.md": {
+          "version": "2.0",
+          "sha256": "350070a50abadddadc2b6c86757f37a509818bedb24573293ff66e1484e9b8f3"
+        },
+        "DOMAIN-001O-Security-Model.md": {
+          "version": "2.0",
+          "sha256": "ee30b39278b4a8e785b89707b15655cd7607c71c5d0ebabc2b8c777ded6bd874"
+        },
+        "DOMAIN-001P-Extension-Points.md": {
+          "version": "2.0",
+          "sha256": "d3b61648766787298b851cb76e289f885bab952972fe75652f80316229a8310c"
+        }
+      }
+    },
+    {
+      "number": "002",
+      "name": "Citizen",
+      "bounded_context": "Citizen Management",
+      "last_consolidated_commit": "e285a40",
+      "not_applicable": [],
+      "documents": {
+        "DOMAIN-002-Aggregate.md": {
+          "version": "1.1",
+          "sha256": "c2739c965433ea7fc7d1cd232eb01203c8bcd23b0138436240efa1ddb74b6049"
+        },
+        "DOMAIN-002A-Lifecycle.md": {
+          "version": "1.0",
+          "sha256": "27013bfb2fd58c6b6992ffab3af28632f3557679f9797846826e4e2d7217393d"
+        },
+        "DOMAIN-002B-State-Machine.md": {
+          "version": "1.0",
+          "sha256": "9609eccad8e54353d6a1455e25b8d5ec0756f7f6399ad4980fc1d27e19d5c88c"
+        },
+        "DOMAIN-002C-Commands.md": {
+          "version": "1.0",
+          "sha256": "44ae28c8ff73b0819528493bb0224f4df9ff0eadc22f42ed382d6ac4178c2c50"
+        },
+        "DOMAIN-002D-Domain-Events.md": {
+          "version": "1.1",
+          "sha256": "3aa5d2cd0c75a8e86347e560831a9909298176cff9d82a7a029d745622747dde"
+        },
+        "DOMAIN-002E-Invariants.md": {
+          "version": "1.0",
+          "sha256": "b996cc90dd90d8487720aa855aabbb3ce82d176d60d60768491c4b9cc8acac51"
+        },
+        "DOMAIN-002F-Permissions.md": {
+          "version": "1.0",
+          "sha256": "cddd9ed710260c888f0124a7dea9e05cf800dc0c3607a4c1eecf0f4b73d98a05"
+        },
+        "DOMAIN-002G-Repository-Contract.md": {
+          "version": "1.0",
+          "sha256": "237aec1e96950b924cefc1b10744219df0d7be60168b515989f7e85f5ae49731"
+        },
+        "DOMAIN-002H-Examples.md": {
+          "version": "1.1",
+          "sha256": "e5c2ab529c83307f9ec8f8df043d760314fd8af670dba544929e6441d78a5ffa"
+        },
+        "DOMAIN-002I-Versioning.md": {
+          "version": "1.0",
+          "sha256": "9cae64cb4a37601671dc2b366919a5f3b041a2d1e6fca44f26ff4f91b78bd621"
+        },
+        "DOMAIN-002J-Consistency-Boundary.md": {
+          "version": "1.0",
+          "sha256": "44735110f33ebde483a481206ecb8f1cde85313e632edb7f88a1b885b4076d43"
+        },
+        "DOMAIN-002K-Integration-Events.md": {
+          "version": "1.1",
+          "sha256": "3ec9bbface5ddb2b8ee06700e7bb2c1c03a93c6d570590afd5a2cfd1562616a0"
+        },
+        "DOMAIN-002L-Read-Model.md": {
+          "version": "1.0",
+          "sha256": "9259067565ed67f2cccbdd623ed5c5c7ca0f33dfee74292cfe101ac25155ab63"
+        },
+        "DOMAIN-002M-Test-Scenarios.md": {
+          "version": "1.0",
+          "sha256": "8984f36673658608571ffbf75f7f668d2391ef2173eda7c36472ec909c6ec0f1"
+        },
+        "DOMAIN-002N-Performance-Rules.md": {
+          "version": "1.0",
+          "sha256": "3634b340fd5793e110c35c277de29b8593dbf45721b10f01d7d9c319d949d875"
+        },
+        "DOMAIN-002O-Security-Model.md": {
+          "version": "1.1",
+          "sha256": "dfc1c6b63eca5f5ae2813868953e4db3309e7c92a7f4df610f183371534f16a6"
+        },
+        "DOMAIN-002P-Extension-Points.md": {
+          "version": "1.0",
+          "sha256": "ca0422140ff6a395a8238e4f1b4cc0651dcee216a884e2042e83352aec6243ee"
+        }
+      }
+    },
+    {
+      "number": "003",
+      "name": "Membership",
+      "bounded_context": "Membership Management",
+      "last_consolidated_commit": "afe63fd",
+      "not_applicable": [],
+      "documents": {
+        "DOMAIN-003-Aggregate.md": {
+          "version": "1.1",
+          "sha256": "21f2d5ae91c0ac7c7e9092a72e56617cb5ff290bb469d3d3377e0e6a5b1dde73"
+        },
+        "DOMAIN-003A-Lifecycle.md": {
+          "version": "1.1",
+          "sha256": "2ada742467421a76347e0450e9f2e3461c058ad29795064d3f43226b4e876d35"
+        },
+        "DOMAIN-003B-State-Machine.md": {
+          "version": "1.0",
+          "sha256": "365f6c12ecbf0f873602bc7903aff1cebc8738906c558851acf740acf51e5779"
+        },
+        "DOMAIN-003C-Commands.md": {
+          "version": "1.0",
+          "sha256": "79a9d91d05afb5099e8a4759f0c7dafffd669b958a904cbde9e3b22cb63eaec2"
+        },
+        "DOMAIN-003D-Domain-Events.md": {
+          "version": "1.1",
+          "sha256": "a3dbb44c80192d0ad0e123de7b1cbe6fdea3e778bed4612837aa64dbb8bcc8d3"
+        },
+        "DOMAIN-003E-Invariants.md": {
+          "version": "1.0",
+          "sha256": "b43c2c81b9745e8c18e379520556f6d33558a9735e82fb8a2ee8a1644ec6a0bd"
+        },
+        "DOMAIN-003F-Permissions.md": {
+          "version": "1.1",
+          "sha256": "a29f8d59b712bd644eb08aacdee4a16bed447e8aeb5dd52aa7d5c420f4a2f1b7"
+        },
+        "DOMAIN-003G-Repository-Contract.md": {
+          "version": "1.0",
+          "sha256": "af44db44451981fae9ed2aad497c7eb6e0e0c0c9d0e9a5b5df2f5719e1c16244"
+        },
+        "DOMAIN-003H-Examples.md": {
+          "version": "1.1",
+          "sha256": "3d2357eb3f381996d5e3c7312d1a589886de389065f7ef0b138f76846937b9e2"
+        },
+        "DOMAIN-003I-Versioning.md": {
+          "version": "1.0",
+          "sha256": "542b671e53e54da2add6d932c7f98917e6f5f24ec0e811ca732722db79458103"
+        },
+        "DOMAIN-003J-Consistency-Boundary.md": {
+          "version": "1.1",
+          "sha256": "3b0ed82dbcb5da2d0268a6c59f43fc2012b0427f0a4bba3bef25046353b26a14"
+        },
+        "DOMAIN-003K-Integration-Events.md": {
+          "version": "1.1",
+          "sha256": "df8a5a4f173d5f84d70fc4300cfad1447988b7c35ef2b68640881c4a001d2b50"
+        },
+        "DOMAIN-003L-Read-Model.md": {
+          "version": "1.0",
+          "sha256": "1c576e24db3220e2e7379a1152d15426cee2342b43a801e38af6687cead0dd22"
+        },
+        "DOMAIN-003M-Test-Scenarios.md": {
+          "version": "1.0",
+          "sha256": "2dc61ebb0fd7012f3ebd5e5b96c2febcdcb257ab6c1cf515d5c2e2a8cedfea77"
+        },
+        "DOMAIN-003N-Performance-Rules.md": {
+          "version": "1.0",
+          "sha256": "adee7406e8828ef32bcfa1d909afc8a30104c902a761130b98f76b7175796e72"
+        },
+        "DOMAIN-003O-Security-Model.md": {
+          "version": "1.0",
+          "sha256": "1cc6db381e5d5520d28eb47a10dc811b74123a6ba43d2fe00c6dd30a50058817"
+        },
+        "DOMAIN-003P-Extension-Points.md": {
+          "version": "1.1",
+          "sha256": "33fe92e29cbfd1f533e50b5fa92d02c25d44794881d96884f927fca75391ba44"
+        }
+      }
+    },
+    {
+      "number": "004",
+      "name": "Role",
+      "bounded_context": "Authorization Management",
+      "last_consolidated_commit": "0802c50",
+      "not_applicable": [],
+      "documents": {
+        "DOMAIN-004-Aggregate.md": {
+          "version": "1.1",
+          "sha256": "ca145c3e7ed6b18ca03ce4a0528b2ac7accc6887512b3f2f2e911a12a8ea3658"
+        },
+        "DOMAIN-004A-Lifecycle.md": {
+          "version": "1.1",
+          "sha256": "17d1cfd227e42c36aab8cb6ff6f4c4c83752adf6b31d8957c873ab6bd1656868"
+        },
+        "DOMAIN-004B-State-Machine.md": {
+          "version": "1.1",
+          "sha256": "2f0b19756bc42c8f86bde05bcf88f99720b7d752ab41826dde83d844c213a8c0"
+        },
+        "DOMAIN-004C-Commands.md": {
+          "version": "1.1",
+          "sha256": "91a80eef57d5e0aa26f987eb18fc04a088f07aac648bd8e68925c5a02e6c86dc"
+        },
+        "DOMAIN-004D-Domain-Events.md": {
+          "version": "1.1",
+          "sha256": "fc57afe1f169f2213793eef9b60eda2fb560e27b08403e435b25e1eaaa71c519"
+        },
+        "DOMAIN-004E-Invariants.md": {
+          "version": "1.1",
+          "sha256": "f409fbdba9ad81d72b12e15642a0403fbf01442621c965256541e91d2b2d1df8"
+        },
+        "DOMAIN-004F-Permissions.md": {
+          "version": "1.1",
+          "sha256": "b55cf6620220c2f938d7ab7b2717497eaa09d527e009e4d7fd8035a136179419"
+        },
+        "DOMAIN-004G-Repository-Contract.md": {
+          "version": "1.1",
+          "sha256": "4c1abbf5db59d86f51235d8f58718185b9bc88a1809a2b0a6aa2d28b809f9ced"
+        },
+        "DOMAIN-004H-Examples.md": {
+          "version": "1.1",
+          "sha256": "dae4960e255d15d5c89ecce2b7601b0f177d89921670ff74dccfee9f075a09ed"
+        },
+        "DOMAIN-004I-Versioning.md": {
+          "version": "1.1",
+          "sha256": "fe5611047d4492a07ecaa69f4ae559b9e7f6384242a83ea5276790eb482a29e6"
+        },
+        "DOMAIN-004J-Consistency-Boundary.md": {
+          "version": "1.1",
+          "sha256": "95d0a8a2854b6686dc0711fea8fac6f9c5895a64585c56686d26b45c925e50ec"
+        },
+        "DOMAIN-004K-Integration-Events.md": {
+          "version": "1.1",
+          "sha256": "c705ab7d9b84a31f4656eb850bd78ed2eadad602debb8b06bb45cd46a438c174"
+        },
+        "DOMAIN-004L-Read-Model.md": {
+          "version": "1.1",
+          "sha256": "0d4e5e200307dbfd4ace5edaaec54da2aa693680f1adca26a598dd23c0010136"
+        },
+        "DOMAIN-004M-Test-Scenarios.md": {
+          "version": "1.1",
+          "sha256": "3c67a529dd498d86f650f20b56948a74400b47d1a3effc4dd57a2da4ad4765be"
+        },
+        "DOMAIN-004N-Performance-Rules.md": {
+          "version": "1.1",
+          "sha256": "2cb74d07dfe5d162d34c63ab2edbea005af9bc10dcd35a8c1b6c92985141d71a"
+        },
+        "DOMAIN-004O-Security-Model.md": {
+          "version": "1.1",
+          "sha256": "16d79b60180731b00f1deb4f766e09a805345597e03d3f222cd0f12a2851b440"
+        },
+        "DOMAIN-004P-Extension-Points.md": {
+          "version": "1.1",
+          "sha256": "3e1c9cb83640efa0163fc504a3b1b6a32c3b647d5897ad748df4c9b2878a50db"
+        }
+      }
+    },
+    {
+      "number": "005",
+      "name": "Territory",
+      "bounded_context": "Territorial Management",
+      "last_consolidated_commit": "f441398",
+      "not_applicable": [],
+      "documents": {
+        "DOMAIN-005-Aggregate.md": {
+          "version": "1.0",
+          "sha256": "7811b71431dbd61da67548dd1f90fad314584439e0648e1ff3992cf915ed7bd2"
+        },
+        "DOMAIN-005A-Lifecycle.md": {
+          "version": "1.0",
+          "sha256": "e27e57b851bbb1bfa97bbba707e0017c395b1ffe9af5e15e41ff47e13a526396"
+        },
+        "DOMAIN-005B-State-Machine.md": {
+          "version": "1.0",
+          "sha256": "2d34629fff065a0e3a6a7603777ce196e7dbb13a057a0b6e8f6439a6aba56b28"
+        },
+        "DOMAIN-005C-Commands.md": {
+          "version": "1.0",
+          "sha256": "a11a6ece6d3c218e3a2f38ab94146985ccc7e224cb8406cb4d60876d6c169d56"
+        },
+        "DOMAIN-005D-Domain-Events.md": {
+          "version": "1.1",
+          "sha256": "1e3a3f9b0c3489fd18af7080a173d460eaa262d85856604ece9138890809b59d"
+        },
+        "DOMAIN-005E-Invariants.md": {
+          "version": "1.0",
+          "sha256": "9148c86d12f8ecb956fc40a6897d828795127979c8a4b5b859ae574c7197db16"
+        },
+        "DOMAIN-005F-Permissions.md": {
+          "version": "1.0",
+          "sha256": "505c17f2b8cacf0f6cb566bd71349bb214f80d8cfa1aa5605566aa05eb126fef"
+        },
+        "DOMAIN-005G-Repository-Contract.md": {
+          "version": "1.0",
+          "sha256": "37182da0ba0668502a09325a8f361a70ab7df0171250b44fd668c82a80c25d69"
+        },
+        "DOMAIN-005H-Examples.md": {
+          "version": "1.0",
+          "sha256": "a39dc8da7c34d5e877a252847ab4771682a48a7e3c838e52c0df9f8c3f7a45de"
+        },
+        "DOMAIN-005I-Versioning.md": {
+          "version": "1.0",
+          "sha256": "6500fe8f92c9343f78b3c7967da5318f311f0f7142da6758825ebe570b2e5ffe"
+        },
+        "DOMAIN-005J-Consistency-Boundary.md": {
+          "version": "1.0",
+          "sha256": "e98059041f9d6aac1e6821f5de8b0715652fe2fa72d4a2c8a19ee2c9433d784d"
+        },
+        "DOMAIN-005K-Integration-Events.md": {
+          "version": "1.0",
+          "sha256": "583921331b02ee6c180372f8427e3b6fac6a588e8fc158fb69345ad084f64d9e"
+        },
+        "DOMAIN-005L-Read-Model.md": {
+          "version": "1.0",
+          "sha256": "ce83b9095f1aa35a3a3f7efe48ba5ec880b4f3ac6b1d7fe5ed0458c0782bd6cc"
+        },
+        "DOMAIN-005M-Test-Scenarios.md": {
+          "version": "1.0",
+          "sha256": "667e405a3d9dfd122e5d27a862140511ea8631e665db186007914a38fe010cc1"
+        },
+        "DOMAIN-005N-Performance-Rules.md": {
+          "version": "1.0",
+          "sha256": "87816090be6eca433e913833e5fe68aa1c9edafe73f33ad847caba4d594c45b4"
+        },
+        "DOMAIN-005O-Security-Model.md": {
+          "version": "1.0",
+          "sha256": "627817bf6cbbc3faaa16bf1dc8899eea809452e7ddff18de4db089dccc2a0d59"
+        },
+        "DOMAIN-005P-Extension-Points.md": {
+          "version": "1.0",
+          "sha256": "d752e73f4dcc8c3d90becbd5f3dbd76fb72b42bef02c24db6f9ca1f50a84b40a"
+        }
+      }
+    },
+    {
+      "number": "006",
+      "name": "Assembly",
+      "bounded_context": "Assembly Management",
+      "last_consolidated_commit": "c8aba46",
+      "not_applicable": [],
+      "documents": {
+        "DOMAIN-006-Aggregate.md": {
+          "version": "1.0",
+          "sha256": "f614075d6bd2ca526c61546c944136d07f9ad513677d6864dfaefb2b0a0a9c22"
+        },
+        "DOMAIN-006A-Lifecycle.md": {
+          "version": "1.0",
+          "sha256": "b473c9090dfd47522d4253ca4eb79c5a678c24d4edaccfda33c6052aad18d879"
+        },
+        "DOMAIN-006B-State-Machine.md": {
+          "version": "1.0",
+          "sha256": "3ab85383067b976ecac4d81510d54a6c3feb24070395dacff0f833edf726a533"
+        },
+        "DOMAIN-006C-Commands.md": {
+          "version": "1.0",
+          "sha256": "6a0c23dc78f31e47554b36776195230b1d7a688c89e22a28b052ab57d8dad608"
+        },
+        "DOMAIN-006D-Domain-Events.md": {
+          "version": "1.1",
+          "sha256": "dd8af2782abadb2f1c890b58480b947d10385e284546aeeb2331566eaf27b4f3"
+        },
+        "DOMAIN-006E-Invariants.md": {
+          "version": "1.0",
+          "sha256": "1536880813236bfbd49eb8732fa366a8eb5077ddf2c6beee477703a6184639d2"
+        },
+        "DOMAIN-006F-Permissions.md": {
+          "version": "1.0",
+          "sha256": "a0fd3d4fa1df512a3e1bbdea9cc45e6f2688514d153d6a51908d7e088a65b5ed"
+        },
+        "DOMAIN-006G-Repository-Contract.md": {
+          "version": "1.0",
+          "sha256": "d204da4edf9f86236dc1141506c6065c06616a2427ab4a2a1332e83b52e74a00"
+        },
+        "DOMAIN-006H-Examples.md": {
+          "version": "1.0",
+          "sha256": "2a0bc3d04ecb5cd123979e767d8c5ea5ce67938983ed713f9a3122f47ee14ef9"
+        },
+        "DOMAIN-006I-Versioning.md": {
+          "version": "1.0",
+          "sha256": "51a982bd71e11a590ede278b8b4abeaf6855fc3e3c30f313f811f9e94d42347a"
+        },
+        "DOMAIN-006J-Consistency-Boundary.md": {
+          "version": "1.1",
+          "sha256": "b8df2f76ea6878273a05d04e2d14bc683a47945a7f021f437ad7641d28c31aba"
+        },
+        "DOMAIN-006K-Integration-Events.md": {
+          "version": "1.0",
+          "sha256": "ab67b6bb33491cb31f1dee7cb060312367140c9a83e4ecd8a6671e05a0592925"
+        },
+        "DOMAIN-006L-Read-Model.md": {
+          "version": "1.0",
+          "sha256": "b1ec88814f68c2da84694b5553a965d2dbf81dccf3c0d9d27509e6ba7dabc514"
+        },
+        "DOMAIN-006M-Test-Scenarios.md": {
+          "version": "1.0",
+          "sha256": "f21a1be4a7f380494282954f134d4bfa41e575609ae991fe44952ab5860102a4"
+        },
+        "DOMAIN-006N-Performance-Rules.md": {
+          "version": "1.0",
+          "sha256": "a17a2f7c9a6f90f83f8e3137c3179bccbc1d20714041f0bc337f1e8d0311aa60"
+        },
+        "DOMAIN-006O-Security-Model.md": {
+          "version": "1.0",
+          "sha256": "e5abec1b5d7baca76c5b8ffe36593798d36e41b4fb742fc58728c259d99c25d5"
+        },
+        "DOMAIN-006P-Extension-Points.md": {
+          "version": "1.0",
+          "sha256": "6e94e8ffd8101775cbc906a2ded1b4691e2cf7326e5f5c4e8f1ca604f28ddcce"
+        }
+      }
+    },
+    {
+      "number": "007",
+      "name": "Proposal",
+      "bounded_context": "Proposal Management",
+      "last_consolidated_commit": "112ca69",
+      "not_applicable": [],
+      "documents": {
+        "DOMAIN-007-Aggregate.md": {
+          "version": "1.1",
+          "sha256": "7d72b84d1768dfd7d49d0b24c6df4cf99313f2a3cccfbb783ed2a7db31c47406"
+        },
+        "DOMAIN-007A-Lifecycle.md": {
+          "version": "1.0",
+          "sha256": "9ad08330440ca7ff85fe29236327f58e93391da1fda588ddea19edc046d39fec"
+        },
+        "DOMAIN-007B-State-Machine.md": {
+          "version": "1.0",
+          "sha256": "55172efe5793677b123a9108d1253a0135c40d38abdde78f4dbe24d8cdf86467"
+        },
+        "DOMAIN-007C-Commands.md": {
+          "version": "1.0",
+          "sha256": "275a10bb75ac9032f7249b23a989d413e349c96dd6ef835ab381c9b4d4ba5866"
+        },
+        "DOMAIN-007D-Domain-Events.md": {
+          "version": "1.1",
+          "sha256": "93b58100e19391124c13b02a991e23b81018222545547ef53734e61a68d87726"
+        },
+        "DOMAIN-007E-Invariants.md": {
+          "version": "1.1",
+          "sha256": "de598633a2229c301d7032c6a92e6ef7be01956d8a297ff75944455f00595dbb"
+        },
+        "DOMAIN-007F-Permissions.md": {
+          "version": "1.0",
+          "sha256": "a9bb9915462602a31df14d9170e25f8ad75cec3b3e66bad50c4e372f7e8ce9e1"
+        },
+        "DOMAIN-007G-Repository-Contract.md": {
+          "version": "1.0",
+          "sha256": "b914897e443a1f1c526d7cdfb70136fb2254f835269decb09e93fec9dad2c951"
+        },
+        "DOMAIN-007H-Examples.md": {
+          "version": "1.0",
+          "sha256": "09604eaddc45513fda7ba93e1646efe13fd1bc76eafd99a0d912d71ddab758da"
+        },
+        "DOMAIN-007I-Versioning.md": {
+          "version": "1.0",
+          "sha256": "660a78c1eedc54c0b23390ee3681291125ec10185fe24d94ea82a5cb18bdc8a2"
+        },
+        "DOMAIN-007J-Consistency-Boundary.md": {
+          "version": "1.1",
+          "sha256": "27550f9910df0e111ced769fc3c2123350b83d75edd8be409118b366928a967d"
+        },
+        "DOMAIN-007K-Integration-Events.md": {
+          "version": "1.0",
+          "sha256": "5858bf25ee4dec99eca31b4e5da319c978a53dd13c3a4d7ae7bda0f9ae40166b"
+        },
+        "DOMAIN-007L-Read-Model.md": {
+          "version": "1.0",
+          "sha256": "7a306ae6624fec028cc252144f5ba81741b1ea14afcf7d134ea97ca1c8fa2137"
+        },
+        "DOMAIN-007M-Test-Scenarios.md": {
+          "version": "1.0",
+          "sha256": "0d9467688892b9adddf7ad2dc8c7cd53d84b06e23a8c2357b1aca7515d2c3191"
+        },
+        "DOMAIN-007N-Performance-Rules.md": {
+          "version": "1.0",
+          "sha256": "213fb1b5270440630ddcc44c1821217aeaf82076cfca9bd595424aa370e477b8"
+        },
+        "DOMAIN-007O-Security-Model.md": {
+          "version": "1.0",
+          "sha256": "ae763d9df970a3ca07d77af495d7c23489899d7aa001233038a0e8e24f1620a0"
+        },
+        "DOMAIN-007P-Extension-Points.md": {
+          "version": "1.0",
+          "sha256": "fc595f46202bad83fc2a628c0d25373cfb0c04a199d00c9ed8911a44ec7480a4"
+        }
+      }
+    },
+    {
+      "number": "008",
+      "name": "Participation",
+      "bounded_context": "Participation Management",
+      "last_consolidated_commit": "bbf5318",
+      "not_applicable": [],
+      "documents": {
+        "DOMAIN-008-Aggregate.md": {
+          "version": "1.1",
+          "sha256": "7f346d795c8f2441afc1bb751f6eb07b7ba21eb25ad6dad40132169cf1b4cced"
+        },
+        "DOMAIN-008A-Lifecycle.md": {
+          "version": "1.0",
+          "sha256": "064b6ee797b6aa1fc3056ce36679a3b5c56c7834eb079e8dce6bc675f0e1c8bf"
+        },
+        "DOMAIN-008B-State-Machine.md": {
+          "version": "1.0",
+          "sha256": "803ca9794c518aef188d511c17d4ade5c71d9060601ec7f610ca7f98f0ffcd9e"
+        },
+        "DOMAIN-008C-Commands.md": {
+          "version": "1.0",
+          "sha256": "926bfaf58ca9dfed24128059e0ca745c313465bf779d8a347fcb509ebcf1ebd9"
+        },
+        "DOMAIN-008D-Domain-Events.md": {
+          "version": "1.1",
+          "sha256": "a25072fe8217c99dad001498fabb052fad087a8436d11524ebdc934762b40157"
+        },
+        "DOMAIN-008E-Invariants.md": {
+          "version": "1.0",
+          "sha256": "14e77e8fff83075eccca77268a7faf49d27f5a06040bfe6cbeb0b4d53d4b476f"
+        },
+        "DOMAIN-008F-Permissions.md": {
+          "version": "1.0",
+          "sha256": "0460c1b618236ac2a7859e974026dd138add16e7b02a4013fc20f6e8c0c443e9"
+        },
+        "DOMAIN-008G-Repository-Contract.md": {
+          "version": "1.0",
+          "sha256": "ff032cd6ef119774c5a92f7da0d240715c143f220a2488b049651afac876d2fe"
+        },
+        "DOMAIN-008H-Examples.md": {
+          "version": "1.0",
+          "sha256": "39973cbc9c6d4da5f97667ef2f461c77e6edd4bb52b3d4c9bb19ba2c12791261"
+        },
+        "DOMAIN-008I-Versioning.md": {
+          "version": "1.0",
+          "sha256": "302ee76d904f13370b0f271e8967e79abebbde5febff43f28a8267f77a369f85"
+        },
+        "DOMAIN-008J-Consistency-Boundary.md": {
+          "version": "1.0",
+          "sha256": "d33b741a20795553eeeafee997b5972583ee9117d3ad1f01fd890615fc51be38"
+        },
+        "DOMAIN-008K-Integration-Events.md": {
+          "version": "1.0",
+          "sha256": "9e6afff6aff37f6447a2c8e1c25c57b7748786cb10d5522c7255a0d3a8c6beb9"
+        },
+        "DOMAIN-008L-Read-Model.md": {
+          "version": "1.0",
+          "sha256": "c800020a188d50df1116f1e567734cfc960374bc324e6694469dfab28e00e3c8"
+        },
+        "DOMAIN-008M-Test-Scenarios.md": {
+          "version": "1.0",
+          "sha256": "8b20459a40a8ba6764a57f9e99c0d03a303f13734d620a94bf9adfaba2c767a5"
+        },
+        "DOMAIN-008N-Performance-Rules.md": {
+          "version": "1.0",
+          "sha256": "14261d9f9fb675c23fa51c49288dc147bf848e70f1fb917d48ea897b9f655bdd"
+        },
+        "DOMAIN-008O-Security-Model.md": {
+          "version": "1.0",
+          "sha256": "5455a6791df4be202a90d57487c821a7ade6c02dcbee8f136f89a40fdb4992f2"
+        },
+        "DOMAIN-008P-Extension-Points.md": {
+          "version": "1.0",
+          "sha256": "a3886668527e33c5f0900c6edce56fbd5416ffb99e5f34c8252cd5aea8a16fb4"
+        }
+      }
+    },
+    {
+      "number": "009",
+      "name": "Voting",
+      "bounded_context": "Voting Management",
+      "last_consolidated_commit": "56bba10",
+      "not_applicable": [],
+      "documents": {
+        "DOMAIN-009-Aggregate.md": {
+          "version": "1.0",
+          "sha256": "07f8956a94ed124140f981f5ab5245dd51d28018ce7d152d3078d2328efe5a0f"
+        },
+        "DOMAIN-009A-Lifecycle.md": {
+          "version": "1.0",
+          "sha256": "eb84ea769b61f522df21cfd0460ff8bd7b1cbb203c0c3b67b53a25f77db89bdd"
+        },
+        "DOMAIN-009B-State-Machine.md": {
+          "version": "1.0",
+          "sha256": "1ca9075962a3b6f392d6139583dcaa6ab659c9151008fff987ab73c24d1d7507"
+        },
+        "DOMAIN-009C-Commands.md": {
+          "version": "1.0",
+          "sha256": "febd22c18369e5c31ae9fb1d4f288b4aedb07ed6832252e2f07995c540f6f0c8"
+        },
+        "DOMAIN-009D-Domain-Events.md": {
+          "version": "1.1",
+          "sha256": "b94a1877476c6f11080bf2f4d6b1b299708bce029a92d064948ecb3cbff499b8"
+        },
+        "DOMAIN-009E-Invariants.md": {
+          "version": "1.0",
+          "sha256": "b9163e96e58c3cb6f968d2592e51751241bebd4bc58c9ce6ac278bcfb76182c1"
+        },
+        "DOMAIN-009F-Permissions.md": {
+          "version": "1.0",
+          "sha256": "7f9e145ce9cbf89083b69f8e1759d307fbc56f102a245b4f9a617ee5e4b85808"
+        },
+        "DOMAIN-009G-Repository-Contract.md": {
+          "version": "1.0",
+          "sha256": "15e2c11ea8d8ee045393af8ae21700069572386656bf4b4a8004eea3c016feb5"
+        },
+        "DOMAIN-009H-Examples.md": {
+          "version": "1.0",
+          "sha256": "47e94a71c13e5e150823d91e8f21a55826451461ebc568a9de9614365f73e98f"
+        },
+        "DOMAIN-009I-Versioning.md": {
+          "version": "1.0",
+          "sha256": "d0ddcfdf8beba89fd8f04296754500c568155edd2638ad424304b4510b74b756"
+        },
+        "DOMAIN-009J-Consistency-Boundary.md": {
+          "version": "1.0",
+          "sha256": "03ac04f4167f5e05911a6c2ae56ebc7883b58cc422f3f8dce8cb992ff8059da4"
+        },
+        "DOMAIN-009K-Integration-Events.md": {
+          "version": "1.0",
+          "sha256": "f9d8cb53577fb4fe3b93eb582daba5a3f3e3fc8a6becc30e0d15784f4ac6bbc8"
+        },
+        "DOMAIN-009L-Read-Model.md": {
+          "version": "1.0",
+          "sha256": "65f4c6a0e2e613d7c140a157d9a26307667140040ac27495b068902496f8a1a5"
+        },
+        "DOMAIN-009M-Test-Scenarios.md": {
+          "version": "1.0",
+          "sha256": "cd0dba311d0486e1a8dd811345a0d9eb09a896ab19cdd8bd9f7fde04494885c1"
+        },
+        "DOMAIN-009N-Performance-Rules.md": {
+          "version": "1.0",
+          "sha256": "fb8b7fe354299e89647b9764542c017dd5a56e741872f11ea2de1a9b83b829ec"
+        },
+        "DOMAIN-009O-Security-Model.md": {
+          "version": "1.0",
+          "sha256": "e8af0f3228746a63ad49fc5adccc87cbed6a43f602173855554f4c07c228b891"
+        },
+        "DOMAIN-009P-Extension-Points.md": {
+          "version": "1.0",
+          "sha256": "76f9442878a054d0e7bf38e6043f86f7d0d65e6e55b9a6d847764b5ccb1b2fa6"
+        }
+      }
+    },
+    {
+      "number": "010",
+      "name": "Document",
+      "bounded_context": "Document Management",
+      "last_consolidated_commit": "3a8f6aa",
+      "not_applicable": [],
+      "documents": {
+        "DOMAIN-010-Aggregate.md": {
+          "version": "1.0",
+          "sha256": "951ccd0ea5eaf05c93ef1f9c980c3b82ab4bf0647bea44897f0442e16bf81b85"
+        },
+        "DOMAIN-010A-Lifecycle.md": {
+          "version": "1.0",
+          "sha256": "89e63e0adefbcc84866b0f32b07a635a1721ceee2000d538169bb3fa3d5a7839"
+        },
+        "DOMAIN-010B-State-Machine.md": {
+          "version": "1.0",
+          "sha256": "33ce9861bde9fa64989dfaa060db908a4ad62a7faf7e46260b1a1e5c1cfd5491"
+        },
+        "DOMAIN-010C-Commands.md": {
+          "version": "1.0",
+          "sha256": "076379fb356639d22abd0542d1d12c99c69f485fcb41f50f8cdc68632582d249"
+        },
+        "DOMAIN-010D-Domain-Events.md": {
+          "version": "1.1",
+          "sha256": "918cab29c1b5fe07355f7ca9fdb32b743abf7c9b1d84dc7c68a6c85ae71ed6e2"
+        },
+        "DOMAIN-010E-Invariants.md": {
+          "version": "1.0",
+          "sha256": "0f4379c37637de3ac34bff0e908d388c34ed1ffc91133eaeb6390f7e5295952f"
+        },
+        "DOMAIN-010F-Permissions.md": {
+          "version": "1.0",
+          "sha256": "fad0f661dd08b9ae776b389785115a848432e5fc990102efd80c2d2dd3154822"
+        },
+        "DOMAIN-010G-Repository-Contract.md": {
+          "version": "1.0",
+          "sha256": "d022465630454edc64753095e4400d6953d74910b2428c69f8bd2c43a804376b"
+        },
+        "DOMAIN-010H-Examples.md": {
+          "version": "1.0",
+          "sha256": "9211085d608f902dc053dd877e413ee2c7a3affd023a5654b631ef0574d68c72"
+        },
+        "DOMAIN-010I-Versioning.md": {
+          "version": "1.0",
+          "sha256": "a81643da20684c4137f9f9d8ff1587e1ef3c0d5fd925971c854f8980b21f9fc8"
+        },
+        "DOMAIN-010J-Consistency-Boundary.md": {
+          "version": "1.0",
+          "sha256": "4cd83587ac76734021537cf75620add8494513428fd6c6ee83603d9cafa95cdf"
+        },
+        "DOMAIN-010K-Integration-Events.md": {
+          "version": "1.0",
+          "sha256": "1d818c0d494aed9417ab132d72068ad0808ca7c9cb208dfc875b97ffa540dcdd"
+        },
+        "DOMAIN-010L-Read-Model.md": {
+          "version": "1.0",
+          "sha256": "a98e24c43cb3c09004c6fca2be3efbfdce695b5d1a9cbe176a629caf9c13e605"
+        },
+        "DOMAIN-010M-Test-Scenarios.md": {
+          "version": "1.0",
+          "sha256": "18ec6ec8776951cb3a9a725e3f2aba2fd634f64691246bf4a41f6aa62a1d7bd2"
+        },
+        "DOMAIN-010N-Performance-Rules.md": {
+          "version": "1.0",
+          "sha256": "f0de5aeaa5ee463787c40f2a72cf6d61da0f1b337dbf26c007173236687bcd21"
+        },
+        "DOMAIN-010O-Security-Model.md": {
+          "version": "1.0",
+          "sha256": "34b586922350fe4a7559a59bd3bbc0469561af8d7405f40d2286007d8bef6d12"
+        },
+        "DOMAIN-010P-Extension-Points.md": {
+          "version": "1.0",
+          "sha256": "1c5b8d7167b9086f7c8345cb1f0e3740a3d186b59d61c1c8732c17089ca8dfa7"
+        }
+      }
+    },
+    {
+      "number": "011",
+      "name": "Notification",
+      "bounded_context": "Notification Management",
+      "last_consolidated_commit": "929586d",
+      "not_applicable": [],
+      "documents": {
+        "DOMAIN-011-Aggregate.md": {
+          "version": "1.0",
+          "sha256": "572aae92c1ed5207d24dfa0b3ae485463179e6515722fe7d62138aba964e99b2"
+        },
+        "DOMAIN-011A-Lifecycle.md": {
+          "version": "1.0",
+          "sha256": "88665c07183bc66818b82648fd55923fdfa6a9c10fb185ffea4e20c9fd597f5c"
+        },
+        "DOMAIN-011B-State-Machine.md": {
+          "version": "1.0",
+          "sha256": "aee3c25a657e379d9b817e12ecb59e7e6514abcf84e26da6320601f3570a4f69"
+        },
+        "DOMAIN-011C-Commands.md": {
+          "version": "1.0",
+          "sha256": "08e493e6c18819c61a204d9ef6810f65319cd8453cfd3d00093641e38d29bc1b"
+        },
+        "DOMAIN-011D-Domain-Events.md": {
+          "version": "1.0",
+          "sha256": "cea1021238055d1fb87d85f826e4d5320f51071917d4425c8057db4380044032"
+        },
+        "DOMAIN-011E-Invariants.md": {
+          "version": "1.0",
+          "sha256": "16758c02c3e92da6a495e0d488baa7f5c2b3d73fa39fb9c876fca3ade401e800"
+        },
+        "DOMAIN-011F-Permissions.md": {
+          "version": "1.0",
+          "sha256": "eef9d980e1adbf47dd3afc7f875d996609b40227bdcf4e750400f8491ecc4b1e"
+        },
+        "DOMAIN-011G-Repository-Contract.md": {
+          "version": "1.0",
+          "sha256": "3fc4bd8b8f6a83fc6c608fc3e961a6b743e8450aab83396b195a3572050234bf"
+        },
+        "DOMAIN-011H-Examples.md": {
+          "version": "1.1",
+          "sha256": "78249f3ed1ed2b6c2a57cabbaac8e79f0eb9f466c7e0e345d47b6874e5087090"
+        },
+        "DOMAIN-011I-Versioning.md": {
+          "version": "1.0",
+          "sha256": "196dc369e854f6256c49628516cee8929eb78e9a06cccdcc584b212fb6309c10"
+        },
+        "DOMAIN-011J-Consistency-Boundary.md": {
+          "version": "1.0",
+          "sha256": "1488f1b7b20248f060214d14d755c345c59b195415c7b17a7f1add305a1cdb57"
+        },
+        "DOMAIN-011K-Integration-Events.md": {
+          "version": "1.0",
+          "sha256": "8ed00b0eb3f900d0d78d406d814d45c46a852bf33b6636dd708c8010cb6082dc"
+        },
+        "DOMAIN-011L-Read-Model.md": {
+          "version": "1.0",
+          "sha256": "15ab87341fb70d5e52055218b6c788740d77eaa98dbf6e407dae2db54e416c46"
+        },
+        "DOMAIN-011M-Test-Scenarios.md": {
+          "version": "1.0",
+          "sha256": "53511add48b6f7bd80a9118371219808ba944f695aac1865d957e77d4cee6784"
+        },
+        "DOMAIN-011N-Performance-Rules.md": {
+          "version": "1.0",
+          "sha256": "92b110a1cde52023b65a5805685e5d18b0e64d7aa2d9cec6cb0c8ca019707918"
+        },
+        "DOMAIN-011O-Security-Model.md": {
+          "version": "1.0",
+          "sha256": "e0d0591eccf0d94f42c20129d4fdc14d13e82fe8a09fd5294a8dcd2e6fce40f2"
+        },
+        "DOMAIN-011P-Extension-Points.md": {
+          "version": "1.0",
+          "sha256": "d043120c5b74d6ac38d069c08c098777c30fe2a23d02249b835e622fa5a535a2"
+        }
+      }
+    },
+    {
+      "number": "012",
+      "name": "Audit",
+      "bounded_context": "Audit Management",
+      "last_consolidated_commit": "1476e4e",
+      "not_applicable": [],
+      "documents": {
+        "DOMAIN-012-Aggregate.md": {
+          "version": "1.0",
+          "sha256": "24f39da8f339c3e391ec88b997437bbf63769a0c1ff8bcf62366503bc77171fe"
+        },
+        "DOMAIN-012A-Lifecycle.md": {
+          "version": "1.0",
+          "sha256": "2c1eb776c6a6dd3c6ced98f5b5abe836d8e99254677a338d26f2d11adc569748"
+        },
+        "DOMAIN-012B-State-Machine.md": {
+          "version": "1.0",
+          "sha256": "f68203936136fc4df3d17ba61a967158764588167fc07284557735e37c630050"
+        },
+        "DOMAIN-012C-Commands.md": {
+          "version": "1.0",
+          "sha256": "85099d629622652f0351b4e9d2ecea6db96619429fc125f7ca9ac79d985d6cb9"
+        },
+        "DOMAIN-012D-Domain-Events.md": {
+          "version": "1.0",
+          "sha256": "0ac1588df9418689e1d622e08df3260868a6e59e76deeb5aa28b233d2fde77ff"
+        },
+        "DOMAIN-012E-Invariants.md": {
+          "version": "1.0",
+          "sha256": "1ba74a608eeadb4aeb3aac219debe79bac8a4d01b7c5dabe6858cf6039ddaa3c"
+        },
+        "DOMAIN-012F-Permissions.md": {
+          "version": "1.0",
+          "sha256": "cf043039c8f7b1e8eed9e4ea72403da9c2846c501f22822d8ca1f5a2f940e5b7"
+        },
+        "DOMAIN-012G-Repository-Contract.md": {
+          "version": "1.0",
+          "sha256": "37f99bd91e77249d7b3f924af69eefd246ec0c34a5322ab8703d0dfb5b7cbc4e"
+        },
+        "DOMAIN-012H-Examples.md": {
+          "version": "1.0",
+          "sha256": "c6d416693f99895a0600e0d6f31d4295b7f84b311687d1158708cb499df42dd2"
+        },
+        "DOMAIN-012I-Versioning.md": {
+          "version": "1.0",
+          "sha256": "ac099de1cdb354833aa044767014be96f89aec9b504d621217a967377a46fdd6"
+        },
+        "DOMAIN-012J-Consistency-Boundary.md": {
+          "version": "1.0",
+          "sha256": "7b2ee97a4e0844a6bd149f8f89cdc1381cd34775b19fd3a895ea724243cc8cd9"
+        },
+        "DOMAIN-012K-Integration-Events.md": {
+          "version": "1.0",
+          "sha256": "03482d7244cfe0816dc80921aa2644de7983d033c24232b52d72f59d53556f83"
+        },
+        "DOMAIN-012L-Read-Model.md": {
+          "version": "1.0",
+          "sha256": "672f2c16ac0ddcaf3d73a0a9932cc3a657370397ca142c00a3e34e53d3915950"
+        },
+        "DOMAIN-012M-Test-Scenarios.md": {
+          "version": "1.0",
+          "sha256": "5b61bd85d52a6992caa1e3d3b8063d9e26faf0b9792c9aa34770363507e31a51"
+        },
+        "DOMAIN-012N-Performance-Rules.md": {
+          "version": "1.0",
+          "sha256": "d59c7ef5ec1cb7285f69d292e8577cb3f4717bd4a5d0b477183a1dbeb01871b7"
+        },
+        "DOMAIN-012O-Security-Model.md": {
+          "version": "1.0",
+          "sha256": "8f57a73e6ebfbd857eaa85cfab71864d73a4d6f6160a2977d045adc2e0c744bc"
+        },
+        "DOMAIN-012P-Extension-Points.md": {
+          "version": "1.0",
+          "sha256": "ac1422a57faf27e4bddcb2992df62e7899bd24e2b7ec84788479ece988b09641"
+        }
+      }
+    },
+    {
+      "number": "013",
+      "name": "Integration",
+      "bounded_context": "Integration Management",
+      "last_consolidated_commit": "e9abd96",
+      "not_applicable": [],
+      "documents": {
+        "DOMAIN-013-Aggregate.md": {
+          "version": "1.0",
+          "sha256": "793c2b48345bb9f2d6c1ca21fcbf1b3743c3b09ba1723102afec736b75546ae7"
+        },
+        "DOMAIN-013A-Lifecycle.md": {
+          "version": "1.0",
+          "sha256": "b658b508f3d5b984e9d2159caae48626aba4418839c77c94442b08603f93d824"
+        },
+        "DOMAIN-013B-State-Machine.md": {
+          "version": "1.0",
+          "sha256": "097a8dcf8c4868955133139fee2a19f271a180fbafba8898d9f0914ba6d188da"
+        },
+        "DOMAIN-013C-Commands.md": {
+          "version": "1.0",
+          "sha256": "d7439cea2839712b58908c6491e74e87f26fb3f5f81cf992b5cd606c93d94630"
+        },
+        "DOMAIN-013D-Domain-Events.md": {
+          "version": "1.1",
+          "sha256": "dd05b8e04664e63ca8169d3f43c299a3522f03232842a8fd8e81b66d36f7d682"
+        },
+        "DOMAIN-013E-Invariants.md": {
+          "version": "1.0",
+          "sha256": "d2708ee69ead991fec57229e7243bf7d9b239fbf92053d48fe0cdabae9ae5b8f"
+        },
+        "DOMAIN-013F-Permissions.md": {
+          "version": "1.0",
+          "sha256": "41db5ff39328f964c74b8534af557fa811b55e6b42e4637f9ac48d5d2e99f644"
+        },
+        "DOMAIN-013G-Repository-Contract.md": {
+          "version": "1.0",
+          "sha256": "9adb4e8c7db328ee104ec7d9445ef127312fdc990d0f7eb71faa66b19123e07a"
+        },
+        "DOMAIN-013H-Examples.md": {
+          "version": "1.0",
+          "sha256": "a209af6dbdb45d9a92bfe295e0bb32fe4cb7af5cd7217b961a2c5072f90af55a"
+        },
+        "DOMAIN-013I-Versioning.md": {
+          "version": "1.0",
+          "sha256": "2576214af1dd1761ab8ebd4e7893233f29e3b6cdfb32f35b755a950f2ffea05e"
+        },
+        "DOMAIN-013J-Consistency-Boundary.md": {
+          "version": "1.0",
+          "sha256": "fdfefa53d805ce3aa3d74f972b14f3b1c7cf24f3f3ca6a46632de84eafd3c7c7"
+        },
+        "DOMAIN-013K-Integration-Events.md": {
+          "version": "1.0",
+          "sha256": "5a28406a04fc93d9b89bb1d7427a94a23d8ba73e72d113eb248daacdc7de21e8"
+        },
+        "DOMAIN-013L-Read-Model.md": {
+          "version": "1.0",
+          "sha256": "8748d1d61fefeff265c709415b3afb1ad91150593e0e0561d5b79f4549064d41"
+        },
+        "DOMAIN-013M-Test-Scenarios.md": {
+          "version": "1.0",
+          "sha256": "ac33d5ee9145af3ccc229c7428f5a8b6070985e8ec9d8dc1dd54298658ba85e1"
+        },
+        "DOMAIN-013N-Performance-Rules.md": {
+          "version": "1.0",
+          "sha256": "7e48a08af49d3d341d4a269017995d72ccca507b82667823932b49f8e2b1e4f4"
+        },
+        "DOMAIN-013O-Security-Model.md": {
+          "version": "1.0",
+          "sha256": "3433dcf91eccdb4f9611048a10bc61ef3386fcc3b755e4a98ef3062cffa5e6ea"
+        },
+        "DOMAIN-013P-Extension-Points.md": {
+          "version": "1.0",
+          "sha256": "6410639bcc6dce737dcaca6267a07a70628e827a4a1d1a4404fa5e09a3bc6f59"
+        }
+      }
+    }
+  ]
+}

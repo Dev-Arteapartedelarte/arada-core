@@ -1,6 +1,6 @@
 # DOMAIN-002H — Citizen Examples
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -553,7 +553,7 @@ control.
 # Relación con Event Sourcing
 
 Cada escenario puede reconstruirse reproduciendo la secuencia
-cronológica de Domain Events emitidos por el Aggregate.
+cronológica de Domain Events generados y registrados por el Aggregate.
 
 La historia del Citizen constituye la fuente oficial de verdad
 del dominio.

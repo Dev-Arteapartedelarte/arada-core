@@ -1,6 +1,6 @@
 # DOMAIN-007E — Proposal Invariants
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -2337,7 +2337,7 @@ Command Received
 
 ↓
 
-Identity Context
+Application Identity Port
 
 ↓
 

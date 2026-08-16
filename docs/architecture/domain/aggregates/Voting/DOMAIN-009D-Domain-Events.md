@@ -1,6 +1,6 @@
 # DOMAIN-009D — Voting Domain Events
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -40,7 +40,7 @@ Documentos relacionados:
 
 # Objetivo
 
-Definir formalmente los **Domain Events** publicados por el
+Definir formalmente los **Domain Events** generados y registrados por el
 Aggregate **Voting** cuando ocurren hechos relevantes dentro de su
 ciclo de vida.
 
@@ -1913,8 +1913,9 @@ modificación concurrente rechazada.
 
 # Eventos y Consistency Boundary
 
-Los Domain Events permiten comunicar hechos fuera del límite sin
-expandir el Consistency Boundary de Voting.
+Los Domain Events comunican hechos únicamente dentro de Voting Management
+sin expandir su Consistency Boundary. Todo efecto externo requiere un
+Integration Event definido en DOMAIN-009K.
 
 La definición del límite pertenece a:
 
@@ -1987,7 +1988,8 @@ Las proyecciones definidas en:
 DOMAIN-009L-Read-Model.md
 ```
 
-pueden consumir Domain Events para actualizar vistas derivadas.
+pueden consumir Domain Events únicamente para actualizar vistas derivadas
+de Voting Management.
 
 Conceptualmente:
 

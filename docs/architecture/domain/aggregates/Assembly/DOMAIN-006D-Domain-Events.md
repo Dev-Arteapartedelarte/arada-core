@@ -1,6 +1,6 @@
 # DOMAIN-006D — Assembly Domain Events
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -40,7 +40,7 @@ Documentos relacionados:
 
 # Objetivo
 
-Definir formalmente los **Domain Events** publicados por el
+Definir formalmente los **Domain Events** generados y registrados por el
 Aggregate **Assembly** cuando ocurren hechos relevantes dentro de
 su ciclo de vida.
 
@@ -2242,7 +2242,8 @@ AssemblyRescheduled
 AssemblyCancelled
 ```
 
-pueden ser consumidos por procesos de Notification.
+requieren un Integration Event explícito antes de que Notification
+Management pueda reaccionar mediante un Command propio.
 
 Ejemplo:
 
@@ -2263,7 +2264,9 @@ transacción.
 
 # Domain Events y Audit
 
-Audit puede consumir eventos de Assembly.
+Audit Management no consume Domain Events de Assembly. Puede recibir un
+Integration Event explícito mediante un inbound adapter y registrar su
+propio hecho.
 
 Ejemplos:
 
@@ -3666,7 +3669,8 @@ Las proyecciones definidas en:
 DOMAIN-006L-Read-Model.md
 ```
 
-pueden consumir Domain Events para actualizar vistas.
+pueden consumir Domain Events únicamente para actualizar vistas internas
+de Assembly Management.
 
 El orden debe respetar AggregateVersion.
 

@@ -1,861 +1,132 @@
-# ============================================================
-# ARADA
-# ============================================================
+# CORE-004 — Ubiquitous Language
 
-# Proyecto
+Versión: 2.0
 
-AURA Core
+Estado: Official
 
----
+Proyecto: AURA Core
 
-# Unidad
+## Objetivo
 
-CORE-004
+Establecer el vocabulario transversal aprobado para AURA Core 1.0. Cada
+Bounded Context puede especializar términos sin reutilizar modelos
+internos ajenos.
 
----
+## Términos estructurales
 
-# Documento
+### Aggregate
 
-Ubiquitous Language
+Unidad de consistencia inmediata modificada exclusivamente mediante su
+Aggregate Root.
 
----
+### Command
 
-# ADR relacionados
+Intención explícita de modificar un Aggregate. Puede ser rechazada y no es
+un hecho ni una API request.
 
-ADR-001
+### Domain Event
 
-ADR-002
+Hecho inmutable y confirmado generado por un Aggregate. Permanece interno
+al Bounded Context que lo produce.
 
-ADR-003
+### Integration Event
 
----
+Contrato público, explícito y versionado para comunicar un hecho entre
+Bounded Contexts o sistemas. No se deriva automáticamente de un Domain
+Event.
 
-# Objetivo
+### API Contract
 
-Definir el Lenguaje Ubicuo oficial de AURA.
+Contrato síncrono o asíncrono de una interfaz pública. No expone el modelo
+interno del Aggregate.
 
-Todo concepto utilizado por el dominio debe poseer un
-único significado.
+### Permission
 
-El mismo término deberá utilizarse en:
+Capacidad explícita requerida para ejecutar un Command. No es un
+Aggregate, Role, Membership ni Citizen.
 
-• documentación
+### Read Model
 
-• código
+Proyección optimizada para consulta sin autoridad de escritura.
 
-• APIs
+## Aggregates oficiales
 
-• eventos
+### Organization
 
-• interfaces
+Identidad colectiva con configuración, políticas, territorio asociado y
+lifecycle propio. No posee Citizens, Memberships ni Roles.
 
-• base de datos
+### Citizen
 
-• conversaciones técnicas
+Identidad cívica de una persona dentro del ecosistema AURA.
 
-• conversaciones con expertos del dominio
+### Membership
 
-No existen sinónimos dentro del dominio.
+Relación formal entre un Citizen y una Organization. No concede permisos
+por sí misma.
 
-Una palabra representa exactamente un concepto.
+### Role
 
----
+Función o cargo dentro de una Organization. Es un Aggregate de catálogo,
+no un Value Object ni un conjunto de permisos.
 
-# Principios
+La asignación Membership–Role no forma parte del baseline 1.0.
 
-El Lenguaje Ubicuo constituye el contrato lingüístico
-del dominio.
+### Territory
 
-Todo cambio en el vocabulario debe realizarse mediante
-un ADR.
+Unidad territorial con identidad, jerarquía y vigencia propias.
 
-El lenguaje pertenece al negocio.
+### Assembly
 
-No pertenece al software.
+Sesión formal de deliberación perteneciente a su propia frontera.
 
----
+### Proposal
 
-# Reglas
+Propuesta formal y su evolución de negocio.
 
-## 1.
+### Participation
 
-Un concepto posee un único nombre.
+Instancia formal de participación de un actor habilitado.
 
-Ejemplo
+### Voting
 
-Correcto
+Proceso formal de votación. `VotingId` identifica el Aggregate; Vote sólo
+puede utilizarse para un concepto interno expresamente definido.
 
-Request
+### Document
 
-Incorrecto
+Documento de dominio y sus metadatos; no representa el storage técnico.
 
-Request
+### Notification
 
-Ticket
+Unidad de comunicación con estado de dominio. Delivered representa
+entrega confirmada, no lectura ni detalle del proveedor.
 
-Issue
+### Audit
 
-Case
+Registro de auditoría bajo un modelo propio; observar un hecho no le
+transfiere ownership sobre el Aggregate origen.
 
-Todos representan el mismo concepto.
+### Integration
 
-Sólo uno puede existir.
+Relación controlada con un sistema externo, protegida por un
+Anti-Corruption Layer.
 
----
+## Términos no oficiales
 
-## 2.
+Identity, Community, Requests, Workflow, Smart City y Permission
+Management no son Bounded Contexts del baseline. Un mecanismo técnico de
+identidad se denomina Identity Provider adapter, no dominio Identity.
 
-Un nombre nunca cambia dependiendo
-del contexto técnico.
+## Naming
 
-Ejemplo
+- Commands utilizan verbo imperativo: `CreateProposal`.
+- Domain Events utilizan hecho pasado: `ProposalCreated`.
+- Integration Events se identifican explícitamente como contrato de
+  integración y mantienen su propia versión.
+- Identidades utilizan el nombre del dueño: `ProposalId`.
 
-Request
+## Definición de éxito
 
-No cambia a:
-
-DTO
-
-Model
-
-Entity
-
-Table
-
-JSON
-
-El concepto continúa siendo Request.
-
----
-
-## 3.
-
-Las clases utilizan exactamente el mismo
-nombre definido por el dominio.
-
-Ejemplo
-
-Community
-
-Organization
-
-Citizen
-
-Request
-
-Workflow
-
-Notification
-
-Sensor
-
-DigitalTwin
-
----
-
-## 4.
-
-Los eventos utilizan lenguaje del dominio.
-
-Ejemplos
-
-CitizenRegistered
-
-OrganizationCreated
-
-RequestCreated
-
-RequestAssigned
-
-WorkflowStarted
-
-WorkflowCompleted
-
-NotificationSent
-
-SensorUpdated
-
----
-
-## 5.
-
-Los comandos utilizan verbos.
-
-Ejemplos
-
-CreateOrganization
-
-ApproveRequest
-
-RegisterCitizen
-
-AssignRequest
-
-CloseWorkflow
-
-PublishNotification
-
----
-
-## 6.
-
-Las consultas utilizan lenguaje del negocio.
-
-Ejemplos
-
-FindCitizen
-
-SearchOrganizations
-
-ListRequests
-
-GetWorkflowHistory
-
----
-
-# Diccionario Oficial
-
----
-
-## Citizen
-
-Representa una persona que participa
-en la comunidad.
-
-Nunca utilizar:
-
-User
-
-Client
-
-Person
-
-Member
-
-Actor
-
-El dominio utiliza:
-
-Citizen
-
----
-
-## Community
-
-Conjunto de ciudadanos que comparten
-un territorio o interés.
-
-Nunca:
-
-Group
-
-Collection
-
-People
-
----
-
-## Organization
-
-Entidad formal reconocida.
-
-Ejemplos
-
-Junta de Vecinos
-
-Comité
-
-Corporación
-
-Fundación
-
-Asociación
-
----
-
-## Membership
-
-Relación entre un Citizen
-y una Organization.
-
-No representa al ciudadano.
-
-Representa el vínculo.
-
----
-
-## Request
-
-Necesidad registrada por la comunidad.
-
-Ejemplos
-
-Solicitud
-
-Incidente
-
-Reclamo
-
-Propuesta
-
-Observación
-
-Todos pertenecen al mismo concepto.
-
-Request.
-
----
-
-## Workflow
-
-Proceso que mueve un Request
-entre estados.
-
-No representa reglas.
-
-Representa el flujo.
-
----
-
-## State
-
-Situación actual
-de un Aggregate.
-
-Ejemplo
-
-Pending
-
-Assigned
-
-Resolved
-
-Closed
-
----
-
-## Transition
-
-Cambio entre dos estados.
-
-Ejemplo
-
-Pending
-
-↓
-
-Assigned
-
----
-
-## Notification
-
-Mensaje generado por un evento.
-
-No representa correo.
-
-No representa WhatsApp.
-
-Representa una intención
-de comunicación.
-
----
-
-## Event
-
-Hecho ocurrido
-en el dominio.
-
-Nunca representa:
-
-mensaje
-
-API
-
-callback
-
----
-
-## Domain Event
-
-Evento publicado por un Aggregate.
-
-Ejemplo
-
-CitizenRegistered
-
----
-
-## Aggregate
-
-Límite de consistencia
-del dominio.
-
-Nunca corresponde
-a una tabla.
-
-Nunca corresponde
-a un microservicio.
-
----
-
-## Aggregate Root
-
-Único punto de entrada
-al Aggregate.
-
-Toda modificación ocurre
-a través de él.
-
----
-
-## Entity
-
-Objeto con identidad.
-
-Ejemplo
-
-Citizen
-
-Organization
-
-Request
-
----
-
-## Value Object
-
-Objeto sin identidad.
-
-Ejemplo
-
-Email
-
-Address
-
-Coordinates
-
-PhoneNumber
-
-GeoLocation
-
----
-
-## Repository
-
-Contrato para obtener
-Aggregates.
-
-Nunca contiene
-lógica de negocio.
-
----
-
-## Specification
-
-Regla reutilizable.
-
-Puede combinarse.
-
-Puede componerse.
-
-No modifica estado.
-
----
-
-## Domain Service
-
-Servicio del dominio.
-
-Existe cuando una regla
-no pertenece naturalmente
-a una Entity
-ni a un Value Object.
-
----
-
-## Integration
-
-Comunicación con sistemas externos.
-
-Ejemplos
-
-Municipalidad
-
-FIWARE
-
-Open311
-
-Blockchain
-
-Correo
-
-SMS
-
-Keycloak
-
-Nunca contiene
-reglas del dominio.
-
----
-
-## Smart City
-
-Modelo urbano digital.
-
-Incluye
-
-IoT
-
-NGSI-LD
-
-Gemelos Digitales
-
-Sensores
-
-Datos abiertos
-
----
-
-## Digital Twin
-
-Representación digital
-de un activo físico.
-
-Ejemplos
-
-Barrio
-
-Semáforo
-
-Sensor
-
-Espacio público
-
----
-
-## Sensor
-
-Fuente de datos.
-
-No representa dispositivos.
-
-Representa una entidad
-del dominio Smart City.
-
----
-
-## Capability
-
-Capacidad observable
-de un sistema.
-
-Ejemplo
-
-Puede autenticar.
-
-Puede sincronizar.
-
-Puede votar.
-
----
-
-## Policy
-
-Conjunto de reglas
-que gobiernan un proceso.
-
-No representa código.
-
-Representa negocio.
-
----
-
-## Permission
-
-Acción autorizada.
-
-Ejemplo
-
-ReadRequest
-
-CreateRequest
-
-ApproveWorkflow
-
----
-
-## Role
-
-Conjunto de permisos.
-
-Nunca representa
-una persona.
-
----
-
-## Identity
-
-Representa la identidad
-digital.
-
-No representa
-la persona.
-
----
-
-# Verbos Oficiales
-
-Create
-
-Register
-
-Assign
-
-Approve
-
-Reject
-
-Close
-
-Archive
-
-Publish
-
-Synchronize
-
-Validate
-
-Update
-
-Remove
-
-Deactivate
-
-Activate
-
-Search
-
-Find
-
-List
-
-Resolve
-
-Notify
-
----
-
-# Sustantivos Oficiales
-
-Citizen
-
-Community
-
-Organization
-
-Membership
-
-Request
-
-Workflow
-
-Notification
-
-Event
-
-Sensor
-
-DigitalTwin
-
-Integration
-
-Identity
-
-Permission
-
-Role
-
-Policy
-
-Specification
-
-Repository
-
-Aggregate
-
-Entity
-
-ValueObject
-
----
-
-# Prefijos Permitidos
-
-Create
-
-Update
-
-Delete
-
-Register
-
-Assign
-
-Publish
-
-Notify
-
-Resolve
-
-Search
-
-Find
-
-List
-
-Sync
-
-Validate
-
----
-
-# Prefijos Prohibidos
-
-Do
-
-Process
-
-Execute
-
-Handle
-
-Manager
-
-Helper
-
-Utils
-
-Misc
-
-Common
-
-Data
-
-Generic
-
-BaseManager
-
----
-
-# Convenciones de Código
-
-Clases
-
-PascalCase
-
-Ejemplo
-
-Request
-
-Citizen
-
-Workflow
-
----
-
-Interfaces
-
-PascalCase
-
-Sin prefijo "I".
-
-Correcto
-
-Repository
-
-Incorrecto
-
-IRepository
-
----
-
-Métodos
-
-camelCase
-
-Ejemplo
-
-createRequest()
-
-assignCitizen()
-
-publishEvent()
-
----
-
-Constantes
-
-UPPER_SNAKE_CASE
-
-Ejemplo
-
-DEFAULT_PRIORITY
-
-MAX_REQUESTS
-
----
-
-Archivos
-
-snake_case
-
-Ejemplo
-
-request_repository.py
-
-workflow_service.py
-
-notification_policy.py
-
----
-
-# Beneficios
-
-El Lenguaje Ubicuo permite:
-
-• reducir ambigüedad
-
-• mejorar comunicación
-
-• disminuir deuda técnica
-
-• facilitar el onboarding
-
-• mantener coherencia
-
-• desacoplar el dominio
-  de la tecnología
-
-• preservar el conocimiento
-  del negocio
-
----
-
-# Estado
-
-Versión
-
-1.0
-
-Estado
-
-Aprobado
-
-Proyecto
-
-AURA Core
-
-Autor
-
-ARADA
+Cada término posee un significado único dentro de su contexto y ninguna
+palabra técnica reemplaza un concepto del negocio.

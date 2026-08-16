@@ -1,6 +1,6 @@
 # CORE-008 — Aggregate Design Rules
 
-Versión: 1.0
+Versión: 2.0
 
 Estado: Oficial
 
@@ -46,7 +46,7 @@ El Aggregate Root:
 - representa la identidad del Aggregate;
 - protege las invariantes;
 - controla todas las modificaciones internas;
-- publica Domain Events;
+- genera y registra Domain Events;
 - mantiene la consistencia del Aggregate.
 
 Ningún objeto externo puede modificar directamente los
@@ -237,8 +237,9 @@ Los Value Objects deben ser:
 
 # Domain Events
 
-Cuando un Aggregate cambia significativamente su estado,
-debe publicar un Domain Event.
+Cuando un Aggregate cambia significativamente su estado debe generar y
+registrar un Domain Event. Application coordina cualquier publicación
+interna después de persistir exitosamente el Aggregate.
 
 Ejemplos:
 
@@ -259,9 +260,9 @@ Una transacción nunca debe modificar múltiples Aggregates.
 
 Si varios Aggregates necesitan colaborar, se utiliza:
 
-- Domain Events;
-- Application Services;
-- Sagas (cuando corresponda).
+- Application Services para orquestación;
+- Integration Events para cruzar Bounded Contexts;
+- sagas o process managers cuando una decisión explícita los adopte.
 
 ---
 
@@ -404,4 +405,4 @@ Todo Aggregate de AURA Core protege completamente sus
 invariantes, encapsula el comportamiento del negocio,
 mantiene consistencia interna y colabora con otros
 Aggregates exclusivamente mediante contratos explícitos,
-identificadores y Domain Events.
+identificadores e Integration Events cuando cruza contextos.

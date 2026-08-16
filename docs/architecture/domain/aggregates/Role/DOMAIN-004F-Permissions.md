@@ -1,6 +1,6 @@
 # DOMAIN-004F — Role Permissions
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -37,8 +37,8 @@ Este documento **no define permisos funcionales del sistema**;
 define únicamente quién está autorizado para modificar el
 Aggregate Role.
 
-Los permisos funcionales asociados a cada Role serán definidos
-por el Aggregate **Permission (DOMAIN-005)**.
+Role no contiene Permissions. Cada Permission es una capacidad explícita
+asociada al Command y evaluada por Application.
 
 ---
 
@@ -270,44 +270,13 @@ Aggregate.
 
 ---
 
-# Permisos y Aggregate
+# Permissions y Aggregate
 
-El Aggregate **Role** no almacena permisos.
+Role no almacena, agrupa ni concede Permissions. Application exige la
+Permission explícita asociada al Command y puede utilizar el contexto del
+actor sin inferir autorización desde Role, Membership o Citizen.
 
-Únicamente valida que el actor que ejecuta un Command posea la
-autorización requerida.
-
-La definición detallada de permisos pertenece al Aggregate:
-
-```text
-Permission
-```
-
----
-
-# Integración con Permission
-
-En la siguiente etapa del dominio:
-
-```text
-Role
-
-↓
-
-Permission
-
-↓
-
-Authorization
-```
-
-Los Roles actuarán como contenedores lógicos para colecciones de
-Permissions.
-
-Esta separación mantiene desacoplados:
-
-- la estructura organizacional;
-- la política de autorización.
+El Aggregate valida exclusivamente estado e invariantes propias.
 
 ---
 
@@ -317,7 +286,7 @@ El modelo de permisos es compatible con:
 
 - Domain-Driven Design (DDD);
 - Role-Based Access Control (RBAC);
-- Clean Architecture;
+- Hexagonal Architecture;
 - CQRS;
 - Event-Driven Architecture.
 

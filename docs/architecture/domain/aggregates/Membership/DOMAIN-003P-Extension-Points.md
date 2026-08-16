@@ -1,6 +1,6 @@
 # DOMAIN-003P — Membership Extension Points
 
-Versión: 1.0
+Versión: 1.1
 
 Estado:
 Official
@@ -63,45 +63,18 @@ Aggregate siempre que no sean esenciales para esa relación.
 
 ---
 
-# Extension Point 1 — Roles Organizacionales
+# Extension Point 1 — Asignación Membership–Role diferida
 
-Después de una activación:
-
-```text
-MembershipActivated
-```
-
-puede ejecutarse:
-
-```text
-AssignDefaultRole
-```
-
-Ejemplo:
-
-```text
-Citizen
-
-↓
-
-Membership
-
-↓
-
-Role = Member
-```
-
-La asignación pertenece al Aggregate **Role**.
+El baseline 1.0 no define AssignDefaultRole ni asignaciones automáticas.
+Una futura capacidad requiere un Source of Truth, Commands, Events y
+Consistency Boundary aprobados.
 
 ---
 
 # Extension Point 2 — Permisos
 
-Una Membership activa puede originar:
-
-```text
-Permission Assignment
-```
+Una Membership activa puede aportar contexto a una decisión de
+autorización, pero no origina Permission Assignment implícito.
 
 Ejemplo:
 
