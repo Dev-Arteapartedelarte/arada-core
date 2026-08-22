@@ -3,6 +3,7 @@ from __future__ import annotations
 import re
 import xml.etree.ElementTree as ET
 from pathlib import Path
+from urllib.parse import unquote, urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
 DOMAIN = ROOT / "docs" / "architecture" / "domain"
@@ -97,3 +98,21 @@ def test_cross_context_documents_preserve_event_boundary() -> None:
     content = "\n".join(path.read_text(encoding="utf-8") for path in TRANSVERSAL_DOCUMENTS)
     assert "Domain Event != Integration Event" in content
     assert "no convierte eventos automáticamente" in content
+
+
+def test_local_markdown_links_are_resolvable() -> None:
+    excluded = {".git", ".mypy_cache", ".pytest_cache", ".ruff_cache", ".venv"}
+    documents = (
+        path for path in ROOT.rglob("*.md") if not excluded.intersection(path.parts)
+    )
+    broken: list[str] = []
+    for document in documents:
+        content = document.read_text(encoding="utf-8")
+        for raw_target in re.findall(r"!?\[[^]]*\]\(([^)]+)\)", content):
+            target = raw_target.strip().strip("<>").split("#", maxsplit=1)[0]
+            if not target or urlparse(target).scheme:
+                continue
+            resolved = (document.parent / unquote(target)).resolve()
+            if not resolved.exists():
+                broken.append(f"{document.relative_to(ROOT)} -> {target}")
+    assert not broken, "unresolved Markdown links:\n" + "\n".join(broken)

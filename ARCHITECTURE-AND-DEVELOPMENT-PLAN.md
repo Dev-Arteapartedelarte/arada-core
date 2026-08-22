@@ -2,7 +2,7 @@
 
 Versión: 2.0
 
-Estado: Consolidación transversal del dominio
+Estado: Consolidación transversal del dominio completada
 
 Baseline: `domain-model-v1.0.0`
 
@@ -41,16 +41,16 @@ Domain Event != Integration Event != API Contract
 | Baseline con hashes y tag anotado | Cerrado |
 | Constitución y reglas CORE | Cerrado |
 | Context Map normativo | Cerrado |
-| Auditoría transversal | En consolidación |
-| Mapa de relaciones | En consolidación |
-| Catálogo transversal de eventos | En consolidación |
-| Mapa de consistency boundaries | En consolidación |
-| Contratos cross-domain | En consolidación |
+| Auditoría transversal | Cerrado |
+| Mapa de relaciones | Cerrado |
+| Catálogo transversal de eventos | Cerrado |
+| Mapa de consistency boundaries | Cerrado |
+| Contratos cross-domain | Cerrado |
 | Application, APIs e infraestructura | No iniciado |
 
-## 4. Fase actual — Consolidación transversal
+## 4. Fase completada — Consolidación transversal
 
-La fase actual produce evidencia derivada del baseline sin redefinir los
+La fase produjo evidencia derivada del baseline sin redefinir los
 Aggregates:
 
 1. auditar cobertura, referencias y contradicciones;
@@ -66,7 +66,7 @@ dominio requiere revisión y aprobación explícita.
 
 ## 5. Criterio de salida
 
-La consolidación termina cuando:
+La consolidación quedó cerrada al comprobar que:
 
 - los trece Aggregates aparecen en todos los inventarios transversales;
 - cada Command y Domain Event oficial posee trazabilidad;

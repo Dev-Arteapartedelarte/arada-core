@@ -5,7 +5,6 @@ import json
 import sys
 from pathlib import Path
 
-
 SCRIPT = Path(__file__).resolve().parents[1] / "scripts" / "validate_domain_model.py"
 SPEC = importlib.util.spec_from_file_location("validate_domain_model", SCRIPT)
 assert SPEC and SPEC.loader
