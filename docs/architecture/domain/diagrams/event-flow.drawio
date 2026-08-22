@@ -1,0 +1,24 @@
+<mxfile host="app.diagrams.net" version="24.7.17">
+  <diagram id="event-flow" name="Event Boundary Flow">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" page="1" pageWidth="1600" pageHeight="700">
+      <root>
+        <mxCell id="0"/><mxCell id="1" parent="0"/>
+        <mxCell id="n1" value="Authorized intent" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1"><mxGeometry x="40" y="180" width="160" height="70" as="geometry"/></mxCell>
+        <mxCell id="n2" value="Command" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1"><mxGeometry x="240" y="180" width="160" height="70" as="geometry"/></mxCell>
+        <mxCell id="n3" value="Aggregate Root&#xa;guards + invariants" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1"><mxGeometry x="440" y="180" width="180" height="70" as="geometry"/></mxCell>
+        <mxCell id="n4" value="Domain Event&#xa;internal fact" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1"><mxGeometry x="660" y="180" width="180" height="70" as="geometry"/></mxCell>
+        <mxCell id="n5" value="Confirmed commit&#xa;one Aggregate" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1"><mxGeometry x="880" y="180" width="180" height="70" as="geometry"/></mxCell>
+        <mxCell id="n6" value="Explicit contract selection" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1"><mxGeometry x="1100" y="165" width="180" height="100" as="geometry"/></mxCell>
+        <mxCell id="n7" value="Integration Event&#xa;versioned Published Language" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1"><mxGeometry x="1320" y="180" width="210" height="70" as="geometry"/></mxCell>
+        <mxCell id="n8" value="No public contract&#xa;event remains internal" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1"><mxGeometry x="1100" y="350" width="180" height="70" as="geometry"/></mxCell>
+        <mxCell id="f1" edge="1" parent="1" source="n1" target="n2"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="f2" edge="1" parent="1" source="n2" target="n3"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="f3" edge="1" parent="1" source="n3" target="n4"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="f4" edge="1" parent="1" source="n4" target="n5"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="f5" value="after commit" edge="1" parent="1" source="n5" target="n6"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="f6" value="yes" edge="1" parent="1" source="n6" target="n7"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="f7" value="no" edge="1" parent="1" source="n6" target="n8"><mxGeometry relative="1" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

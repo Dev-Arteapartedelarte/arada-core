@@ -13,6 +13,7 @@ Baseline: `domain-model-v1.0.0`
 - un contrato público sólo aparece cuando está definido en el documento K;
 - `condicional` exige selección explícita después del commit;
 - el catálogo no convierte eventos automáticamente ni aprueba consumidores.
+- `Domain Event != Integration Event`: un contrato K sólo existe cuando el modelo normativo lo declara explícitamente.
 
 ## DOMAIN-001 — Organization
 
@@ -95,6 +96,9 @@ Baseline: `domain-model-v1.0.0`
 | ArchiveTerritory | TerritoryArchived | — |
 
 ## DOMAIN-006 — Assembly
+
+`AssemblyPublished` es un contrato oficial cuyo Domain Event de origen permanece sin
+selección determinista por TA-001; por tanto no se incorpora automáticamente a ninguna fila.
 
 | Command | Domain Event | Integration Event |
 |---|---|---|

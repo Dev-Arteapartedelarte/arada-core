@@ -1,0 +1,23 @@
+<mxfile host="app.diagrams.net" version="24.7.17">
+  <diagram id="state-machines" name="Aggregate State Machines">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" page="1" pageWidth="1600" pageHeight="1100">
+      <root>
+        <mxCell id="0"/><mxCell id="1" parent="0"/>
+        <mxCell id="title" value="AURA Core v1 — State Machine summary&#xa;Only Aggregate Roots execute transitions" style="text;html=1;align=center;fontSize=18;fontStyle=1" vertex="1" parent="1"><mxGeometry x="400" y="20" width="800" height="70" as="geometry"/></mxCell>
+        <mxCell id="s1" value="Organization&#xa;Draft → PendingValidation → Active ⇄ Suspended → Archived → Deleted" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1"><mxGeometry x="80" y="120" width="680" height="70" as="geometry"/></mxCell>
+        <mxCell id="s2" value="Citizen&#xa;Draft → PendingVerification → Verified → Active ⇄ Suspended → Inactive → Archived" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1"><mxGeometry x="820" y="120" width="680" height="70" as="geometry"/></mxCell>
+        <mxCell id="s3" value="Membership&#xa;Draft → PendingApproval → Approved/Rejected → Active ⇄ Suspended → Terminated → Archived" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1"><mxGeometry x="80" y="220" width="680" height="70" as="geometry"/></mxCell>
+        <mxCell id="s4" value="Role&#xa;Draft → Active ⇄ Inactive → Archived" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1"><mxGeometry x="820" y="220" width="680" height="70" as="geometry"/></mxCell>
+        <mxCell id="s5" value="Territory&#xa;Draft → PendingValidation → Active ⇄ Inactive → Archived" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1"><mxGeometry x="80" y="320" width="680" height="70" as="geometry"/></mxCell>
+        <mxCell id="s6" value="Assembly&#xa;Draft → Scheduled → Convoked → InProgress → Completed → Archived; Cancelled → Archived" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1"><mxGeometry x="820" y="320" width="680" height="70" as="geometry"/></mxCell>
+        <mxCell id="s7" value="Proposal&#xa;Draft → Submitted → UnderReview → Accepted/Rejected; Withdrawn; terminal → Archived" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1"><mxGeometry x="80" y="420" width="680" height="70" as="geometry"/></mxCell>
+        <mxCell id="s8" value="Participation&#xa;Registered → Active → Completed; Withdrawn/Invalidated; terminal → Archived" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1"><mxGeometry x="820" y="420" width="680" height="70" as="geometry"/></mxCell>
+        <mxCell id="s9" value="Voting&#xa;Draft → Open → Closed → Archived; Draft → Cancelled → Archived" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1"><mxGeometry x="80" y="520" width="680" height="70" as="geometry"/></mxCell>
+        <mxCell id="s10" value="Document&#xa;Draft → Published → Archived" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1"><mxGeometry x="820" y="520" width="680" height="70" as="geometry"/></mxCell>
+        <mxCell id="s11" value="Notification&#xa;Draft → Pending → Delivered; Pending → Failed → Pending" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1"><mxGeometry x="80" y="620" width="680" height="70" as="geometry"/></mxCell>
+        <mxCell id="s12" value="Audit&#xa;No Audit → Recorded (terminal)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1"><mxGeometry x="820" y="620" width="680" height="70" as="geometry"/></mxCell>
+        <mxCell id="s13" value="Integration&#xa;Draft → Active ⇄ Suspended → Archived" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1"><mxGeometry x="450" y="740" width="680" height="70" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
