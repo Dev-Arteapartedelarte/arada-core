@@ -64,6 +64,7 @@ reglas normativas ni resolver ambigüedades por inferencia.
 | TA-005 | Media | Los contratos K usan convenciones de nombre distintas: `IntegrationEvent`, `ForIntegration` y nombres publicados | Preservar nombres oficiales; no normalizar sin versionado |
 | TA-006 | Media | Varios documentos K mencionan consumidores posibles, no consumidores contractualmente aprobados | Catálogo registra consumidor como no definido |
 | TA-007 | Informativa | Los artefactos horizontales y diagramas estaban vacíos al cerrar v1 | Se completan fuera de los 221 documentos normativos |
+| TA-008 | Alta | DOMAIN-006K menciona `AssemblyModeChanged`, mientras DOMAIN-006D define `AssemblyModalityChanged` | No mapear ese cambio hasta aprobar una corrección normativa |
 
 ## Integridad de referencias
 
