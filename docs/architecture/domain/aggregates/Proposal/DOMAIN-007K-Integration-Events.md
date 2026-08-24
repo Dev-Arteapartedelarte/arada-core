@@ -792,8 +792,23 @@ modificación deba ser conocida fuera del Bounded Context.
 
 ## Origen conceptual
 
-Puede derivarse de Domain Events relacionados con cambios
-permitidos sobre información propia de Proposal.
+Puede derivarse exclusivamente de los siguientes Domain Events:
+
+```text
+ProposalRenamed
+
+ProposalPurposeChanged
+
+ProposalDescriptionChanged
+
+ProposalTypeChanged
+
+ProposalContentUpdated
+
+ProposalTerritoryChanged
+
+ProposalAssemblyAssociated
+```
 
 ## Condición
 
@@ -804,7 +819,8 @@ La modificación debe:
 - preservar las invariantes;
 - encontrarse persistida;
 - haber generado una nueva Version válida;
-- poseer relevancia externa.
+- poseer relevancia externa;
+- estar sujeta a un contrato explícito de interoperabilidad cuando deba publicarse.
 
 ## Información conceptual
 
@@ -2836,7 +2852,19 @@ ProposalWithdrawn               ProposalWithdrawnForIntegration
 
 ProposalArchived                ProposalArchivedForIntegration
 
-Relevant Proposal Changes       ProposalUpdatedForIntegration
+ProposalRenamed                 ProposalUpdatedForIntegration
+
+ProposalPurposeChanged          ProposalUpdatedForIntegration
+
+ProposalDescriptionChanged      ProposalUpdatedForIntegration
+
+ProposalTypeChanged             ProposalUpdatedForIntegration
+
+ProposalContentUpdated          ProposalUpdatedForIntegration
+
+ProposalTerritoryChanged        ProposalUpdatedForIntegration
+
+ProposalAssemblyAssociated      ProposalUpdatedForIntegration
 ```
 
 La existencia de esta correspondencia conceptual no obliga a

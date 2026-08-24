@@ -583,11 +583,11 @@ una Assembly en un estado que permite modificar su modalidad
 
 When
 
-ChangeAssemblyMode establece una modalidad válida
+ChangeAssemblyModality establece una modalidad válida
 
 Then
 
-AssemblyMode cambia
+AssemblyModality cambia
 
 And
 
@@ -599,7 +599,7 @@ Version cambia
 
 And
 
-se produce AssemblyModeChanged
+se produce AssemblyModalityChanged
 ```
 
 ---
@@ -621,7 +621,7 @@ la operación es rechazada
 
 And
 
-AssemblyMode permanece sin cambios
+AssemblyModality permanece sin cambios
 
 And
 
@@ -2791,7 +2791,7 @@ changePurpose()
 
 changeDescription()
 
-changeMode()
+changeModality()
 
 changeLocation()
 
@@ -3085,24 +3085,24 @@ se produce AssemblyDescriptionChanged
 
 ---
 
-# Test de changeMode()
+# Test de changeModality()
 
 ```text
 Given
 
-Assembly en un estado que permite modificar AssemblyMode
+Assembly en un estado que permite modificar AssemblyModality
 
 When
 
-changeMode() recibe una modalidad válida
+changeModality() recibe una modalidad válida
 
 Then
 
-AssemblyMode cambia
+AssemblyModality cambia
 
 And
 
-se produce AssemblyModeChanged
+se produce AssemblyModalityChanged
 ```
 
 ---

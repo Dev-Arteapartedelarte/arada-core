@@ -1942,7 +1942,7 @@ comportamiento del Aggregate.
 Modificar:
 
 ```text
-AssemblyMode
+AssemblyModality
 ```
 
 requiere una operación autorizada.

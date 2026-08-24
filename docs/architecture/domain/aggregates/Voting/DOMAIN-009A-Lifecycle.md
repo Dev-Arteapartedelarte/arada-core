@@ -519,7 +519,7 @@ Formal Voting Process Active
 No significa:
 
 ```text
-Assembly Open
+Assembly InProgress
 ```
 
 ni:

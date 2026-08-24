@@ -1,6 +1,6 @@
 # DOMAIN-006D — Assembly Domain Events
 
-Versión: 1.1
+Versión: 1.0
 
 Estado:
 Official
@@ -40,7 +40,7 @@ Documentos relacionados:
 
 # Objetivo
 
-Definir formalmente los **Domain Events** generados y registrados por el
+Definir formalmente los **Domain Events** publicados por el
 Aggregate **Assembly** cuando ocurren hechos relevantes dentro de
 su ciclo de vida.
 
@@ -2117,41 +2117,7 @@ state rollback
 
 como comportamiento normal.
 
-La implementación puede utilizar estrategias como:
-
-```text
-Transactional Outbox
-```
-
-cuando corresponda.
-
 La técnica concreta pertenece a Infrastructure.
-
----
-
-# Transactional Outbox
-
-El patrón Transactional Outbox puede utilizarse para garantizar
-entrega confiable después de persistir el Aggregate.
-
-Conceptualmente:
-
-```text
-Assembly
-    │
-    │ Domain Event
-    ▼
-Transaction
-    ├── Aggregate State
-    └── Outbox Record
-            │
-            ▼
-       Event Dispatcher
-```
-
-Assembly no conoce la Outbox.
-
-El patrón pertenece a Infrastructure/Application.
 
 ---
 
@@ -2173,19 +2139,7 @@ Un Domain Event pertenece al dominio interno.
 
 Un Integration Event pertenece a una frontera de integración.
 
-Ejemplo:
-
-```text
-AssemblyStarted
-```
-
-puede originar:
-
-```text
-AssemblyStartedIntegrationEvent
-```
-
-pero no son el mismo contrato.
+No son el mismo contrato.
 
 ---
 
@@ -2213,7 +2167,7 @@ Assembly
 Domain Event
     │
     ▼
-Application / Integration Handler
+Application / Integration Boundary
     │
     ▼
 Integration Event
@@ -2242,31 +2196,18 @@ AssemblyRescheduled
 AssemblyCancelled
 ```
 
-requieren un Integration Event explícito antes de que Notification
-Management pueda reaccionar mediante un Command propio.
-
-Ejemplo:
-
-```text
-AssemblyConvoked
-      │
-      ▼
-Notification Handler
-      │
-      ▼
-Notification Command
-```
+pueden ser observados posteriormente por procesos de
+Notification cuando exista el contrato correspondiente.
 
 Assembly no crea ni envía directamente Notification dentro de su
-transacción.
+límite de consistencia.
 
 ---
 
 # Domain Events y Audit
 
-Audit Management no consume Domain Events de Assembly. Puede recibir un
-Integration Event explícito mediante un inbound adapter y registrar su
-propio hecho.
+Los hechos de Assembly pueden ser utilizados posteriormente por
+Audit cuando corresponda.
 
 Ejemplos:
 
@@ -2323,7 +2264,7 @@ No constituyen la fuente transaccional de verdad.
 
 # Domain Events y CQRS
 
-Dentro de CQRS:
+La separación conceptual entre modificación y lectura permite:
 
 ```text
 Command
@@ -2343,6 +2284,9 @@ Read Model
 
 La lectura permanece desacoplada de la modificación del
 Aggregate.
+
+Esta separación conceptual no obliga una implementación física
+específica de CQRS.
 
 ---
 
@@ -2389,16 +2333,15 @@ La compatibilidad no obliga a utilizar Event Sourcing.
 
 # Rehidratación desde Eventos
 
-Cuando se reconstruye una Assembly desde eventos históricos,
-estos eventos deben aplicarse sin producirlos nuevamente.
+Cuando una estrategia futura utilice reconstrucción desde eventos
+históricos, estos hechos deben aplicarse sin producirlos
+nuevamente.
 
 Conceptualmente:
 
 ```text
 apply(AssemblyCreated)
-
 apply(AssemblyScheduled)
-
 apply(AssemblyConvoked)
 ```
 
@@ -2408,11 +2351,7 @@ reconstruye:
 AssemblyStatus = Convoked
 ```
 
-pero no agrega nuevos:
-
-```text
-PendingDomainEvents
-```
+sin crear hechos nuevos.
 
 La rehidratación restaura hechos.
 
@@ -2422,7 +2361,7 @@ No genera hechos nuevos.
 
 # Eventos Históricos
 
-Los Domain Events persistidos deben considerarse inmutables.
+Los Domain Events históricos deben considerarse inmutables.
 
 No deben editarse retrospectivamente para reflejar el estado
 actual.
@@ -2447,34 +2386,19 @@ AssemblyScheduled(T2)
 
 # Evolución de Esquema
 
-La estructura de un Domain Event puede evolucionar.
+La estructura de un Domain Event puede evolucionar cuando el
+modelo evolucione formalmente.
 
-Cuando exista persistencia histórica o consumidores internos
-dependientes, los cambios deben ser controlados.
+Si existen representaciones históricas o consumidores internos,
+cualquier cambio debe preservar su significado o tratar
+explícitamente su compatibilidad.
 
-Puede utilizarse:
-
-```text
-EventSchemaVersion
-```
-
-cuando la arquitectura lo requiera.
-
-Ejemplo conceptual:
-
-```text
-EventSchemaVersion = 1
-```
-
-Este valor es distinto de:
-
-```text
-AggregateVersion
-```
+La evolución estructural del evento no modifica el significado
+histórico del hecho.
 
 ---
 
-# AggregateVersion versus EventSchemaVersion
+# AggregateVersion y Versión Contractual
 
 ```text
 AggregateVersion
@@ -2482,63 +2406,35 @@ AggregateVersion
 
 representa la posición evolutiva del Aggregate.
 
-```text
-EventSchemaVersion
-```
+Una eventual versión estructural del contrato de evento representa
+una dimensión distinta.
 
-representa la versión del contrato estructural del evento.
-
-No deben confundirse.
-
-Ejemplo:
+Debe mantenerse:
 
 ```text
-AssemblyStarted
+AggregateVersion
 
-AggregateVersion = 15
+≠
 
-EventSchemaVersion = 2
+Event Contract Version
 ```
-
-Esto significa que el evento corresponde a la versión 15 de la
-Assembly, utilizando la versión 2 del esquema del evento.
 
 ---
 
 # Compatibilidad hacia Atrás
 
-Cuando un esquema de evento cambie debe evaluarse:
+Cuando un contrato de evento cambie debe evaluarse:
 
 * consumidores existentes;
 * eventos históricos;
 * proyecciones;
-* Event Sourcing;
+* Event Sourcing cuando exista;
 * auditoría;
 * integraciones;
-* migraciones;
-* replay.
+* replay cuando corresponda.
 
-No deben eliminarse campos con significado histórico sin una
-estrategia explícita.
-
----
-
-# Upcasting
-
-Cuando eventos históricos deban ser interpretados mediante un
-modelo más reciente puede utilizarse conceptualmente:
-
-```text
-Event Upcaster
-```
-
-El Upcaster transforma una representación histórica hacia una
-forma compatible para consumo interno.
-
-No modifica físicamente el hecho histórico original por defecto.
-
-La necesidad concreta debe documentarse mediante arquitectura
-explícita.
+No deben eliminarse campos con significado histórico mediante una
+reinterpretación silenciosa.
 
 ---
 
@@ -2574,7 +2470,7 @@ No contiene el Aggregate Citizen.
 # ActorId como Metadato
 
 Cuando ActorId no modifica el significado del hecho puede
-mantenerse como metadato del evento.
+mantenerse como metadato del evento conforme al contrato oficial.
 
 Ejemplo:
 
@@ -2584,8 +2480,8 @@ AssemblyCancelled
 
 puede registrar quién provocó la cancelación.
 
-La decisión de ubicar ActorId en Payload o Metadata debe ser
-consistente en la arquitectura de eventos de AURA.
+La ubicación concreta de ActorId debe mantenerse coherente con el
+contrato transversal de eventos de AURA.
 
 ---
 
@@ -2628,16 +2524,9 @@ Estas propiedades no pertenecen al dominio Assembly.
 Los Domain Events pueden contener información de negocio
 sensible.
 
-La infraestructura responsable de:
-
-* almacenamiento;
-* transporte;
-* autorización;
-* cifrado;
-* retención;
-* acceso;
-
-debe aplicar las políticas definidas por el Security Model.
+Las políticas externas de almacenamiento, transporte,
+autorización, cifrado, retención y acceso no forman parte del
+comportamiento del Aggregate.
 
 Assembly no implementa mecanismos criptográficos directamente.
 
@@ -2657,72 +2546,62 @@ AssemblyStarted
 y:
 
 ```text
-ParticipationCreated
+ParticipationRegistered
 ```
 
 pertenecen a límites distintos.
 
-La coordinación distribuida debe usar:
+Debe mantenerse:
 
-* CorrelationId;
-* CausationId;
-* AggregateVersion;
-* identificadores;
-* políticas de consistencia eventual.
+```text
+Cross-Aggregate Collaboration
+
+=
+
+Eventual Consistency
+```
 
 No debe suponerse una transacción global.
 
 ---
 
-# Entrega al Menos Una Vez
+# Eventos Duplicados
 
-Una infraestructura de mensajería puede operar con semántica:
+Dos eventos con EventId distinto pueden representar dos hechos
+reales del mismo tipo.
+
+Ejemplo:
 
 ```text
-at-least-once delivery
+AssemblyDescriptionChanged
 ```
 
-Esto significa que un consumidor podría recibir un mismo evento
-más de una vez.
+puede ocurrir varias veces durante la vida del Aggregate cuando el
+estado permita modificaciones.
 
-Los consumidores deben utilizar mecanismos apropiados de
-idempotencia.
-
-Esta necesidad no altera la semántica del Domain Event.
-
----
-
-# Idempotencia de Consumidores
-
-Un consumidor puede utilizar:
+Cada hecho posee:
 
 ```text
 EventId
 ```
 
-para detectar procesamiento repetido.
-
-Conceptualmente:
+propio y:
 
 ```text
-if EventId already processed:
-    ignore duplicate delivery
+AggregateVersion
 ```
 
-La lógica concreta pertenece al consumidor.
+propia.
 
-Assembly no debe generar un nuevo EventId para representar la
-misma entrega retransmitida.
+Una repetición técnica de entrega no constituye un nuevo hecho de
+dominio.
 
 ---
 
 # Eventos Fuera de Orden
 
-En sistemas distribuidos algunos consumidores pueden observar
-eventos fuera de orden.
-
-AggregateVersion permite identificar el orden correcto dentro de
-una Assembly.
+AggregateVersion permite expresar el orden lógico dentro de una
+misma Assembly.
 
 Ejemplo:
 
@@ -2731,20 +2610,22 @@ AssemblyStarted
 AggregateVersion = 8
 ```
 
-no debe proyectarse como anterior a:
+corresponde lógicamente después de:
 
 ```text
 AssemblyConvoked
 AggregateVersion = 7
 ```
 
-aunque la infraestructura los entregue en orden inverso.
+independientemente de cómo una representación externa sea
+observada posteriormente.
 
 ---
 
 # Replay
 
-Los eventos pueden ser reprocesados para reconstruir:
+Cuando exista una capacidad de replay, los eventos pueden
+utilizarse para reconstruir:
 
 * Read Models;
 * Analytics;
@@ -2752,60 +2633,50 @@ Los eventos pueden ser reprocesados para reconstruir:
 * auditoría derivada;
 * estado cuando se utilice Event Sourcing.
 
-El replay no debe causar efectos externos irreversibles de forma
-indiscriminada.
-
-Por ejemplo, reprocesar:
-
-```text
-AssemblyConvoked
-```
-
-no debe necesariamente volver a enviar una Notification real.
+El replay no modifica el significado del hecho histórico.
 
 ---
 
 # Proyecciones versus Side Effects
 
-Los consumidores deben distinguir:
+Debe mantenerse:
 
 ```text
 Projection
-```
 
-de:
+≠
 
-```text
 External Side Effect
 ```
 
-Una proyección puede reprocesarse.
-
-Un Side Effect como enviar una comunicación externa puede requerir
-protecciones adicionales de idempotencia.
+La reconstrucción de una proyección no convierte un hecho
+histórico en un nuevo hecho de dominio.
 
 ---
 
 # Domain Event Handlers
 
-Los Domain Event Handlers reaccionan a eventos después de que el
-hecho ocurrió.
+Los consumidores internos pueden reaccionar a eventos después de
+que el hecho ocurrió.
 
-Ejemplo conceptual:
+Conceptualmente:
 
 ```text
 AssemblyCompleted
        │
-       ├────────► UpdateReadModel
-       ├────────► RegisterAudit
-       └────────► PrepareIntegrationEvent
+       ├────────► Read Model
+       ├────────► Audit
+       └────────► Integration Contract
 ```
 
-Un Handler no modifica retroactivamente el hecho original.
+cuando los contratos correspondientes existan.
+
+Una reacción posterior no modifica retroactivamente el hecho
+original.
 
 ---
 
-# Handler Failure
+# Consumer Failure
 
 El fallo de un consumidor no significa que el Domain Event deje
 de ser verdadero.
@@ -2818,40 +2689,38 @@ AssemblyConvoked
 
 ocurrió.
 
-Si el Notification Handler falla, la Assembly continúa siendo:
+Si un proceso posterior falla, la Assembly continúa siendo:
 
 ```text
 Convoked
 ```
 
-El error debe resolverse mediante retry, compensación o políticas
-de infraestructura.
-
-No mediante reversión silenciosa del Domain Event.
+El fallo externo no redefine silenciosamente el hecho del
+Aggregate.
 
 ---
 
 # Eventos y Consistencia Eventual
 
-Los efectos externos derivados de Domain Events utilizan
-consistencia eventual.
+Los efectos pertenecientes a otros Aggregates o Boundaries
+derivados de Domain Events utilizan consistencia eventual.
 
-Ejemplo:
+Conceptualmente:
 
 ```text
 AssemblyConvoked
         │
         ▼
-Assembly persisted
+Assembly confirmed
         │
         ▼
-Notification eventually created
+External reaction eventually occurs
 ```
 
 Puede existir una ventana temporal donde Assembly ya está
-Convoked y Notification aún no fue procesada.
+Convoked y otro contexto todavía no ha reaccionado.
 
-Esto es coherente con el límite DDD.
+Esto preserva el límite de consistencia de Assembly.
 
 ---
 
@@ -2890,202 +2759,103 @@ DOMAIN-006J-Consistency-Boundary.md
 
 # Eventos e Integration Boundary
 
-Los sistemas externos no deben consumir necesariamente los Domain
-Events internos directamente.
+Los sistemas externos no deben asumir que los Domain Events
+internos constituyen automáticamente contratos públicos.
 
 Cuando exista un contrato público o inter-contextual debe
-utilizarse:
+utilizarse el Integration Event oficial correspondiente.
+
+Debe mantenerse:
 
 ```text
+Domain Event
+
+≠
+
 Integration Event
 ```
 
-La transformación protege el dominio interno.
+---
+
+# AssemblyScheduled y AssemblyPublished
+
+El Domain Event:
+
+```text
+AssemblyScheduled
+```
+
+constituye el origen semántico de:
+
+```text
+AssemblyPublished
+```
+
+cuando exista un contrato explícito que requiera comunicar el
+hecho fuera del Boundary.
+
+Debe mantenerse:
+
+```text
+AssemblyScheduled
+
+≠
+
+AssemblyPublished
+```
+
+y:
+
+```text
+AssemblyScheduled
+
+≠
+
+Mandatory External Publication
+```
+
+`AssemblyCreated` no constituye el origen de
+`AssemblyPublished`.
 
 ---
 
-# FIWARE
+# AssemblyModalityChanged — Naming Canónico
 
-Los Domain Events pueden originar proyecciones hacia FIWARE.
-
-Ejemplo:
-
-```text
-AssemblyStarted
-      │
-      ▼
-Integration Handler
-      │
-      ▼
-AssemblyStartedIntegrationEvent
-      │
-      ▼
-FIWARE Adapter
-      │
-      ▼
-NGSI-LD
-```
-
-FIWARE no constituye el propietario del Domain Event.
-
----
-
-# Anti-Corruption Layer
-
-Cuando un sistema externo utiliza una semántica diferente, la
-transformación debe realizarse mediante una Anti-Corruption
-Layer.
-
-Un evento externo:
+El nombre oficial y canónico del Domain Event que representa el
+cambio de modalidad es:
 
 ```text
-MEETING_OPENED
+AssemblyModalityChanged
 ```
 
-no debe incorporarse automáticamente como Domain Event de AURA.
-
-Debe traducirse solamente cuando exista equivalencia real con:
+Su Command origen es:
 
 ```text
-AssemblyStarted
+ChangeAssemblyModality
 ```
 
----
-
-# Persistencia de Domain Events
-
-Cuando la arquitectura requiera conservar Domain Events, la
-persistencia debe preservar:
+y su Payload utiliza:
 
 ```text
-EventId
+PreviousModality
 
-EventType
-
-AssemblyId
-
-OrganizationId
-
-AggregateVersion
-
-OccurredAt
-
-CorrelationId
-
-CausationId
-
-Payload
+NewModality
 ```
 
-y, cuando corresponda:
+Debe mantenerse:
 
 ```text
-EventSchemaVersion
+AssemblyModality
+    │
+    ▼
+ChangeAssemblyModality
+    │
+    ▼
+AssemblyModalityChanged
 ```
 
-La representación física pertenece a Infrastructure.
-
----
-
-# Domain Event Store
-
-La existencia de un Event Store no forma parte obligatoria del
-Aggregate.
-
-El modelo de dominio es compatible con:
-
-```text
-State Persistence + Domain Events
-```
-
-y con:
-
-```text
-Event Sourcing
-```
-
-La estrategia debe definirse explícitamente a nivel
-arquitectónico.
-
----
-
-# Repository y Domain Events
-
-El Repository persiste Assembly como unidad.
-
-La estrategia de persistencia debe coordinar la versión del
-Aggregate con los eventos generados.
-
-Conceptualmente:
-
-```text
-load Assembly vN
-      │
-      ▼
-execute Command
-      │
-      ▼
-Assembly vN+1
-      +
-Domain Events
-      │
-      ▼
-persist consistently
-```
-
----
-
-# Eventos y Optimistic Concurrency
-
-AggregateVersion permite verificar que el evento corresponde a la
-secuencia aceptada del Aggregate.
-
-No debe existir:
-
-```text
-AssemblyVersion = 9
-```
-
-con un nuevo evento aceptado como:
-
-```text
-AggregateVersion = 8
-```
-
-después de que la versión 9 ya fue persistida.
-
----
-
-# Eventos Duplicados
-
-Dos eventos con EventId distinto pueden representar dos hechos
-reales del mismo tipo.
-
-Ejemplo:
-
-```text
-AssemblyDescriptionChanged
-```
-
-puede ocurrir varias veces durante la vida del Aggregate cuando el
-estado permita modificaciones.
-
-Cada hecho posee:
-
-```text
-EventId
-```
-
-propio y:
-
-```text
-AggregateVersion
-```
-
-propia.
-
-Esto es diferente de una retransmisión duplicada del mismo
-evento.
+`AssemblyModeChanged` no representa un segundo Domain Event ni un
+alias normativo.
 
 ---
 
@@ -3648,7 +3418,7 @@ DOMAIN-006J-Consistency-Boundary.md
 # Relación con Integration Events
 
 Los eventos que deban cruzar Bounded Contexts pueden ser
-traducidos según:
+representados mediante los contratos definidos en:
 
 ```text
 DOMAIN-006K-Integration-Events.md
@@ -3657,7 +3427,8 @@ DOMAIN-006K-Integration-Events.md
 No todos los Domain Events necesitan transformarse en Integration
 Events.
 
-Solo deben publicarse externamente los hechos necesarios.
+Solo deben utilizarse externamente los contratos explícitamente
+definidos.
 
 ---
 
@@ -3669,10 +3440,10 @@ Las proyecciones definidas en:
 DOMAIN-006L-Read-Model.md
 ```
 
-pueden consumir Domain Events únicamente para actualizar vistas internas
-de Assembly Management.
+pueden consumir Domain Events para actualizar vistas.
 
-El orden debe respetar AggregateVersion.
+El orden lógico dentro de una Assembly debe respetar
+AggregateVersion.
 
 ---
 
@@ -3698,8 +3469,6 @@ event generated after valid command
 event not generated after rejected command
 
 historical values preserved
-
-consumer idempotency assumptions
 ```
 
 Los escenarios formales se encuentran en:
@@ -3769,7 +3538,8 @@ FIWARE
 NGSI-LD
 ```
 
-Estos mecanismos pueden transportar o persistir eventos.
+Estos mecanismos pueden transportar o persistir representaciones
+de eventos.
 
 No definen su semántica.
 
@@ -3786,17 +3556,7 @@ Conceptualmente el dominio puede representar:
 AssemblyStarted
 ```
 
-sin conocer si posteriormente se serializa como:
-
-```text
-JSON
-
-Avro
-
-Protobuf
-
-MessagePack
-```
+sin conocer su formato físico de serialización.
 
 La elección tecnológica no debe contaminar el modelo.
 
@@ -3822,10 +3582,9 @@ Los Domain Events de Assembly deben cumplir:
 * no incluir secretos;
 * no depender de infraestructura;
 * no reescribir eventos históricos;
-* no publicarse cuando una operación falla;
+* no producirse cuando una operación falla;
 * preservar causalidad;
 * preservar orden por AggregateVersion;
-* permitir consumidores idempotentes;
 * separar Domain Events de Integration Events.
 
 ---
@@ -3837,10 +3596,10 @@ No está permitido:
 * modificar un Domain Event después de ocurrido;
 * reutilizar EventId;
 * utilizar Domain Events como Commands;
-* publicar eventos de operaciones rechazadas;
-* publicar eventos antes de validar invariantes;
+* producir eventos de operaciones rechazadas;
+* producir eventos antes de validar invariantes;
 * utilizar un evento para modificar directamente otro Aggregate;
-* transportar Aggregate completo sin necesidad;
+* transportar un Aggregate completo sin necesidad;
 * incluir contraseñas;
 * incluir tokens;
 * incluir claves privadas;
@@ -3848,9 +3607,14 @@ No está permitido:
 * utilizar nombres técnicos como eventos de dominio;
 * sobrescribir eventos históricos;
 * asumir orden global entre distintos Aggregates;
-* acoplar un Domain Event a Kafka, FIWARE o cualquier tecnología;
+* acoplar la semántica de un Domain Event a una tecnología;
 * transformar silenciosamente un Domain Event interno en contrato
-  público permanente.
+  público permanente;
+* utilizar `AssemblyModeChanged` como Domain Event oficial;
+* utilizar `AssemblyModeChanged` como alias normativo;
+* introducir `ChangeAssemblyMode`;
+* introducir `PreviousMode`;
+* introducir `NewMode`.
 
 ---
 
@@ -3862,13 +3626,15 @@ El modelo de Domain Events es compatible con:
 * Tactical DDD;
 * Clean Architecture;
 * Hexagonal Architecture;
-* CQRS;
+* CQRS conceptual;
 * Event-Driven Architecture;
-* Event Sourcing;
+* Event Sourcing cuando sea adoptado explícitamente;
 * Optimistic Concurrency;
-* Transactional Outbox;
 * arquitectura distribuida;
 * consistencia eventual.
+
+La compatibilidad no constituye adopción obligatoria de una
+arquitectura física específica.
 
 ---
 
@@ -3897,11 +3663,25 @@ Integration y otros procesos reaccionan posteriormente mediante
 consistencia eventual y conservan sus propios límites de
 consistencia.
 
+El lenguaje ubicuo mantiene:
+
+```text
+AssemblyModality
+    │
+    ▼
+ChangeAssemblyModality
+    │
+    ▼
+AssemblyModalityChanged
+```
+
+como representación canónica del cambio de modalidad.
+
 Los Domain Events permanecen separados de Commands, Integration
-Events y mecanismos técnicos de mensajería, permitiendo que el
-modelo de dominio continúe independiente de infraestructura.
+Events y mecanismos técnicos, permitiendo que el modelo de
+dominio continúe independiente de Infrastructure.
 
 De esta forma, los Domain Events de Assembly proporcionan una
-base inmutable, trazable, auditable, desacoplada y compatible con
-Domain-Driven Design, CQRS, Event-Driven Architecture, Event
-Sourcing y una arquitectura distribuida.
+base inmutable, trazable, auditable y desacoplada, preservando el
+patrón consolidado de AURA sin redefinir el Aggregate ni imponer
+decisiones de arquitectura.

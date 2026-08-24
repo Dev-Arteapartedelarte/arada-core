@@ -17,126 +17,120 @@ Assembly
 Autor:
 ARADA
 
-Documentos relacionados:
+Documentos Relacionados:
 
-* DOMAIN-001-Aggregate.md
-* DOMAIN-002-Aggregate.md
-* DOMAIN-003-Aggregate.md
-* DOMAIN-004-Aggregate.md
-* DOMAIN-005-Aggregate.md
-* DOMAIN-006A-Lifecycle.md
-* DOMAIN-006B-State-Machine.md
-* DOMAIN-006C-Commands.md
-* DOMAIN-006D-Domain-Events.md
-* DOMAIN-006E-Invariants.md
-* DOMAIN-006F-Permissions.md
-* DOMAIN-006G-Repository-Contract.md
-* DOMAIN-006H-Examples.md
-* DOMAIN-006I-Versioning.md
-* DOMAIN-006J-Consistency-Boundary.md
-* DOMAIN-006K-Integration-Events.md
-* DOMAIN-006L-Read-Model.md
-* DOMAIN-006M-Test-Scenarios.md
-* DOMAIN-006N-Performance-Rules.md
-* DOMAIN-006O-Security-Model.md
-* DOMAIN-006P-Extension-Points.md
-* CORE-002-Bounded-Context-Map.md
-* CORE-003-Shared-Kernel.md
-* CORE-004-Ubiquitous-Language.md
-* CORE-006-Domain-Invariants.md
-* CORE-007-Strategic-Design.md
-* CORE-008-Aggregate-Design-Rules.md
-* CORE-011-Repository-Contracts.md
+- CORE-002-Bounded-Context-Map.md
+- CORE-003-Shared-Kernel.md
+- CORE-004-Ubiquitous-Language.md
+- CORE-006-Domain-Invariants.md
+- CORE-007-Strategic-Design.md
+- CORE-008-Aggregate-Design-Rules.md
+- CORE-011-Repository-Contracts.md
+- DOMAIN-001-Aggregate.md
+- DOMAIN-002-Aggregate.md
+- DOMAIN-003-Aggregate.md
+- DOMAIN-004-Aggregate.md
+- DOMAIN-005-Aggregate.md
 
 ---
 
 # Objetivo
 
-Definir el Aggregate **Assembly**, responsable de representar una
-instancia formal de reunión, deliberación y participación
-colectiva dentro del ecosistema AURA.
+El Aggregate **Assembly** representa una instancia formal de
+reunión, deliberación y participación colectiva dentro del
+ecosistema AURA.
 
-Una Assembly constituye el contexto formal en el cual los
-integrantes de una **Organization** pueden reunirse, tratar
-materias, deliberar y desarrollar procesos organizacionales o
-comunitarios.
+Constituye el espacio organizacional en el cual los integrantes
+de una Organization pueden reunirse, conocer materias,
+deliberar, registrar decisiones y desarrollar procesos formales
+de participación.
 
-El Aggregate centraliza la identidad de la reunión, su
-clasificación, programación, convocatoria, modalidad, estado y
-ciclo de vida, proporcionando un contexto consistente para los
-procesos de Participation, Proposal, Voting, Document,
-Notification y Audit.
+Assembly conecta la estructura organizacional con los procesos
+de participación y gobernanza de AURA, manteniendo la
+consistencia de la reunión como una unidad de dominio.
 
-Assembly representa exclusivamente la reunión formal.
+Assembly permite representar la existencia formal de una
+reunión independientemente de los procesos posteriores que
+puedan desarrollarse dentro de ella.
 
-Los procesos que ocurran dentro de ella y posean identidad,
-ciclo de vida o invariantes propias permanecen bajo la
-responsabilidad de sus respectivos Aggregates.
+No reemplaza ni absorbe otros Aggregates del dominio.
 
----
-
-# Definición
-
-Una **Assembly** representa una reunión formal convocada dentro
-del contexto de una Organization.
-
-Dependiendo de las reglas organizacionales y del propósito de la
-reunión, una Assembly puede corresponder a:
-
-* Asamblea ordinaria;
-* Asamblea extraordinaria;
-* reunión de directorio;
-* reunión organizacional;
-* reunión comunitaria;
-* reunión territorial;
-* sesión deliberativa;
-* sesión de trabajo;
-* instancia formal de consulta;
-* instancia formal de participación.
-
-La naturaleza de la Assembly se expresa mediante su tipo y sus
-reglas de dominio.
-
-El Aggregate no impone que todas las organizaciones utilicen los
-mismos tipos de reunión.
-
-La clasificación puede evolucionar mediante los mecanismos de
-extensión definidos para el dominio, manteniendo siempre la
-identidad y las invariantes fundamentales de Assembly.
+Cada proceso que posea identidad, ciclo de vida o reglas de
+consistencia propias permanece bajo la responsabilidad de su
+respectivo Aggregate.
 
 ---
 
 # Propósito
 
-Assembly proporciona una representación consistente de una
-reunión formal dentro del dominio AURA.
+El propósito del Aggregate Assembly es proporcionar una
+representación consistente de una instancia formal de reunión
+dentro de una Organization.
 
-Su propósito es garantizar que toda Assembly posea:
+Assembly permite establecer:
 
-* identidad única;
-* Organization propietaria;
-* contexto territorial cuando corresponda;
-* nombre;
-* tipo;
-* propósito;
-* programación;
-* modalidad;
-* ubicación cuando corresponda;
-* convocatoria;
-* condiciones de realización;
-* estado;
-* ciclo de vida;
-* trazabilidad;
-* versión.
+- identidad de la reunión;
+- organización convocante;
+- territorio asociado cuando corresponda;
+- tipo de Asamblea;
+- propósito de la reunión;
+- fecha y horario;
+- modalidad de realización;
+- estado de la Asamblea;
+- condiciones de convocatoria;
+- condiciones de realización;
+- reglas propias de la Asamblea;
+- trazabilidad de cambios relevantes;
+- publicación de hechos del dominio.
 
-Assembly permite que otros Aggregates utilicen:
+Assembly constituye el límite de consistencia de la reunión.
 
-```text
-AssemblyId
-```
+No constituye el límite de consistencia de los procesos que
+ocurren dentro de ella.
 
-como referencia estable hacia una reunión sin requerir acceso
-directo al estado interno del Aggregate.
+---
+
+# Definición
+
+Una Assembly representa una reunión formal convocada dentro del
+contexto de una Organization.
+
+Una Assembly posee identidad propia y mantiene su ciclo de vida,
+estado, convocatoria, contexto organizacional y condiciones
+necesarias para su desarrollo.
+
+La Assembly puede representar reuniones tales como:
+
+- Asamblea ordinaria;
+- Asamblea extraordinaria;
+- reunión organizacional;
+- reunión de directorio;
+- reunión comunitaria;
+- sesión deliberativa;
+- instancia formal de participación;
+- reunión territorial;
+- sesión de trabajo;
+- instancia formal de consulta.
+
+La naturaleza específica de una Assembly dependerá de las reglas
+de la Organization y del contexto en que sea convocada.
+
+Assembly no representa:
+
+- una Organization;
+- un Citizen;
+- una Membership;
+- un Role;
+- un Territory;
+- una Proposal;
+- una Participation;
+- una Voting;
+- un Document;
+- una Notification;
+- un Audit;
+- una Integration.
+
+Estos corresponden a otros Aggregates del dominio.
 
 ---
 
@@ -144,45 +138,71 @@ directo al estado interno del Aggregate.
 
 El Aggregate Assembly es responsable de:
 
-* mantener su identidad;
-* mantener la Organization propietaria;
-* mantener el Territory asociado cuando corresponda;
-* administrar su ciclo de vida;
-* controlar su estado;
-* definir su clasificación;
-* mantener su nombre;
-* mantener su propósito;
-* mantener su descripción;
-* administrar su programación;
-* administrar su modalidad;
-* mantener su ubicación cuando corresponda;
-* mantener la información formal de convocatoria;
-* mantener las reglas propias de la reunión;
-* mantener las condiciones necesarias para su realización;
-* controlar las condiciones necesarias para iniciar;
-* controlar las condiciones necesarias para finalizar;
-* controlar las condiciones necesarias para cancelar;
-* controlar las condiciones necesarias para archivar;
-* proteger sus invariantes;
-* mantener Version;
-* publicar Domain Events.
+- mantener la identidad de la Asamblea;
+- mantener la Organization a la cual pertenece;
+- mantener el contexto territorial cuando corresponda;
+- administrar su ciclo de vida;
+- controlar su estado;
+- mantener la información formal de convocatoria;
+- establecer las condiciones de realización;
+- mantener la modalidad de la reunión;
+- registrar el contexto formal de la reunión;
+- controlar las reglas propias de la Asamblea;
+- proteger sus invariantes;
+- mantener la trazabilidad de sus cambios;
+- controlar las condiciones necesarias para iniciar la Asamblea;
+- controlar las condiciones necesarias para finalizarla;
+- publicar Domain Events;
+- mantener la consistencia de la Asamblea como unidad de dominio.
+
+Assembly es responsable de representar la reunión como un hecho
+formal del dominio.
 
 No administra directamente:
 
-* Organizations;
-* Citizens;
-* Memberships;
-* Roles;
-* Territories;
-* Proposals;
-* Participations;
-* Votings;
-* Documents;
-* Notifications;
-* Audits;
-* Integrations.
+- Organizations;
+- Citizens;
+- Memberships;
+- Roles;
+- Territories;
+- Proposals;
+- Participations;
+- Votings;
+- Documents;
+- Notifications;
+- Audits;
+- Integrations.
 
-Estos conceptos mantienen sus propios límites de consistencia.
+---
+
+# Responsabilidades Fuera del Aggregate
+
+No es responsabilidad de Assembly:
+
+- administrar Organizations;
+- administrar Citizens;
+- crear o modificar Memberships;
+- definir Roles;
+- administrar Territories;
+- administrar permisos técnicos;
+- ejecutar autenticación;
+- administrar sesiones;
+- administrar Proposals;
+- ejecutar Votings;
+- administrar procesos de Participation;
+- almacenar Documents;
+- enviar Notifications;
+- ejecutar procesos de Audit;
+- administrar Integrations externas.
+
+Estas responsabilidades pertenecen a sus respectivos Aggregates
+o Bounded Contexts.
+
+La colaboración entre ellos se realiza mediante contratos de
+dominio, identificadores, Domain Events e Integration Events.
+
+Assembly nunca modifica directamente el estado interno de otro
+Aggregate.
 
 ---
 
@@ -194,20 +214,29 @@ La única Aggregate Root es:
 Assembly
 ```
 
-Toda modificación de la reunión debe realizarse exclusivamente a
-través de esta entidad.
+Toda modificación sobre una Assembly debe realizarse
+exclusivamente mediante la Aggregate Root.
 
-No existen modificaciones directas sobre atributos internos,
-entidades internas o Value Objects desde fuera del Aggregate.
+Ninguna entidad interna, Value Object o componente perteneciente
+al Aggregate puede modificar directamente el estado de la
+Assembly desde fuera de su límite de consistencia.
 
-Assembly protege sus invariantes y controla todas las
-transiciones válidas de su ciclo de vida.
+La Aggregate Root controla:
+
+- las transiciones de estado;
+- las modificaciones de sus datos;
+- las condiciones de convocatoria;
+- las condiciones de inicio;
+- las condiciones de finalización;
+- las invariantes;
+- la generación de Domain Events;
+- el incremento de versión.
 
 ---
 
 # Identidad
 
-Cada Assembly posee un identificador único e inmutable.
+La identidad del Aggregate está determinada por:
 
 ```text
 AssemblyId
@@ -215,26 +244,26 @@ AssemblyId
 
 Este identificador:
 
-* es global dentro del dominio;
-* es inmutable;
-* nunca cambia;
-* nunca se reutiliza;
-* no depende del almacenamiento;
-* no depende del nombre de la reunión;
-* no depende de su estado;
-* no depende de su programación;
-* no depende de identificadores externos.
+- es único;
+- es global dentro del dominio;
+- es inmutable;
+- nunca cambia;
+- nunca se reutiliza;
+- no depende del mecanismo de persistencia.
 
-AssemblyId permanece constante durante todo el ciclo de vida del
-Aggregate.
+Una Assembly conserva su AssemblyId durante todo su ciclo de
+vida.
+
+El cambio de nombre, fecha, modalidad, estado, territorio o
+cualquier otra propiedad no modifica su identidad.
 
 ---
 
-# Contexto Organizacional
+# Propietario Organizacional
 
-Toda Assembly pertenece exactamente a una Organization.
+Toda Assembly debe pertenecer a una Organization.
 
-La relación se mantiene mediante:
+La relación se representa mediante:
 
 ```text
 OrganizationId
@@ -242,91 +271,45 @@ OrganizationId
 
 OrganizationId:
 
-* es obligatorio;
-* identifica la Organization propietaria;
-* permanece inmutable durante toda la vida de Assembly;
-* no representa una referencia directa al objeto Organization.
+- es obligatorio;
+- identifica la Organization propietaria;
+- no puede cambiar durante la vida de la Assembly;
+- no constituye una referencia directa a otro Aggregate;
+- no permite modificar la Organization desde Assembly.
 
-Assembly no administra la Organization.
-
-Una Assembly no puede cambiar de Organization mediante una
-operación ordinaria del dominio.
+Assembly conoce la identidad de la Organization, pero no administra
+su estado.
 
 ---
 
 # Contexto Territorial
 
-Una Assembly puede estar asociada a un Territory.
-
-La relación se mantiene mediante:
+Una Assembly puede mantener un territorio asociado mediante:
 
 ```text
 TerritoryId
 ```
 
-TerritoryId puede ser opcional cuando la naturaleza de la
-reunión no requiere un contexto territorial explícito.
+El TerritoryId:
 
-Cuando existe, permite asociar la reunión con:
+- representa el territorio en cuyo contexto se desarrolla la
+  Asamblea;
+- se mantiene como identificador;
+- no contiene el Aggregate Territory;
+- no permite modificar el territorio desde Assembly.
 
-* una Región;
-* una Provincia;
-* una Comuna;
-* un Distrito;
-* un Barrio;
-* un Sector;
-* una Unidad Vecinal;
-* una Comunidad;
-* un Territorio Indígena;
-* cualquier otra unidad reconocida por Territory.
+La obligatoriedad del TerritoryId depende de las reglas de la
+Organization y del tipo de Assembly.
 
-Assembly no administra la estructura territorial.
-
-Territory conserva su identidad, jerarquía, clasificación,
-geometría y ciclo de vida dentro de su propio Aggregate.
+Cuando una Assembly requiera territorio por definición de dominio,
+la ausencia de TerritoryId constituye una violación de la
+invariante correspondiente.
 
 ---
 
-# Modelo Conceptual
+# Atributos Conceptuales
 
-```text
-Organization
-      │
-      │ 1
-      ▼
-Assembly
-      │
-      ├──────── Territory
-      │
-      ├──────── Participation
-      │
-      ├──────── Proposal
-      │
-      ├──────── Voting
-      │
-      ├──────── Document
-      │
-      ├──────── Notification
-      │
-      └──────── Audit
-```
-
-Una Organization puede poseer múltiples Assemblies.
-
-Cada Assembly pertenece a una única Organization.
-
-Una Assembly puede utilizar Territory como contexto geográfico.
-
-Participation, Proposal, Voting, Document, Notification y Audit
-pueden relacionarse con Assembly mediante AssemblyId.
-
-Estas relaciones no representan composición interna.
-
----
-
-# Estado del Aggregate
-
-El Aggregate mantiene, como mínimo, la siguiente información:
+Una Assembly mantiene conceptualmente información equivalente a:
 
 ```text
 AssemblyId
@@ -335,65 +318,65 @@ OrganizationId
 
 TerritoryId
 
-AssemblyName
-
 AssemblyType
 
-AssemblyPurpose
+Title
 
-AssemblyDescription
+Description
 
-AssemblyStatus
+Purpose
+
+Status
 
 ScheduledStartAt
 
 ScheduledEndAt
 
-TimeZone
+ActualStartedAt
 
-AssemblyModality
+ActualEndedAt
 
-AssemblyLocation
+Location
+
+Modality
 
 Convocation
 
-AssemblyRules
+QuorumPolicy
 
-ExecutionConditions
+ParticipationPolicy
+
+Rules
+
+Version
 
 CreatedAt
 
 UpdatedAt
-
-ConvokedAt
-
-StartedAt
-
-CompletedAt
-
-CancelledAt
-
-ArchivedAt
-
-Version
 ```
 
-Los atributos opcionales dependen del estado, tipo y reglas
-aplicables a la Assembly.
+Los nombres y tipos concretos de implementación pertenecen al
+modelo de dominio y deberán respetar los contratos definidos para
+el Aggregate.
+
+No se debe interpretar esta estructura como una autorización
+para exponer setters públicos.
 
 ---
 
-# Atributos Conceptuales
+# Descripción de Atributos
 
 ## AssemblyId
 
-Identificador único e inmutable del Aggregate.
+Identificador único de la Assembly.
+
+Es inmutable durante toda la vida del Aggregate.
 
 ---
 
 ## OrganizationId
 
-Identificador de la Organization propietaria.
+Identificador de la Organization propietaria de la Assembly.
 
 Es obligatorio e inmutable.
 
@@ -403,52 +386,27 @@ Es obligatorio e inmutable.
 
 Identificador del Territory asociado cuando corresponda.
 
-Puede ser opcional.
-
----
-
-## AssemblyName
-
-Nombre formal de la reunión.
-
-Ejemplos:
-
-```text
-Asamblea General Ordinaria
-
-Asamblea Extraordinaria
-
-Reunión de Directorio
-
-Asamblea Comunitaria
-
-Asamblea Territorial
-```
-
-El nombre no constituye la identidad del Aggregate.
+Puede ser obligatorio según el tipo de Assembly y las reglas de
+la Organization.
 
 ---
 
 ## AssemblyType
 
-Clasificación conceptual de la reunión.
+Define la naturaleza formal de la reunión.
 
-Ejemplos:
+Ejemplos conceptuales:
 
 ```text
 Ordinary
 
 Extraordinary
 
-Organizational
-
 Board
 
 Community
 
 Deliberative
-
-Participatory
 
 Territorial
 
@@ -457,67 +415,120 @@ WorkingSession
 Consultation
 ```
 
-El tipo permite clasificar la reunión sin modificar su identidad.
+El conjunto definitivo de tipos debe respetar el lenguaje
+ubícuo y las reglas del dominio.
 
 ---
 
-## AssemblyPurpose
+## Title
 
-Representa el propósito formal de la reunión.
+Nombre identificable de la Asamblea.
 
-Describe la razón por la cual la Assembly existe y para qué fue
-convocada.
+Debe permitir distinguir formalmente la instancia de reunión
+dentro de su contexto organizacional.
 
-AssemblyPurpose no representa una Proposal.
-
-Una Proposal puede ser presentada o tratada dentro del contexto
-de una Assembly manteniendo su propio Aggregate.
+No constituye la identidad del Aggregate.
 
 ---
 
-## AssemblyDescription
+## Description
 
-Descripción complementaria de la reunión.
+Descripción funcional de la Asamblea.
 
-Permite incorporar contexto adicional sin modificar el propósito
-formal.
+Permite registrar información contextual que no altera la
+identidad del Aggregate.
 
-Puede ser opcional.
+---
+
+## Purpose
+
+Propósito formal de la Asamblea.
+
+Define para qué se convoca la reunión.
+
+El propósito debe estar disponible antes de que la Assembly sea
+formalmente convocada cuando las reglas del dominio lo exijan.
+
+---
+
+## Status
+
+Representa el estado actual de la Assembly.
+
+El estado solamente puede cambiar mediante las transiciones
+definidas por el Aggregate.
+
+Estados conceptuales:
+
+```text
+Draft
+
+Scheduled
+
+Convoked
+
+InProgress
+
+Completed
+
+Cancelled
+
+Archived
+```
+
+Las transiciones completas se definen en:
+
+```text
+DOMAIN-006B-State-Machine.md
+```
 
 ---
 
 ## ScheduledStartAt
 
-Fecha y hora programadas para el inicio.
-
-Representa planificación.
-
-No representa necesariamente el momento efectivo de inicio.
+Fecha y hora planificada para el inicio.
 
 ---
 
 ## ScheduledEndAt
 
-Fecha y hora programadas para la finalización.
+Fecha y hora planificada para el término.
 
-Cuando exista, debe ser posterior a ScheduledStartAt.
-
----
-
-## TimeZone
-
-Zona horaria utilizada para interpretar la programación.
-
-Permite representar de forma inequívoca las fechas y horas de la
-Assembly.
+Cuando exista, debe ser coherente con ScheduledStartAt.
 
 ---
 
-## AssemblyModality
+## ActualStartedAt
 
-Modalidad mediante la cual se desarrollará la reunión.
+Fecha y hora efectiva en que la Asamblea fue iniciada.
 
-Valores conceptuales:
+Debe existir únicamente cuando la Assembly haya alcanzado el
+estado correspondiente a su inicio.
+
+---
+
+## ActualEndedAt
+
+Fecha y hora efectiva en que la Asamblea fue completada.
+
+Debe existir únicamente cuando la Assembly haya finalizado.
+
+---
+
+## Location
+
+Representa el lugar físico, lógico o contextual de realización
+cuando corresponda.
+
+Puede utilizar Value Objects específicos del dominio.
+
+---
+
+## Modality
+
+Representa la modalidad de realización.
+
+Ejemplos:
 
 ```text
 InPerson
@@ -527,283 +538,173 @@ Remote
 Hybrid
 ```
 
-La modalidad pertenece al dominio de Assembly.
-
-No representa la infraestructura tecnológica utilizada para
-ejecutar una reunión remota.
-
----
-
-## AssemblyLocation
-
-Representa la ubicación cuando corresponda.
-
-Puede incluir conceptos como:
-
-```text
-Address
-
-Venue
-
-Room
-
-Reference
-```
-
-Una Assembly remota puede no requerir ubicación física.
-
-Una Assembly presencial debe mantener una ubicación compatible
-con las reglas aplicables.
+La modalidad no determina por sí sola la infraestructura
+tecnológica utilizada.
 
 ---
 
 ## Convocation
 
-Representa la información formal de convocatoria.
+Representa las condiciones formales asociadas a la convocatoria.
 
-Puede incluir:
+Puede incluir conceptualmente:
 
 ```text
-ConvocationStatus
-
-ConvocationDate
+ConvokedAt
 
 ConvocationDeadline
 
 ConvocationMethod
 
-ConvocationReference
+ConvocationStatus
 ```
 
-Convocation representa el estado formal de la convocatoria.
-
-No representa una Notification.
-
-Notification pertenece a su propio Aggregate.
+Estas condiciones pertenecen al dominio de Assembly y no deben
+confundirse con Notification.
 
 ---
 
-## AssemblyRules
+## QuorumPolicy
 
-Representa reglas propias de la reunión.
+Representa las condiciones de quórum que deben respetarse para
+los procesos que dependan de la Asamblea.
 
-Puede incluir condiciones como:
+La política pertenece al contexto de la Assembly cuando forma
+parte de sus invariantes.
 
-```text
-QuorumRequired
-
-RemoteParticipationAllowed
-
-PublicParticipationAllowed
-
-ProposalSubmissionAllowed
-
-VotingAllowed
-
-RecordingAllowed
-```
-
-Estas reglas pertenecen a Assembly únicamente cuando forman parte
-de las condiciones de la reunión.
-
-Las reglas internas de Participation, Proposal o Voting
-permanecen bajo sus respectivos Aggregates.
+La determinación de participantes concretos no pertenece a este
+Aggregate.
 
 ---
 
-## ExecutionConditions
+## ParticipationPolicy
 
-Representa las condiciones necesarias para que la Assembly pueda
-realizarse.
+Representa las reglas propias de participación aplicables a la
+Asamblea.
 
-Puede incluir:
+No administra las participaciones individuales.
 
-```text
-RequiredConvocation
-
-RequiredSchedule
-
-RequiredLocation
-
-RequiredDocumentation
-
-MinimumAttendance
-
-RequiredQuorum
-```
-
-ExecutionConditions permite que Assembly determine si se
-encuentra en condiciones válidas para iniciar.
-
-No convierte a Citizen, Membership o Participation en entidades
-internas del Aggregate.
+Las participaciones con identidad propia pertenecen al Aggregate
+Participation.
 
 ---
 
-## AssemblyStatus
+## Rules
 
-Representa el estado actual del ciclo de vida.
+Representa las reglas específicas que gobiernan la instancia de
+Asamblea y que forman parte de su definición formal.
 
-Valores oficiales iniciales:
-
-```text
-Draft
-
-Scheduled
-
-Convoked
-
-InProgress
-
-Completed
-
-Cancelled
-
-Archived
-```
-
-Toda transición debe ser controlada por la Aggregate Root.
-
----
-
-## CreatedAt
-
-Fecha y hora de creación.
-
-Es inmutable.
-
----
-
-## UpdatedAt
-
-Fecha y hora de la última modificación válida.
-
----
-
-## ConvokedAt
-
-Fecha y hora efectiva en que la Assembly fue formalmente
-convocada.
-
-Puede ser nula antes de alcanzar Convoked.
-
----
-
-## StartedAt
-
-Fecha y hora efectiva de inicio.
-
-Puede ser nula antes de InProgress.
-
----
-
-## CompletedAt
-
-Fecha y hora efectiva de finalización.
-
-Puede ser nula antes de Completed.
-
----
-
-## CancelledAt
-
-Fecha y hora de cancelación.
-
-Puede ser nula mientras la Assembly no se encuentre Cancelled.
-
----
-
-## ArchivedAt
-
-Fecha y hora de archivado.
-
-Puede ser nula mientras la Assembly no se encuentre Archived.
+No debe utilizarse para almacenar reglas de infraestructura,
+autenticación o autorización técnica.
 
 ---
 
 ## Version
 
-Número de versión utilizado para concurrencia optimista.
+Número de versión utilizado para control de concurrencia
+optimista.
 
-Toda modificación válida incrementa Version.
+Cada modificación válida del Aggregate incrementa la versión.
+
+---
+
+## CreatedAt
+
+Fecha y hora de creación de la Assembly.
+
+No cambia durante la vida del Aggregate.
+
+---
+
+## UpdatedAt
+
+Fecha y hora de la última modificación válida del Aggregate.
+
+Se actualiza únicamente como consecuencia de una modificación
+aceptada por la Aggregate Root.
 
 ---
 
 # Entidades Internas
 
-El Aggregate puede contener entidades internas cuando estas
-posean identidad local dentro del límite de consistencia de
-Assembly.
+El Aggregate puede contener entidades internas necesarias para
+representar conceptos propios de la Asamblea.
 
-Ejemplos conceptuales:
+Entre ellas pueden existir:
 
 ```text
-Convocation
+AssemblyConvocation
 
-AssemblyRule
+AssemblySchedule
+
+AssemblyLocation
+
+AssemblyRules
+
+AssemblySession
 ```
 
-Una entidad interna:
+Estas entidades:
 
-* pertenece exclusivamente a Assembly;
-* no existe independientemente fuera del Aggregate;
-* no constituye una Aggregate Root;
-* no puede modificarse directamente desde fuera;
-* no puede persistirse como un Aggregate independiente.
+- pertenecen al Aggregate Assembly;
+- no poseen existencia independiente fuera del Aggregate;
+- no pueden ser modificadas directamente desde otros Aggregates;
+- deben respetar las invariantes de Assembly;
+- no deben transformarse en Aggregates independientes sin una
+  decisión explícita de diseño.
 
-Los conceptos sin identidad local deben modelarse
-preferentemente mediante Value Objects.
+Una entidad interna puede poseer identidad propia dentro del
+Aggregate, pero esa identidad no reemplaza AssemblyId.
 
 ---
 
 # Value Objects
 
-Entre los Value Objects del Aggregate se consideran:
+Entre los Value Objects del dominio pueden considerarse:
 
 ```text
-AssemblyName
-
-AssemblyType
-
-AssemblyPurpose
+AssemblyTitle
 
 AssemblyDescription
 
-AssemblySchedule
+AssemblyPurpose
 
-AssemblyModality
+AssemblyType
+
+AssemblyStatus
+
+AssemblySchedule
 
 AssemblyLocation
 
-ConvocationStatus
+AssemblyModality
 
-ConvocationMethod
-
-ExecutionConditions
+AssemblyConvocation
 
 AssemblyRules
 
-AssemblyStatus
-```
+QuorumPolicy
 
-Los identificadores relacionados pueden utilizar Value Objects
-del Shared Kernel:
-
-```text
-AssemblyId
-
-OrganizationId
-
-TerritoryId
+ParticipationPolicy
 ```
 
 Todos los Value Objects son inmutables.
 
-No poseen ciclo de vida independiente.
+Los Value Objects no poseen identidad independiente del contexto
+en que son utilizados.
+
+Cuando un concepto necesite identidad, ciclo de vida,
+consistencia independiente o colaboración propia entre
+transacciones, debe evaluarse como Entity o Aggregate según las
+reglas de diseño de AURA.
 
 ---
 
-# Estados
+# Estado
+
+El ciclo de vida de Assembly se representa mediante AssemblyStatus.
+
+Estados conceptuales:
 
 ```text
 Draft
@@ -821,180 +722,67 @@ Cancelled
 Archived
 ```
 
-Toda transición de estado es controlada exclusivamente por la
-Aggregate Root.
-
----
-
-# Definición de Estados
+La interpretación de cada estado es:
 
 ## Draft
 
-Representa una Assembly creada pero todavía no formalmente
-programada.
-
-En este estado puede prepararse la información necesaria para la
-reunión.
-
----
+La Assembly existe como definición inicial y todavía no ha sido
+formalmente programada o convocada.
 
 ## Scheduled
 
-Representa una Assembly que posee una programación formal
-válida.
-
-La reunión todavía puede no haber sido convocada.
-
----
+La Asamblea posee una fecha y condiciones de realización
+establecidas.
 
 ## Convoked
 
-Representa una Assembly formalmente convocada.
-
-Debe existir información de convocatoria válida conforme a las
-reglas del dominio.
-
----
+La convocatoria formal ha sido realizada y la Asamblea se
+encuentra disponible para su instancia programada.
 
 ## InProgress
 
-Representa una Assembly que ha comenzado formalmente.
-
-Debe existir:
-
-```text
-StartedAt
-```
-
----
+La Asamblea se encuentra en ejecución después de haber comenzado formalmente.
 
 ## Completed
 
-Representa una Assembly finalizada correctamente.
-
-Debe existir:
-
-```text
-CompletedAt
-```
-
-Una Assembly Completed no vuelve a InProgress mediante una
-transición ordinaria.
-
----
+La Asamblea ha finalizado formalmente.
 
 ## Cancelled
 
-Representa una Assembly cuya realización fue cancelada.
-
-Debe existir:
-
-```text
-CancelledAt
-```
-
-Una Assembly Cancelled no puede iniciar posteriormente mediante
-una operación ordinaria.
-
----
+La Asamblea fue cancelada antes de completar su realización.
 
 ## Archived
 
-Representa una Assembly retirada del ciclo operativo.
+La Assembly ha sido retirada del ciclo operativo y pasa a un
+estado histórico.
 
-Debe existir:
-
-```text
-ArchivedAt
-```
-
-El archivado conserva la identidad y la trazabilidad histórica.
-
----
-
-# Transiciones Permitidas
-
-El flujo principal es:
+Las transiciones válidas se encuentran formalmente definidas en:
 
 ```text
-Draft
-    ↓
-Scheduled
-    ↓
-Convoked
-    ↓
-InProgress
-    ↓
-Completed
-    ↓
-Archived
-```
+DOMAIN-006A-Lifecycle.md
 
-Las transiciones de cancelación permitidas conceptualmente son:
-
-```text
-Draft
-    ↓
-Cancelled
-
-Scheduled
-    ↓
-Cancelled
-
-Convoked
-    ↓
-Cancelled
-```
-
-Una Assembly Cancelled puede posteriormente alcanzar:
-
-```text
-Archived
-```
-
-No existen transiciones directas que omitan estados cuando las
-reglas del dominio exijan completar los estados intermedios.
-
-La definición formal de las transiciones pertenece a:
-
-```text
 DOMAIN-006B-State-Machine.md
 ```
 
 ---
 
-# Invariantes
+# Reglas de Estado
 
-Siempre deben cumplirse, como mínimo, las siguientes reglas:
+El Aggregate debe garantizar como mínimo:
 
-* existe exactamente un AssemblyId;
-* AssemblyId nunca cambia;
-* toda Assembly pertenece exactamente a una Organization;
-* OrganizationId es obligatorio;
-* OrganizationId es inmutable;
-* AssemblyName debe ser válido;
-* AssemblyType debe ser válido;
-* AssemblyStatus debe ser válido;
-* ScheduledStartAt debe ser válido cuando la Assembly esté
-  programada;
-* ScheduledEndAt, cuando exista, debe ser posterior a
-  ScheduledStartAt;
-* TimeZone debe ser válido cuando exista programación temporal;
-* AssemblyModality debe ser válida;
-* AssemblyLocation debe ser compatible con la modalidad cuando
-  corresponda;
-* una Assembly no puede iniciar sin satisfacer sus condiciones
-  de realización;
-* una Assembly no puede finalizar antes de haber iniciado;
-* una Assembly Completed no puede regresar a InProgress;
-* una Assembly Cancelled no puede iniciar;
-* una Assembly Archived no admite modificaciones ordinarias;
-* todo cambio de estado debe respetar la State Machine;
-* toda modificación válida incrementa Version;
-* Assembly nunca modifica directamente otro Aggregate;
-* Assembly nunca contiene otros Aggregates completos.
+- una Assembly nueva comienza en un estado válido;
+- una Assembly no puede iniciarse si no cumple las condiciones
+  requeridas para su inicio;
+- una Assembly no puede completarse antes de haber sido iniciada;
+- una Assembly cancelada no puede continuar normalmente sin una
+  operación explícita permitida por el dominio;
+- una Assembly completada no puede volver a estado InProgress;
+- una Assembly archivada no puede modificarse mediante operaciones
+  ordinarias;
+- toda transición debe estar definida por la máquina de estados;
+- ninguna transición puede omitir las invariantes del Aggregate.
 
-Las invariantes completas se desarrollan en:
+Las reglas exhaustivas se documentan en:
 
 ```text
 DOMAIN-006E-Invariants.md
@@ -1002,70 +790,347 @@ DOMAIN-006E-Invariants.md
 
 ---
 
-# Operaciones Públicas
+# Invariantes
 
-Assembly expone únicamente comportamiento de dominio.
+El Aggregate Assembly mantiene como mínimo las siguientes
+invariantes:
 
-Ejemplos:
+- AssemblyId siempre existe;
+- AssemblyId nunca cambia;
+- OrganizationId siempre existe;
+- OrganizationId nunca cambia;
+- TerritoryId debe existir cuando el tipo de Assembly lo exige;
+- AssemblyType siempre es válido;
+- Title debe cumplir las reglas de identidad descriptiva del
+  dominio;
+- Purpose debe existir cuando sea obligatorio para la convocatoria;
+- ScheduledStartAt debe ser una fecha válida;
+- ScheduledEndAt no puede preceder a ScheduledStartAt;
+- ActualStartedAt solamente puede existir después del inicio;
+- ActualEndedAt solamente puede existir después de la finalización;
+- ActualEndedAt no puede preceder a ActualStartedAt;
+- una Assembly no puede iniciarse sin cumplir sus condiciones de
+  convocatoria;
+- una Assembly no puede completarse si no ha sido iniciada;
+- una Assembly archivada no puede modificarse mediante comandos
+  ordinarios;
+- toda modificación válida incrementa Version;
+- toda transición debe pertenecer a la máquina de estados;
+- las invariantes deben mantenerse antes y después de cada
+  operación del Aggregate.
 
-```text
-create()
-
-schedule()
-
-reschedule()
-
-convoke()
-
-rename()
-
-changeType()
-
-changePurpose()
-
-changeDescription()
-
-changeModality()
-
-changeLocation()
-
-updateConvocation()
-
-updateRules()
-
-updateExecutionConditions()
-
-start()
-
-complete()
-
-cancel()
-
-archive()
-```
-
-El Aggregate nunca expone setters públicos.
-
-No se permiten operaciones genéricas como:
+Las reglas completas se desarrollan en:
 
 ```text
-setStatus()
-
-setValue()
-
-updateEverything()
-
-forceState()
+DOMAIN-006E-Invariants.md
 ```
 
-Toda modificación debe expresar una intención concreta del
+---
+
+# Relaciones
+
+Assembly mantiene relaciones con otros Aggregates exclusivamente
+mediante identificadores.
+
+```text
+Assembly
+    │
+    ├──────── OrganizationId
+    │
+    ├──────── TerritoryId
+    │
+    ├──────── MembershipId
+    │
+    ├──────── CitizenId
+    │
+    ├──────── RoleId
+    │
+    ├──────── ProposalId
+    │
+    ├──────── ParticipationId
+    │
+    ├──────── VotingId
+    │
+    ├──────── DocumentId
+    │
+    ├──────── NotificationId
+    │
+    └──────── AuditId
+```
+
+Estas relaciones no implican que Assembly almacene Aggregates
+completos.
+
+Assembly solamente mantiene las referencias necesarias para
+expresar su contexto de dominio.
+
+Las relaciones con Membership, Citizen, Role, Proposal,
+Participation, Voting, Document, Notification y Audit no
+convierten a esos conceptos en entidades internas de Assembly.
+
+---
+
+# Organización y Assembly
+
+Una Organization puede poseer múltiples Assemblies.
+
+La relación conceptual es:
+
+```text
+Organization
+      │
+      │ 1
+      │
+      ├────────── N
+      │
+    Assembly
+```
+
+Assembly pertenece a una única Organization.
+
+Assembly no puede cambiar de Organization mediante una operación
+ordinaria.
+
+Si una reunión debe pertenecer a otra Organization, debe crearse
+una nueva instancia de Assembly conforme a las reglas del
 dominio.
+
+---
+
+# Territorio y Assembly
+
+Una Assembly puede estar vinculada a un Territory.
+
+La relación se mantiene mediante:
+
+```text
+TerritoryId
+```
+
+Assembly no administra el Territory.
+
+La validez del territorio debe ser comprobada mediante las
+reglas de dominio correspondientes y, cuando sea necesario,
+mediante coordinación entre Aggregates.
+
+No se permite resolver esta relación almacenando el Aggregate
+Territory dentro de Assembly.
+
+---
+
+# Membership y Assembly
+
+La pertenencia a una Organization es administrada por
+Membership.
+
+Assembly no crea, activa, suspende ni termina Memberships.
+
+Cuando una Asamblea necesite determinar quién puede participar,
+la decisión se realiza mediante los contratos y políticas
+correspondientes.
+
+Assembly puede utilizar referencias como:
+
+```text
+MembershipId
+```
+
+sin asumir la responsabilidad sobre el ciclo de vida de la
+Membership.
+
+---
+
+# Citizen y Assembly
+
+Citizen representa la identidad cívica.
+
+Assembly no administra Citizens.
+
+La identificación de una persona participante se realiza mediante
+CitizenId cuando el proceso de dominio correspondiente lo requiera.
+
+Assembly no modifica el estado de un Citizen.
+
+---
+
+# Role y Assembly
+
+Role representa una función organizacional.
+
+Assembly puede utilizar Roles como parte de sus reglas de
+participación o convocatoria.
+
+No administra Roles.
+
+La relación se mantiene mediante:
+
+```text
+RoleId
+```
+
+---
+
+# Proposal y Assembly
+
+Una Assembly puede constituir el contexto dentro del cual una
+Proposal sea presentada o deliberada.
+
+Assembly no administra el ciclo de vida de Proposal.
+
+La relación se mantiene mediante:
+
+```text
+ProposalId
+```
+
+La Proposal conserva su propia identidad, reglas, invariantes,
+estado y eventos.
+
+---
+
+# Participation y Assembly
+
+Participation representa la participación de un actor en un
+proceso de participación.
+
+Assembly proporciona el contexto de reunión, pero no reemplaza
+el Aggregate Participation.
+
+La relación puede expresarse mediante:
+
+```text
+ParticipationId
+```
+
+Assembly no administra el historial individual de participación.
+
+---
+
+# Voting y Assembly
+
+Una Assembly puede contener el contexto organizacional para uno o
+más procesos de Voting.
+
+Voting posee su propio Aggregate Root y sus propias invariantes.
+
+Assembly no ejecuta directamente el ciclo de vida de Voting.
+
+La relación se mantiene mediante:
+
+```text
+VotingId
+```
+
+---
+
+# Document y Assembly
+
+Documents pueden estar asociados a una Assembly para representar
+convocatorias, antecedentes, actas u otros documentos formales.
+
+Assembly no almacena ni administra el contenido del Document.
+
+La relación se mantiene mediante:
+
+```text
+DocumentId
+```
+
+---
+
+# Notification y Assembly
+
+Las Notifications pueden utilizar eventos de Assembly para
+informar a los actores correspondientes.
+
+Assembly no envía Notifications directamente.
+
+La comunicación se realiza mediante Domain Events o Integration
+Events.
+
+---
+
+# Audit y Assembly
+
+Las modificaciones relevantes de Assembly pueden producir
+información utilizada por el contexto de auditoría.
+
+Assembly no administra el Aggregate Audit.
+
+La trazabilidad se propaga mediante eventos y contratos
+establecidos por la arquitectura.
+
+---
+
+# Consistencia
+
+Assembly constituye un límite de consistencia.
+
+Todas las modificaciones sobre el Aggregate deben respetar:
+
+- una única operación de dominio;
+- una única Aggregate Root;
+- invariantes válidas;
+- transición válida;
+- control de concurrencia;
+- generación coherente de eventos.
+
+No existen actualizaciones parciales del Aggregate.
+
+Las operaciones internas deben finalizar con el Aggregate en un
+estado válido.
+
+La consistencia dentro de Assembly es inmediata.
+
+La consistencia entre Assembly y otros Aggregates es eventual.
+
+---
+
+# Límite de Consistencia
+
+El límite de consistencia de Assembly comprende:
+
+```text
+Assembly
+    │
+    ├── entidades internas;
+    │
+    └── Value Objects
+```
+
+No comprende:
+
+```text
+Organization
+Citizen
+Membership
+Role
+Territory
+Proposal
+Participation
+Voting
+Document
+Notification
+Audit
+Integration
+```
+
+Estos permanecen fuera del límite.
+
+La definición formal se desarrolla en:
+
+```text
+DOMAIN-006J-Consistency-Boundary.md
+```
 
 ---
 
 # Commands
 
-Assembly responde a Commands como:
+El Aggregate Assembly responde a Commands que expresan
+intenciones del dominio.
+
+Ejemplos:
 
 ```text
 CreateAssembly
@@ -1103,11 +1168,15 @@ CancelAssembly
 ArchiveAssembly
 ```
 
-Los Commands representan intenciones.
+Los Commands:
 
-No representan hechos consumados.
+- expresan intención;
+- no modifican directamente propiedades;
+- son validados por el Aggregate;
+- solamente producen cambios si las invariantes lo permiten;
+- pueden generar Domain Events.
 
-La definición formal se desarrolla en:
+La especificación completa se encuentra en:
 
 ```text
 DOMAIN-006C-Commands.md
@@ -1115,9 +1184,76 @@ DOMAIN-006C-Commands.md
 
 ---
 
+# Operaciones Públicas
+
+La Aggregate Root expone comportamiento de dominio.
+
+Conceptualmente:
+
+```text
+create()
+
+schedule()
+
+reschedule()
+
+convoke()
+
+rename()
+
+changeType()
+
+changePurpose()
+
+changeDescription()
+
+changeModality()
+
+changeLocation()
+
+updateConvocation()
+
+updateRules()
+
+updateExecutionConditions()
+
+start()
+
+complete()
+
+cancel()
+
+archive()
+```
+
+No se exponen setters públicos.
+
+No se permite modificar directamente:
+
+```text
+status
+
+version
+
+organizationId
+
+assemblyId
+
+actualStartedAt
+
+actualEndedAt
+```
+
+Estos valores son controlados por comportamiento de dominio.
+
+---
+
 # Eventos del Dominio
 
-El Aggregate puede publicar eventos como:
+Assembly publica Domain Events cuando ocurre un hecho relevante
+y aceptado por el Aggregate.
+
+Ejemplos:
 
 ```text
 AssemblyCreated
@@ -1155,9 +1291,11 @@ AssemblyCancelled
 AssemblyArchived
 ```
 
-Todos representan hechos consumados.
+Los eventos representan hechos consumados.
 
-La definición formal se desarrolla en:
+No deben utilizarse como Commands.
+
+La especificación completa se encuentra en:
 
 ```text
 DOMAIN-006D-Domain-Events.md
@@ -1165,432 +1303,225 @@ DOMAIN-006D-Domain-Events.md
 
 ---
 
-# Relaciones
+# Ciclo de Vida
 
-Assembly mantiene relaciones exclusivamente mediante
-identificadores.
-
-Ejemplos:
-
-```text
-OrganizationId
-
-TerritoryId
-
-CitizenId
-
-MembershipId
-
-RoleId
-
-ProposalId
-
-ParticipationId
-
-VotingId
-
-DocumentId
-
-NotificationId
-
-AuditId
-```
-
-Nunca mantiene referencias directas a otros Aggregates.
-
-La existencia de un identificador asociado no implica que dicho
-Aggregate pertenezca al límite de consistencia de Assembly.
-
----
-
-# Relación con Organization
-
-Cada Assembly pertenece exactamente a una Organization.
-
-La relación se representa mediante:
-
-```text
-OrganizationId
-```
-
-Assembly no administra:
-
-* identidad de Organization;
-* estado de Organization;
-* configuración;
-* políticas;
-* ciclo de vida.
-
----
-
-# Relación con Territory
-
-Assembly puede asociarse a un Territory mediante:
-
-```text
-TerritoryId
-```
-
-Territory proporciona contexto geográfico.
-
-Assembly no administra:
-
-* geometría;
-* jerarquía territorial;
-* códigos administrativos;
-* estado de Territory.
-
----
-
-# Relación con Citizen
-
-Los Citizens pueden participar en procesos relacionados con una
-Assembly.
-
-Assembly puede ser referenciada junto con:
-
-```text
-CitizenId
-```
-
-en Aggregates o procesos de participación.
-
-Assembly no administra Citizen.
-
----
-
-# Relación con Membership
-
-Membership representa la relación formal entre Citizen y
-Organization.
-
-Assembly no administra Membership.
-
-Cuando una regla necesite verificar pertenencia organizacional,
-la coordinación debe realizarse fuera del límite de consistencia
-de Assembly.
-
----
-
-# Relación con Role
-
-Role puede participar en reglas de autorización o
-responsabilidad organizacional relacionadas con Assembly.
-
-Assembly no administra Role.
-
----
-
-# Relación con Proposal
-
-Una Proposal puede ser presentada, tratada o deliberada dentro
-del contexto de una Assembly.
-
-La asociación puede utilizar:
-
-```text
-AssemblyId
-```
-
-o:
-
-```text
-ProposalId
-```
-
-según el Aggregate responsable de la referencia.
-
-Proposal conserva su propia identidad, ciclo de vida,
-invariantes, Repository y Domain Events.
-
----
-
-# Relación con Participation
-
-Participation representa la participación dentro de procesos del
-ecosistema AURA.
-
-Una Participation puede utilizar AssemblyId para establecer el
-contexto de reunión.
-
-Assembly no administra el ciclo de vida de Participation.
-
----
-
-# Relación con Voting
-
-Voting puede desarrollarse dentro del contexto de una Assembly.
-
-Voting mantiene:
-
-* identidad propia;
-* estado propio;
-* reglas propias;
-* participantes;
-* opciones;
-* resultados;
-* invariantes propias.
-
-Assembly no ejecuta internamente la votación.
-
----
-
-# Relación con Document
-
-Documents pueden asociarse a una Assembly.
-
-Ejemplos:
-
-* convocatoria;
-* tabla;
-* antecedentes;
-* acta;
-* anexos;
-* resoluciones.
-
-Assembly no almacena ni administra el contenido documental.
-
----
-
-# Relación con Notification
-
-Los eventos de Assembly pueden producir procesos de
-Notification.
-
-Ejemplos:
-
-```text
-AssemblyConvoked
-
-AssemblyRescheduled
-
-AssemblyCancelled
-```
-
-Assembly no envía Notifications directamente.
-
----
-
-# Relación con Audit
-
-Los cambios relevantes de Assembly pueden ser registrados por
-Audit.
-
-Assembly produce hechos de dominio.
-
-Audit conserva su propio límite de consistencia.
-
----
-
-# Límites del Aggregate
-
-Assembly administra exclusivamente los conceptos que requieren
-consistencia inmediata para representar la reunión.
-
-Dentro del límite se encuentran conceptualmente:
-
-```text
-Assembly
-    ├── AssemblyId
-    ├── OrganizationId
-    ├── TerritoryId
-    ├── AssemblyName
-    ├── AssemblyType
-    ├── AssemblyPurpose
-    ├── AssemblyDescription
-    ├── AssemblySchedule
-    ├── AssemblyModality
-    ├── AssemblyLocation
-    ├── Convocation
-    ├── AssemblyRules
-    ├── ExecutionConditions
-    ├── AssemblyStatus
-    └── Version
-```
-
-Fuera del límite se encuentran:
-
-```text
-Organization
-
-Citizen
-
-Membership
-
-Role
-
-Territory
-
-Proposal
-
-Participation
-
-Voting
-
-Document
-
-Notification
-
-Audit
-
-Integration
-```
-
-La relación contextual con Assembly nunca implica composición de
-estos Aggregates.
-
----
-
-# Regla de No Absorción
-
-Assembly no absorbe otros Aggregates por el solo hecho de que sus
-procesos ocurran durante una reunión.
+El ciclo de vida de Assembly permite distinguir claramente entre
+la existencia de la instancia de reunión y su ejecución.
 
 Conceptualmente:
 
 ```text
-Assembly
-    ├──────── Proposal
-    ├──────── Participation
-    ├──────── Voting
-    └──────── Document
+Draft
+   │
+   ▼
+Scheduled
+   │
+   ▼
+Convoked
+   │
+   ▼
+InProgress
+   │
+   ▼
+Completed
+   │
+   ▼
+Archived
 ```
 
-representa relaciones entre Aggregates.
-
-No representa:
+Existe además una ruta de cancelación:
 
 ```text
-Assembly
-    └── Proposal
-        └── Participation
-            └── Voting
-                └── Document
+Draft ─────────► Cancelled
+
+Scheduled ─────► Cancelled
+
+Convoked ──────► Cancelled
 ```
 
-Proposal, Participation, Voting y Document mantienen:
+Las rutas exactas, condiciones y transiciones permitidas no deben
+inferirse desde este documento.
 
-* identidad independiente;
-* ciclo de vida independiente;
-* invariantes independientes;
-* Repository independiente;
-* Domain Events propios;
-* límites de consistencia propios.
+Se encuentran formalmente definidas en:
+
+```text
+DOMAIN-006A-Lifecycle.md
+DOMAIN-006B-State-Machine.md
+```
 
 ---
 
-# Consistencia
+# Convocatoria
 
-Toda modificación de Assembly ocurre dentro de una única
-transacción lógica del Aggregate.
+La convocatoria constituye una condición formal del ciclo de
+vida de Assembly.
 
-Al finalizar una operación válida:
+Convocar una Assembly no equivale a enviar una Notification.
 
-* todas las invariantes deben cumplirse;
-* el estado debe ser válido;
-* los timestamps deben ser coherentes;
-* Version debe representar la nueva versión;
-* los Domain Events resultantes deben corresponder a hechos
-  realmente ocurridos.
+La convocatoria es un hecho de dominio.
 
-No existen actualizaciones parciales.
+El mecanismo utilizado para comunicarla puede pertenecer a otro
+Bounded Context.
+
+La Assembly debe conservar las condiciones necesarias para
+determinar que su convocatoria es válida.
+
+Entre ellas pueden existir:
+
+```text
+fecha de convocatoria;
+
+fecha programada;
+
+condiciones de convocatoria;
+
+modalidad;
+
+lugar;
+
+propósito;
+
+reglas aplicables.
+```
+
+La entrega efectiva de comunicaciones corresponde al contexto
+responsable de Notifications.
 
 ---
 
-# Consistencia entre Aggregates
+# Inicio
 
-La coordinación con otros Aggregates utiliza consistencia
-eventual.
+Una Assembly puede ser iniciada únicamente cuando cumple las
+condiciones establecidas por su ciclo de vida y sus invariantes.
 
-Assembly no mantiene una transacción distribuida con:
+El inicio:
+
+- cambia el estado;
+- registra ActualStartedAt;
+- incrementa Version;
+- genera el Domain Event correspondiente.
+
+El inicio no debe modificar directamente otros Aggregates.
+
+---
+
+# Finalización
+
+La finalización representa el término formal de la Asamblea.
+
+Al completar:
+
+- el estado cambia a Completed;
+- ActualEndedAt queda registrado;
+- Version se incrementa;
+- se publica AssemblyCompleted.
+
+Una Assembly completada no puede continuar como Assembly InProgress
+mediante una modificación ordinaria.
+
+Los procesos derivados, como actas, votaciones o documentos,
+permanecen bajo sus propios Aggregates.
+
+---
+
+# Cancelación
+
+La cancelación representa la decisión formal de no realizar una
+Assembly programada o convocada.
+
+Cancelar no significa eliminar.
+
+La identidad de la Assembly permanece.
+
+El historial del Aggregate debe conservar el hecho de que la
+instancia fue cancelada.
+
+Las condiciones de cancelación se encuentran en:
 
 ```text
-Organization
+DOMAIN-006E-Invariants.md
 
-Territory
-
-Citizen
-
-Membership
-
-Role
-
-Proposal
-
-Participation
-
-Voting
-
-Document
-
-Notification
-
-Audit
+DOMAIN-006C-Commands.md
 ```
 
-La interacción se realiza mediante:
+---
 
-* identificadores;
-* Domain Events;
-* Integration Events;
-* Application Services;
-* Process Managers;
-* políticas de dominio cuando corresponda.
+# Archivado
+
+Archivar una Assembly significa retirar la instancia del ciclo
+operativo y conservarla como parte del historial del dominio.
+
+Una Assembly archivada:
+
+- conserva su AssemblyId;
+- conserva su historial;
+- no puede modificarse mediante operaciones ordinarias;
+- puede continuar siendo consultada por Read Models;
+- puede ser utilizada como referencia histórica.
+
+Archivar no equivale a eliminar físicamente el Aggregate.
+
+---
+
+# Reglas de Modificación
+
+Las modificaciones deben cumplir:
+
+- ninguna modificación directa de atributos;
+- ninguna modificación fuera de la Aggregate Root;
+- ninguna modificación de AssemblyId;
+- ninguna modificación de OrganizationId;
+- ninguna modificación que viole la máquina de estados;
+- ninguna modificación que deje el Aggregate en estado inválido;
+- toda modificación válida incrementa Version;
+- toda modificación relevante genera el Domain Event
+  correspondiente.
+
+Las reglas detalladas se encuentran en:
+
+```text
+DOMAIN-006E-Invariants.md
+```
+
+---
+
+# Fuente de Verdad
+
+La fuente de verdad de Assembly es el Aggregate Assembly y,
+cuando corresponda, su historial de Domain Events.
+
+Los Read Models no constituyen la fuente de verdad.
+
+Los Read Models pueden ser reconstruidos.
+
+Una proyección de Assembly no puede utilizarse para modificar
+directamente el Aggregate.
 
 ---
 
 # Persistencia
 
-El Repository persiste Assembly como una unidad.
-
-Nunca se persisten entidades internas como Aggregates
-independientes cuando pertenecen al mismo límite de consistencia.
-
-El modelo de persistencia no define el modelo de dominio.
-
-Assembly no conoce:
-
-* tablas;
-* colecciones;
-* SQL;
-* MongoDB;
-* PostgreSQL;
-* ORM;
-* drivers;
-* mecanismos físicos de almacenamiento.
-
----
-
-# Repository
-
-El Repository Contract representa la abstracción mediante la cual
-Assembly puede ser recuperada y persistida.
+El Repository persiste Assembly como una unidad de consistencia.
 
 Conceptualmente:
 
 ```text
-AssemblyRepository
+Assembly
+    │
+    ├── State
+    ├── Value Objects
+    ├── Internal Entities
+    └── Version
 ```
 
-Puede proporcionar operaciones como:
+No se deben persistir partes del Aggregate de forma independiente
+mediante operaciones que permitan violar sus invariantes.
 
-```text
-save(Assembly)
-
-findById(AssemblyId)
-
-existsById(AssemblyId)
-```
-
-La definición formal se desarrolla en:
+El contrato formal se define en:
 
 ```text
 DOMAIN-006G-Repository-Contract.md
 ```
-
-El Repository no contiene las invariantes de Assembly.
-
-Las reglas del dominio permanecen dentro del Aggregate.
 
 ---
 
@@ -1604,17 +1535,19 @@ Cada modificación válida incrementa:
 Version
 ```
 
-Version:
+El Repository debe verificar que la versión esperada coincida
+con la versión persistida antes de aceptar la escritura.
 
-* nunca disminuye;
-* no puede modificarse arbitrariamente;
-* permite detectar conflictos de concurrencia;
-* forma parte del estado técnico necesario para preservar la
-  consistencia del Aggregate.
+Ante una concurrencia incompatible:
 
-El Repository valida la versión esperada antes de persistir.
+```text
+ConcurrencyConflict
+```
 
-La definición formal se desarrolla en:
+debe producirse el comportamiento definido por el contrato de
+persistencia.
+
+La especificación se encuentra en:
 
 ```text
 DOMAIN-006I-Versioning.md
@@ -1626,242 +1559,324 @@ DOMAIN-006I-Versioning.md
 
 Assembly no administra autenticación.
 
-Assembly nunca almacena:
+Assembly no almacena:
 
-* contraseñas;
-* tokens;
-* JWT;
-* certificados privados;
-* claves privadas;
-* secretos criptográficos;
-* sesiones;
-* credenciales externas.
+- contraseñas;
+- tokens;
+- claves privadas;
+- secretos criptográficos;
+- credenciales de usuarios;
+- sesiones.
 
-La autenticación pertenece al Bounded Context correspondiente.
+La autorización de las operaciones se evalúa mediante las
+políticas y permisos definidos por el modelo de seguridad de
+AURA.
 
-La autorización determina quién puede solicitar una operación.
+La operación de dominio debe recibir una intención autorizada,
+pero el Aggregate continúa siendo responsable de proteger sus
+invariantes.
 
-Assembly determina si dicha operación es válida según las
-invariantes del dominio.
+Las reglas formales se encuentran en:
+
+```text
+DOMAIN-006F-Permissions.md
+
+DOMAIN-006O-Security-Model.md
+```
 
 ---
 
 # Permisos
 
-Las capacidades necesarias para operar sobre Assembly se
-desarrollan formalmente en:
+Los permisos determinan quién puede solicitar determinadas
+operaciones sobre Assembly.
+
+Conceptualmente pueden existir permisos para:
+
+```text
+create assembly
+
+schedule assembly
+
+convoke assembly
+
+start assembly
+
+complete assembly
+
+cancel assembly
+
+archive assembly
+
+change assembly rules
+```
+
+El permiso no reemplaza la validación del Aggregate.
+
+Una operación puede ser autorizada técnicamente y aun así ser
+rechazada por una invariante de dominio.
+
+La especificación completa se encuentra en:
 
 ```text
 DOMAIN-006F-Permissions.md
 ```
 
-Conceptualmente pueden existir permisos como:
-
-```text
-Assembly.Create
-
-Assembly.View
-
-Assembly.Update
-
-Assembly.Schedule
-
-Assembly.Convoke
-
-Assembly.Start
-
-Assembly.Complete
-
-Assembly.Cancel
-
-Assembly.Archive
-```
-
-Assembly no implementa mecanismos técnicos de autorización.
-
-No depende de:
-
-* OAuth;
-* JWT;
-* middleware;
-* PEP Proxy;
-* sistemas externos de identidad.
-
----
-
-# Auditoría
-
-Assembly publica hechos relevantes que pueden ser consumidos por
-Audit.
-
-Ejemplos:
-
-```text
-AssemblyCreated
-
-AssemblyScheduled
-
-AssemblyConvoked
-
-AssemblyStarted
-
-AssemblyCompleted
-
-AssemblyCancelled
-
-AssemblyArchived
-```
-
-Assembly no mantiene registros Audit como entidades internas.
-
-La auditoría constituye una responsabilidad independiente.
-
 ---
 
 # Integración
 
-Assembly puede participar en integraciones con:
+Assembly puede integrarse con otros Bounded Contexts y sistemas
+externos mediante eventos y contratos.
 
-* plataformas municipales;
-* plataformas de participación ciudadana;
-* sistemas Smart City;
-* sistemas territoriales;
-* sistemas documentales;
-* sistemas de notificación;
-* plataformas de transparencia;
-* FIWARE;
-* otros sistemas externos.
+Puede relacionarse con:
 
-Las integraciones no acceden directamente al estado interno del
-Aggregate.
+- Organization Management;
+- Citizen Management;
+- Membership Management;
+- Authorization Management;
+- Territory Management;
+- Proposal Management;
+- Participation Management;
+- Voting Management;
+- Document Management;
+- Notification Management;
+- Audit;
+- Smart City Integration;
+- plataformas municipales;
+- FIWARE.
+
+Estas integraciones no deben introducir dependencias directas
+sobre la implementación interna del Aggregate.
 
 ---
 
 # Integration Events
 
-Los Domain Events relevantes pueden transformarse en Integration
-Events.
+Los hechos de dominio relevantes pueden transformarse en
+Integration Events para otros contextos.
 
-Ejemplos conceptuales:
+Ejemplos:
 
 ```text
-AssemblyCreatedIntegrationEvent
+AssemblyPublished
 
-AssemblyScheduledIntegrationEvent
+AssemblyRescheduledForIntegration
 
-AssemblyConvokedIntegrationEvent
+AssemblyConvocationPublished
 
-AssemblyStartedIntegrationEvent
+AssemblyConvocationUpdatedForIntegration
 
-AssemblyCompletedIntegrationEvent
+AssemblyStartedForIntegration
 
-AssemblyCancelledIntegrationEvent
+AssemblyCompletedForIntegration
 
-AssemblyArchivedIntegrationEvent
+AssemblyCancelledForIntegration
+
+AssemblyArchivedForIntegration
+
+AssemblyDetailsChanged
 ```
 
-La definición formal se desarrolla en:
+Los Integration Events:
+
+- no reemplazan Domain Events;
+- no forman parte del estado interno del Aggregate;
+- no permiten modificar directamente Assembly;
+- representan contratos de integración.
+
+La definición formal se encuentra en:
 
 ```text
 DOMAIN-006K-Integration-Events.md
 ```
 
-Los Integration Events pertenecen a la frontera del Bounded
-Context y no sustituyen a los Domain Events internos.
-
----
-
-# FIWARE
-
-Assembly puede proyectarse hacia FIWARE cuando AURA necesite
-representar reuniones organizacionales o comunitarias dentro de
-un ecosistema Smart City.
-
-El flujo conceptual es:
-
-```text
-Assembly
-    │
-    │ Domain Event
-    ▼
-Application Layer
-    │
-    │ Integration Event
-    ▼
-Integration Adapter
-    │
-    ▼
-FIWARE
-```
-
-Assembly no depende directamente de:
-
-* NGSI-LD;
-* Context Broker;
-* Orion;
-* HTTP;
-* OAuth;
-* PEP Proxy.
-
-La representación FIWARE es una proyección de integración y no
-constituye la fuente de verdad del Aggregate.
-
 ---
 
 # Read Model
 
-Assembly puede proyectarse hacia modelos especializados de
-lectura.
+Assembly puede disponer de Read Models especializados para
+consulta.
 
 Ejemplos:
 
 ```text
-AssemblyCalendar
+AssemblySummary
 
-AssemblyDirectory
+AssemblyCalendarView
+
+AssemblyDetailView
+
+AssemblyHistoryView
 
 AssemblyPublicView
-
-AssemblyTimeline
-
-AssemblyTerritorialView
-
-AssemblyGovernanceView
 ```
 
-Los Read Models pueden contener información derivada como:
+Los Read Models:
 
-```text
-AssemblyId
+- son proyecciones;
+- pueden reconstruirse;
+- no constituyen fuente de verdad;
+- no contienen autoridad para modificar el Aggregate;
+- pueden optimizarse para diferentes necesidades de consulta.
 
-OrganizationId
-
-TerritoryId
-
-AssemblyName
-
-AssemblyType
-
-AssemblyPurpose
-
-ScheduledStartAt
-
-ScheduledEndAt
-
-AssemblyModality
-
-AssemblyLocation
-
-AssemblyStatus
-```
-
-El Read Model no modifica el Aggregate.
-
-La especificación formal se desarrolla en:
+La definición se encuentra en:
 
 ```text
 DOMAIN-006L-Read-Model.md
 ```
+
+---
+
+# Rendimiento
+
+El Aggregate debe mantenerse pequeño y enfocado en la
+consistencia de la Assembly.
+
+No debe cargar Aggregates externos para ejecutar operaciones
+ordinarias.
+
+Debe utilizar identificadores y contratos de dominio.
+
+Las consultas complejas deben resolverse mediante Read Models y
+no mediante expansión innecesaria del Aggregate.
+
+Las reglas específicas de rendimiento se encuentran en:
+
+```text
+DOMAIN-006N-Performance-Rules.md
+```
+
+---
+
+# Extensibilidad
+
+Assembly debe permitir evolución sin modificar innecesariamente
+su núcleo.
+
+Los puntos de extensión pueden incluir:
+
+```text
+AssemblyType
+
+AssemblyRules
+
+ParticipationPolicy
+
+QuorumPolicy
+
+AssemblyModality
+
+Domain Events
+
+Integration Events
+
+Read Models
+```
+
+Las extensiones no deben:
+
+- romper invariantes existentes;
+- modificar retrospectivamente la identidad;
+- introducir dependencias con Infrastructure;
+- convertir otros Aggregates en entidades internas;
+- crear acoplamiento directo con sistemas externos.
+
+La especificación se encuentra en:
+
+```text
+DOMAIN-006P-Extension-Points.md
+```
+
+---
+
+# Compatibilidad Arquitectónica
+
+Assembly está diseñado para cumplir:
+
+- Domain-Driven Design;
+- Aggregate Pattern;
+- Clean Architecture;
+- Hexagonal Architecture;
+- SOLID;
+- Event-Driven Architecture;
+- CQRS;
+- Event Sourcing Compatible;
+- Optimistic Concurrency Control;
+- High Cohesion;
+- Low Coupling.
+
+El Aggregate pertenece al dominio y no depende de tecnologías de
+Infrastructure.
+
+---
+
+# Dependencias
+
+Assembly depende conceptualmente de:
+
+- Shared Kernel;
+- Value Objects;
+- Domain Events;
+- Repository Contracts;
+- contratos de dominio definidos por AURA.
+
+Assembly no depende directamente de:
+
+```text
+Infrastructure
+
+Frameworks
+
+Bases de datos
+
+HTTP
+
+REST
+
+GraphQL
+
+OAuth
+
+JWT
+
+React
+
+Next.js
+
+FastAPI
+
+Django
+
+FIWARE SDK
+
+MongoDB
+
+PostgreSQL
+```
+
+Las implementaciones tecnológicas pertenecen a capas externas.
+
+---
+
+# Relaciones Estratégicas
+
+Assembly es utilizado o consumido estratégicamente por:
+
+- Organization Management;
+- Membership Management;
+- Participation;
+- Proposal Management;
+- Voting;
+- Documents;
+- Notifications;
+- Audit;
+- Governance;
+- Analytics;
+- Smart City Integration.
+
+Assembly constituye uno de los Aggregates centrales para los
+procesos formales de deliberación y participación colectiva.
 
 ---
 
@@ -1869,369 +1884,214 @@ DOMAIN-006L-Read-Model.md
 
 Assembly es compatible con CQRS.
 
-El lado de escritura utiliza:
+En el lado de escritura:
 
 ```text
-Assembly
+Command
+   │
+   ▼
+Assembly Aggregate
+   │
+   ├── Invariants
+   ├── State Transition
+   └── Domain Events
 ```
 
-como modelo de consistencia.
+En el lado de lectura:
 
-El lado de lectura utiliza Read Models especializados.
+```text
+Domain Events
+      │
+      ▼
+Projection
+      │
+      ▼
+Read Model
+```
 
-Los Commands modifican el Aggregate.
-
-Las Queries consultan proyecciones.
-
-Nunca se utiliza un Read Model para evitar la ejecución de las
-invariantes del Aggregate.
+El Read Model no reemplaza al Aggregate.
 
 ---
 
 # Event Sourcing
 
-Assembly es compatible conceptualmente con Event Sourcing.
+Assembly es compatible con Event Sourcing.
 
-Los cambios de estado pueden expresarse mediante eventos como:
+Los Domain Events pueden representar la evolución histórica del
+Aggregate.
+
+Conceptualmente:
 
 ```text
 AssemblyCreated
-
+        ↓
 AssemblyScheduled
-
+        ↓
 AssemblyConvoked
-
+        ↓
 AssemblyStarted
-
+        ↓
 AssemblyCompleted
 ```
 
-La compatibilidad con Event Sourcing no obliga a utilizarlo como
-mecanismo de persistencia.
+El historial debe ser inmutable.
 
-El modelo de dominio permanece independiente de esa decisión de
-infraestructura.
+Los eventos representan hechos ocurridos y no instrucciones
+futuras.
 
----
-
-# Dependencias
-
-Assembly depende únicamente de conceptos del dominio y del
-Shared Kernel.
-
-Puede utilizar:
-
-* identificadores;
-* Value Objects;
-* Domain Events;
-* Domain Rules;
-* Repository Contracts.
-
-Nunca depende de:
-
-* Infrastructure;
-* Frameworks;
-* Bases de datos;
-* HTTP;
-* REST;
-* GraphQL;
-* OAuth;
-* JWT;
-* React;
-* Next.js;
-* FastAPI;
-* Django;
-* FIWARE;
-* MongoDB;
-* PostgreSQL.
+La implementación concreta de Event Sourcing pertenece a la
+infraestructura y no debe introducirse en el modelo de dominio.
 
 ---
 
-# Reglas de Diseño
+# Trazabilidad
 
-Assembly cumple las siguientes reglas:
+Assembly debe permitir reconstruir conceptualmente:
 
-* una única Aggregate Root;
-* AssemblyId único e inmutable;
-* OrganizationId obligatorio e inmutable;
-* límite de consistencia explícito;
-* Value Objects inmutables;
-* comportamiento orientado al dominio;
-* ausencia de setters públicos;
-* invariantes protegidas internamente;
-* referencias externas mediante identificadores;
-* ninguna referencia directa a otros Aggregates completos;
-* persistencia mediante Repository;
-* Versionado Optimista;
-* Domain Events para hechos relevantes;
-* Integration Events en la frontera;
-* consistencia fuerte dentro del Aggregate;
-* consistencia eventual entre Aggregates;
-* alta cohesión;
-* bajo acoplamiento;
-* independencia tecnológica.
+- cuándo fue creada;
+- cuándo fue programada;
+- cuándo fue convocada;
+- cuándo fue iniciada;
+- cuándo fue completada;
+- cuándo fue cancelada;
+- cuándo fue archivada;
+- qué cambios relevantes ocurrieron;
+- qué versión produjo cada modificación.
+
+La trazabilidad no implica que Audit sea una entidad interna del
+Aggregate.
+
+La auditoría se integra mediante eventos y contratos.
 
 ---
 
-# Casos de Uso
+# Reglas de Diseño del Aggregate
 
-Ejemplos:
+Assembly debe respetar:
+
+- una única Aggregate Root;
+- identidad única e inmutable;
+- alto nivel de cohesión;
+- bajo acoplamiento;
+- invariantes protegidas;
+- comportamiento orientado a métodos;
+- ausencia de setters públicos;
+- ausencia de referencias directas a otros Aggregates;
+- colaboración mediante identificadores;
+- consistencia transaccional interna;
+- consistencia eventual entre Aggregates;
+- Domain Events para hechos del dominio;
+- Integration Events para integración externa;
+- Read Models para consultas;
+- Repository Contract para persistencia;
+- Versionado Optimista para concurrencia.
+
+---
+
+# Escenarios de Uso Conceptuales
+
+Assembly debe poder representar escenarios como:
+
+## Asamblea Ordinaria
+
+Una Organization programa una Asamblea ordinaria, establece
+fecha, modalidad, propósito y condiciones de convocatoria.
+
+## Asamblea Extraordinaria
+
+Una Organization crea una Asamblea extraordinaria para tratar
+una materia específica bajo reglas especiales.
+
+## Asamblea Territorial
+
+Una Assembly se asocia a un Territory mediante TerritoryId.
+
+## Asamblea Híbrida
+
+Una Assembly se configura con modalidad:
 
 ```text
-Crear una nueva Asamblea.
-
-Programar una Asamblea.
-
-Reprogramar una Asamblea.
-
-Convocar formalmente una Asamblea.
-
-Cambiar el nombre de una Asamblea.
-
-Cambiar el tipo de Asamblea.
-
-Cambiar el propósito de una Asamblea.
-
-Modificar su descripción.
-
-Cambiar la modalidad.
-
-Cambiar la ubicación.
-
-Actualizar las reglas propias de la Asamblea.
-
-Actualizar las condiciones de realización.
-
-Iniciar una Asamblea.
-
-Finalizar una Asamblea.
-
-Cancelar una Asamblea.
-
-Archivar una Asamblea.
+Hybrid
 ```
 
-Los casos de uso coordinan el Aggregate mediante Commands.
+sin incorporar infraestructura tecnológica dentro del Aggregate.
 
-No modifican directamente su estado interno.
+## Asamblea Cancelada
+
+Una Assembly programada o convocada puede ser cancelada cuando
+las condiciones del dominio lo permiten.
+
+## Asamblea Completada
+
+Una Assembly InProgress puede completarse formalmente y conservar su
+historial.
 
 ---
 
-# Restricciones
+# Restricciones Arquitectónicas
 
 No está permitido:
 
-* modificar AssemblyId;
-* modificar OrganizationId;
-* modificar Status directamente;
-* modificar Version directamente;
-* utilizar setters públicos;
-* modificar entidades internas desde fuera del Aggregate;
-* almacenar Aggregates externos dentro de Assembly;
-* modificar Organization desde Assembly;
-* modificar Territory desde Assembly;
-* modificar Citizen desde Assembly;
-* modificar Membership desde Assembly;
-* modificar Role desde Assembly;
-* modificar Proposal desde Assembly;
-* modificar Participation desde Assembly;
-* modificar Voting desde Assembly;
-* modificar Document desde Assembly;
-* modificar Notification desde Assembly;
-* modificar Audit desde Assembly;
-* iniciar una Assembly desde un estado inválido;
-* finalizar una Assembly desde un estado inválido;
-* reactivar una Assembly Completed;
-* reactivar una Assembly Cancelled mediante una operación
-  ordinaria;
-* modificar una Assembly Archived;
-* mantener una programación temporal inválida;
-* introducir dependencias de Infrastructure;
-* introducir dependencias de Frameworks;
-* ejecutar acceso a base de datos desde el Aggregate;
-* ejecutar llamadas HTTP desde el Aggregate.
+- convertir Citizen en entidad interna de Assembly;
+- convertir Membership en entidad interna de Assembly;
+- convertir Organization en entidad interna de Assembly;
+- convertir Proposal en entidad interna de Assembly;
+- convertir Voting en entidad interna de Assembly;
+- almacenar Aggregates completos dentro de Assembly;
+- acceder directamente a repositorios de otros Aggregates desde
+  Assembly;
+- realizar llamadas HTTP desde el Aggregate;
+- acceder directamente a bases de datos desde el Aggregate;
+- ejecutar lógica de infraestructura dentro del Aggregate;
+- enviar Notifications directamente desde el Aggregate;
+- ejecutar integraciones externas directamente desde el Aggregate;
+- modificar el estado de otro Aggregate dentro de la misma
+  operación interna de Assembly.
 
 ---
 
-# Extensibilidad
+# Objetivos de Diseño
 
-Assembly puede evolucionar mediante puntos de extensión
-controlados.
+El Aggregate busca garantizar:
 
-Ejemplos conceptuales:
-
-```text
-NewAssemblyType
-
-NewAssemblyModality
-
-NewConvocationRule
-
-NewExecutionCondition
-
-NewAssemblyRule
-
-NewDomainEvent
-
-NewIntegrationEvent
-
-NewReadModelProjection
-```
-
-Los puntos de extensión se desarrollan en:
-
-```text
-DOMAIN-006P-Extension-Points.md
-```
-
-La extensibilidad no permite alterar silenciosamente los límites
-fundamentales del Aggregate.
-
----
-
-# Criterios de Evolución
-
-Una nueva capacidad puede incorporarse dentro de Assembly
-solamente cuando:
-
-* pertenece conceptualmente a la reunión;
-* requiere consistencia inmediata con Assembly;
-* no posee identidad global independiente;
-* no posee ciclo de vida independiente;
-* no posee invariantes independientes;
-* no pertenece claramente a otro Aggregate.
-
-Cuando un concepto posee:
-
-* identidad propia;
-* ciclo de vida propio;
-* invariantes propias;
-* Repository propio;
-* consistencia independiente;
-
-debe evaluarse como Aggregate separado.
-
-La conveniencia técnica no determina los límites del Aggregate.
-
----
-
-# Fuente de Verdad
-
-Assembly constituye la fuente de verdad transaccional para el
-estado de una reunión.
-
-Los siguientes elementos son representaciones derivadas:
-
-```text
-Read Models
-
-Integration Events
-
-FIWARE Entities
-
-HTTP DTOs
-
-Persistence Models
-```
-
-Ninguno de ellos sustituye al Aggregate.
-
-Las invariantes únicamente pueden protegerse mediante el modelo
-de dominio oficial.
-
----
-
-# Beneficios
-
-Este diseño proporciona:
-
-* representación formal y consistente de reuniones;
-* identidad estable mediante AssemblyId;
-* separación entre reunión y procesos asociados;
-* independencia respecto de otros Aggregates;
-* consistencia transaccional dentro del límite;
-* trazabilidad mediante Domain Events;
-* control de concurrencia mediante Version;
-* compatibilidad con CQRS;
-* compatibilidad con Event Sourcing;
-* interoperabilidad mediante Integration Events;
-* integración con ecosistemas Smart City;
-* independencia tecnológica;
-* evolución controlada;
-* alta cohesión;
-* bajo acoplamiento.
-
----
-
-# Documentación Derivada
-
-Este documento constituye la definición conceptual principal del
-Aggregate Assembly.
-
-Los siguientes documentos desarrollan formalmente dimensiones
-específicas del Aggregate:
-
-```text
-DOMAIN-006A-Lifecycle.md
-
-DOMAIN-006B-State-Machine.md
-
-DOMAIN-006C-Commands.md
-
-DOMAIN-006D-Domain-Events.md
-
-DOMAIN-006E-Invariants.md
-
-DOMAIN-006F-Permissions.md
-
-DOMAIN-006G-Repository-Contract.md
-
-DOMAIN-006H-Examples.md
-
-DOMAIN-006I-Versioning.md
-
-DOMAIN-006J-Consistency-Boundary.md
-
-DOMAIN-006K-Integration-Events.md
-
-DOMAIN-006L-Read-Model.md
-
-DOMAIN-006M-Test-Scenarios.md
-
-DOMAIN-006N-Performance-Rules.md
-
-DOMAIN-006O-Security-Model.md
-
-DOMAIN-006P-Extension-Points.md
-```
-
-Todos los documentos derivados deben preservar la identidad,
-responsabilidades, límites, invariantes y reglas conceptuales
-establecidas en DOMAIN-006-Aggregate.md.
+- identidad formal de la Asamblea;
+- consistencia del ciclo de vida;
+- consistencia de convocatoria;
+- trazabilidad;
+- independencia tecnológica;
+- interoperabilidad;
+- bajo acoplamiento;
+- alta cohesión;
+- evolución controlada;
+- compatibilidad con CQRS;
+- compatibilidad con Event Sourcing;
+- compatibilidad con arquitecturas distribuidas;
+- integración con Smart City;
+- separación clara entre reunión y procesos derivados.
 
 ---
 
 # Definición de Éxito
 
-El Aggregate **Assembly** representa de forma consistente y
-oficial una instancia formal de reunión dentro del ecosistema
+El Aggregate **Assembly** representa la instancia formal de
+reunión, deliberación y participación colectiva del ecosistema
 AURA.
 
-Centraliza la identidad, contexto organizacional, contexto
-territorial cuando corresponda, clasificación, propósito,
-programación, modalidad, convocatoria, condiciones de
-realización, estado y ciclo de vida de una reunión.
+Actúa como el punto de referencia para la existencia, convocatoria,
+programación, inicio, finalización, cancelación y archivado de una
+Asamblea dentro de una Organization.
 
-Assembly protege sus invariantes mediante una única Aggregate
-Root, mantiene consistencia fuerte dentro de su propio límite y
-colabora con otros Aggregates exclusivamente mediante
-identificadores, Domain Events e Integration Events.
+Mantiene su propia identidad, ciclo de vida, reglas, invariantes,
+consistencia y trazabilidad, sin absorber responsabilidades de
+Citizen, Organization, Membership, Role, Territory, Proposal,
+Participation, Voting, Document, Notification o Audit.
 
-Los procesos de Proposal, Participation, Voting, Document,
-Notification y Audit pueden relacionarse con una Assembly sin
-ser absorbidos por ella, conservando sus propias identidades,
-reglas, ciclos de vida e invariantes.
+La colaboración con otros Aggregates se realiza mediante
+identificadores, Domain Events, Integration Events y contratos
+explícitos.
 
-De esta forma, Assembly proporciona una base consistente,
-trazable, desacoplada, interoperable y preparada para una
-arquitectura distribuida basada en Domain-Driven Design.
+El diseño mantiene los principios de Domain-Driven Design,
+Clean Architecture, Hexagonal Architecture, CQRS y Event-Driven
+Architecture, permitiendo que Assembly evolucione sin romper los
+límites de consistencia ni introducir dependencias tecnológicas
+en el dominio.

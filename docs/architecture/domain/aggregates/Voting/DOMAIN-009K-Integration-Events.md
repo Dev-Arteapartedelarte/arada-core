@@ -471,7 +471,7 @@ corresponda.
 El evento no significa:
 
 ```text
-Assembly Opened
+Assembly InProgress
 ```
 
 ni:

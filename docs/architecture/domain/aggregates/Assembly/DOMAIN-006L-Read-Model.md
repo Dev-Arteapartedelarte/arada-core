@@ -146,7 +146,7 @@ ScheduledStart
 
 ScheduledEnd
 
-AssemblyMode
+AssemblyModality
 ```
 
 Uso:
@@ -183,7 +183,7 @@ ScheduledStart
 
 ScheduledEnd
 
-AssemblyMode
+AssemblyModality
 
 Location
 
@@ -234,7 +234,7 @@ ScheduledStart
 
 ScheduledEnd
 
-AssemblyMode
+AssemblyModality
 
 Location
 
@@ -269,7 +269,7 @@ ScheduledStart
 
 ScheduledEnd
 
-AssemblyMode
+AssemblyModality
 
 Location
 
@@ -346,7 +346,7 @@ AssemblyStatus
 
 ScheduledStart
 
-AssemblyMode
+AssemblyModality
 ```
 
 Uso:
@@ -459,7 +459,7 @@ Projection
 ```
 
 ```text
-AssemblyModeChanged
+AssemblyModalityChanged
 
 ↓
 

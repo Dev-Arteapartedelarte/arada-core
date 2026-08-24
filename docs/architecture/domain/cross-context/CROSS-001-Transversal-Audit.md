@@ -57,14 +57,14 @@ reglas normativas ni resolver ambigüedades por inferencia.
 
 | ID | Severidad | Hallazgo | Tratamiento |
 |---|---|---|---|
-| TA-001 | Alta | `AssemblyPublished` puede relacionarse con una Assembly creada o programada, sin seleccionar un Domain Event origen único | No mapear automáticamente; requiere decisión futura |
-| TA-002 | Media | `ProposalUpdatedForIntegration` agrupa cambios relevantes sin enumerar un conjunto cerrado de Domain Events origen | Mantener como contrato condicional; requiere selección explícita |
+| TA-001 | Alta | `AssemblyPublished` requería seleccionar un Domain Event origen único | Resuelto: `AssemblyScheduled` es el único Domain Event origen semántico de `AssemblyPublished`; la publicación permanece condicional al contrato explícito correspondiente |
+| TA-002 | Media | `ProposalUpdatedForIntegration` requería enumerar un conjunto cerrado de Domain Events origen | Resuelto: el conjunto cerrado está compuesto por `ProposalRenamed`, `ProposalPurposeChanged`, `ProposalDescriptionChanged`, `ProposalTypeChanged`, `ProposalContentUpdated`, `ProposalTerritoryChanged` y `ProposalAssemblyAssociated`; la publicación permanece condicional |
 | TA-003 | Informativa | Territory no declara Integration Events oficiales en v1 | Registrar ausencia; no inventar contratos |
 | TA-004 | Informativa | Document no declara Integration Events oficiales en v1 | Registrar ausencia; no inventar contratos |
 | TA-005 | Media | Los contratos K usan convenciones de nombre distintas: `IntegrationEvent`, `ForIntegration` y nombres publicados | Preservar nombres oficiales; no normalizar sin versionado |
 | TA-006 | Media | Varios documentos K mencionan consumidores posibles, no consumidores contractualmente aprobados | Catálogo registra consumidor como no definido |
 | TA-007 | Informativa | Los artefactos horizontales y diagramas estaban vacíos al cerrar v1 | Se completan fuera de los 221 documentos normativos |
-| TA-008 | Alta | DOMAIN-006K menciona `AssemblyModeChanged`, mientras DOMAIN-006D define `AssemblyModalityChanged` | No mapear ese cambio hasta aprobar una corrección normativa |
+| TA-008 | Alta | DOMAIN-006K utilizaba `AssemblyModeChanged`, mientras DOMAIN-006D define `AssemblyModalityChanged` | Resuelto: `AssemblyModalityChanged` es el nombre canónico; `AssemblyModeChanged` constituye una divergencia documental y no un Domain Event adicional |
 
 ## Integridad de referencias
 
@@ -84,11 +84,11 @@ Este documento no:
 - selecciona tecnología;
 - define consumidores nuevos;
 - convierte eventos internos en públicos;
-- corrige los hallazgos TA-001 a TA-006;
+- resuelve hallazgos sin una decisión normativa explícita;
 - altera el tag o el manifest v1.
 
 ## Resultado
 
 El baseline es estructuralmente completo y apto para consolidación horizontal.
-Las ambigüedades semánticas identificadas permanecen visibles y no bloquean la
-descripción fiel del modelo existente.
+TA-001, TA-002 y TA-008 cuentan con resolución normativa explícita; los
+hallazgos restantes permanecen visibles sin introducir reglas por inferencia.

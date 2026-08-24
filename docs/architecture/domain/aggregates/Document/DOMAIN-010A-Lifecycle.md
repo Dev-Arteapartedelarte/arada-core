@@ -691,7 +691,7 @@ Aggregates relacionados.
 Por ejemplo:
 
 ```text
-Assembly Closed
+Assembly Completed
 ```
 
 no implica automáticamente:

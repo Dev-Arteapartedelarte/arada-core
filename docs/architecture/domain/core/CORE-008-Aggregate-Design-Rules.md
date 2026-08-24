@@ -246,7 +246,7 @@ Ejemplos:
 - OrganizationCreated
 - MemberJoined
 - ProposalApproved
-- AssemblyClosed
+- AssemblyCompleted
 
 Los eventos representan hechos consumados.
 
@@ -307,7 +307,7 @@ Ejemplos:
 
 approveProposal()
 
-closeAssembly()
+completeAssembly()
 
 registerCitizen()
 

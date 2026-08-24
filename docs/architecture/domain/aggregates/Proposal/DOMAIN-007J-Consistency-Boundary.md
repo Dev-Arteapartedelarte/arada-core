@@ -1241,7 +1241,7 @@ AssemblySchedule
 
 AssemblyConvocation
 
-AssemblyMode
+AssemblyModality
 
 AssemblyLocation
 

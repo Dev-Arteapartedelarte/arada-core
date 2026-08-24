@@ -278,7 +278,7 @@ AssemblyDescriptionChanged
 
 AssemblyTypeChanged
 
-AssemblyModeChanged
+AssemblyModalityChanged
 
 AssemblyLocationChanged
 
@@ -684,10 +684,10 @@ flujo.
 Ejemplo conceptual:
 
 ```text
-CreateAssembly
+ScheduleAssembly
         │
         ▼
-AssemblyCreated
+AssemblyScheduled
         │
         ▼
 AssemblyPublished
@@ -934,8 +934,19 @@ establecido.
 
 ## Hecho relacionado
 
-Puede relacionarse conceptualmente con la disponibilidad de una
-Assembly creada o programada para interoperabilidad.
+Se relaciona exclusivamente con el Domain Event:
+
+```text
+AssemblyScheduled
+```
+
+como origen semántico del hecho publicado.
+
+`AssemblyCreated` no constituye origen de `AssemblyPublished`.
+
+La existencia de `AssemblyScheduled` no obliga por sí sola a publicar
+`AssemblyPublished`; la publicación permanece condicionada al contrato
+explícito de interoperabilidad correspondiente.
 
 ## Datos conceptuales
 
@@ -962,7 +973,7 @@ ScheduledStart
 
 ScheduledEnd
 
-AssemblyMode
+AssemblyModality
 
 AssemblyStatus
 
@@ -1079,7 +1090,7 @@ ScheduledStart
 
 ScheduledEnd
 
-AssemblyMode
+AssemblyModality
 
 ConvokedAt
 
@@ -1395,7 +1406,7 @@ AssemblyDescriptionChanged
 
 AssemblyTypeChanged
 
-AssemblyModeChanged
+AssemblyModalityChanged
 
 AssemblyLocationChanged
 ```

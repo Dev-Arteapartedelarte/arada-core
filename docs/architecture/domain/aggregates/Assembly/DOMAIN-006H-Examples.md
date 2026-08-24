@@ -4644,6 +4644,8 @@ AssemblyCompleted
 y una política externa decidir qué procesos posteriores deben
 ocurrir.
 
+Assembly no modifica Voting directamente.
+
 ---
 
 # Ejemplo 121 — Cancelación y Voting

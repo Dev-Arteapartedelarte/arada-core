@@ -97,20 +97,20 @@ Baseline: `domain-model-v1.0.0`
 
 ## DOMAIN-006 — Assembly
 
-`AssemblyPublished` es un contrato oficial cuyo Domain Event de origen permanece sin
-selección determinista por TA-001; por tanto no se incorpora automáticamente a ninguna fila.
+`AssemblyPublished` tiene como único Domain Event de origen semántico
+`AssemblyScheduled`; su publicación permanece condicionada al contrato explícito correspondiente.
 
 | Command | Domain Event | Integration Event |
 |---|---|---|
-| CreateAssembly | AssemblyCreated | No mapping determinista; TA-001 |
-| ScheduleAssembly | AssemblyScheduled | No mapping determinista; TA-001 |
+| CreateAssembly | AssemblyCreated | — |
+| ScheduleAssembly | AssemblyScheduled | AssemblyPublished, condicional |
 | RescheduleAssembly | AssemblyRescheduled | AssemblyRescheduledForIntegration |
 | ConvokeAssembly | AssemblyConvoked | AssemblyConvocationPublished |
 | RenameAssembly | AssemblyRenamed | AssemblyDetailsChanged, condicional |
 | ChangeAssemblyType | AssemblyTypeChanged | AssemblyDetailsChanged, condicional |
 | ChangeAssemblyPurpose | AssemblyPurposeChanged | AssemblyDetailsChanged, condicional |
 | ChangeAssemblyDescription | AssemblyDescriptionChanged | AssemblyDetailsChanged, condicional |
-| ChangeAssemblyModality | AssemblyModalityChanged | Mapping inconsistente; TA-008 |
+| ChangeAssemblyModality | AssemblyModalityChanged | AssemblyDetailsChanged, condicional |
 | ChangeAssemblyLocation | AssemblyLocationChanged | AssemblyDetailsChanged, condicional |
 | UpdateAssemblyConvocation | AssemblyConvocationUpdated | AssemblyConvocationUpdatedForIntegration |
 | UpdateAssemblyRules | AssemblyRulesUpdated | — |

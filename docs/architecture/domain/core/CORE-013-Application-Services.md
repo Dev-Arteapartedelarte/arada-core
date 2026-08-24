@@ -273,9 +273,9 @@ CreateOrganizationService
 
 RegisterCitizenService
 
-OpenAssemblyService
+StartAssemblyService
 
-CloseAssemblyService
+CompleteAssemblyService
 
 ApproveProposalService
 

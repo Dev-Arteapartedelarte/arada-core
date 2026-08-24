@@ -2361,7 +2361,7 @@ VotingClosed
 no significa:
 
 ```text
-Assembly Closed
+Assembly Completed
 ```
 
 Assembly y Voting poseen Lifecycles independientes.

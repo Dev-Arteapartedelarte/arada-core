@@ -229,7 +229,7 @@ Los Extension Points conceptuales de Assembly pueden comprender:
 ```text
 Assembly Types
 
-Assembly Modes
+Assembly Modalities
 
 Assembly Rules
 
@@ -338,12 +338,12 @@ correspondientes.
 
 ---
 
-# Extensión de AssemblyMode
+# Extensión de AssemblyModality
 
 Assembly mantiene:
 
 ```text
-AssemblyMode
+AssemblyModality
 ```
 
 con modalidades oficiales:
@@ -361,7 +361,7 @@ nuevas formas reconocibles de realización.
 
 ---
 
-# Regla de Extensión de AssemblyMode
+# Regla de Extensión de AssemblyModality
 
 Una nueva modalidad debe representar una forma distinta de
 realización de la reunión.
@@ -371,7 +371,7 @@ No debe representar una tecnología concreta.
 Debe mantenerse:
 
 ```text
-AssemblyMode
+AssemblyModality
     ≠
 Technology Provider
 ```
@@ -388,7 +388,7 @@ Por lo tanto una modalidad no debe llamarse según:
 
 # Modalidad e Infrastructure
 
-AssemblyMode expresa cómo se desarrolla conceptualmente la reunión.
+AssemblyModality expresa cómo se desarrolla conceptualmente la reunión.
 
 Infrastructure determina mediante qué herramientas se implementa.
 
@@ -397,7 +397,7 @@ Debe mantenerse:
 ```text
 Remote
     =
-Domain Mode
+Domain Modality
 ```
 
 mientras:
@@ -412,7 +412,7 @@ Infrastructure Choice
 
 # Modalidad y Location
 
-Una extensión de AssemblyMode puede requerir revisar las reglas
+Una extensión de AssemblyModality puede requerir revisar las reglas
 relacionadas con:
 
 ```text
@@ -1988,7 +1988,7 @@ requiere verificar:
 Ejemplo conceptual:
 
 ```text
-New AssemblyMode
+New AssemblyModality
 ```
 
 requiere verificar:
@@ -2554,15 +2554,15 @@ all affected rules remain coherent
 ```text
 Given
 
-a new AssemblyMode
+a new AssemblyModality
 
 When
 
-the mode is incorporated
+the modality is incorporated
 
 Then
 
-it represents a domain realization mode
+it represents a domain realization modality
 
 And
 
@@ -3164,7 +3164,7 @@ Assembly puede extenderse para incorporar:
 ```text
 New Assembly Types
 
-New Assembly Modes
+New Assembly Modalities
 
 New Assembly Rules
 

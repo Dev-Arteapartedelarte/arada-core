@@ -53,9 +53,9 @@ permanecen bajo el contrato propietario; este documento no las normaliza.
 
 | Contrato | Origen permitido por el baseline | Restricción |
 |---|---|---|
-| AssemblyPublished | disponibilidad de Assembly creada o programada | TA-001 impide seleccionar origen único |
-| AssemblyDetailsChanged | cambios de detalles enumerados por DOMAIN-006K | sólo cuando exista relevancia externa |
-| ProposalUpdatedForIntegration | cambio confirmado de información propia | TA-002 exige selección explícita |
+| AssemblyPublished | `AssemblyScheduled` | sólo cuando exista contrato explícito de interoperabilidad; `AssemblyCreated` no es origen |
+| AssemblyDetailsChanged | cambios de detalles enumerados por DOMAIN-006K, incluido `AssemblyModalityChanged` | sólo cuando exista relevancia externa |
+| ProposalUpdatedForIntegration | `ProposalRenamed`, `ProposalPurposeChanged`, `ProposalDescriptionChanged`, `ProposalTypeChanged`, `ProposalContentUpdated`, `ProposalTerritoryChanged`, `ProposalAssemblyAssociated` | sólo cuando exista relevancia externa y contrato explícito de interoperabilidad |
 
 ## Ausencias explícitas
 
